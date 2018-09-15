@@ -11,7 +11,7 @@ The following npm scripts are available:
 ```
 
 #### before you can run the app it needs to be build.
-run ```npm run build``` first or simply start with ```npm run start:dev``` or combined with ```npm run build:dev```
+run ```npm run build``` first or simply start with ```npm run start:dev```
 
 After the initial build a www folder is created. 
 Now a ```npm start``` will work too.
