@@ -4,7 +4,8 @@ const express = require('express');
 const router = new express.Router();
 
 // routes
-router.use('/example', require('./routes/examples'));
+router.use('/concatenate', require('./routes/concatenation_route'));
+router.use('/palindrome', require('./routes/palindrome_route'));
 
 router.use(function (req, res) {
   res.status(404).end();
