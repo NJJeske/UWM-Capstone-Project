@@ -6,7 +6,7 @@ const config = require('config');
 const serviceUrl = config.get('serviceUrl');
 
 router.get('/:value1/:value2', (req, res, next) => {
-    return axios.get(`${serviceUrl}/${req.param.value1}/${req.param.value2}`).catch(err => next(err));
+    return axios.get(`${serviceUrl}/concatenate/${req.params.value1}/${req.params.value2}`).then(response => res.send(response.data)).catch(err => next(err));
 });
 
 module.exports = router;
