@@ -1,0 +1,84 @@
+stages:
+  - Test
+  - SonarQube
+  # - Build
+  - Clair
+  # - Deploy Int
+  # - Deploy QA
+
+Code Coverage:
+  stage: SonarQube
+  image: $CI_REGISTRY/lvcd/sonar-scanner:latest
+  script:
+    - sonar-scanner
+  only:
+    - master
+
+Test:
+  stage: Test
+  image: $CI_REGISTRY/lvcd/gitlabci-build:latest
+  artifacts:
+      paths:
+      - ./coverage/lcov.info
+      expire_in: 1d
+  script:
+  - npm install --quiet
+  - npm test
+
+
+# Build:
+#   stage: Build
+#   image: $CI_REGISTRY/lvcd/gitlabci-build:latest
+#   script:
+#     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#     - 'echo "Build Docker Images : $CI_COMMIT_SHA"'
+#     - docker build --build-arg ENVIRONMENT=$DEV_ENV --no-cache -t $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -t regt.nmlv.nml.com:5000/smash-webapp-node:latest -t regt.nmlv.nml.com:5000/smash-webapp-node:$CI_COMMIT_SHA .
+#     - 'echo "Push Docker Images:$CI_COMMIT_SHA"'
+#     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+#     - docker push regt.nmlv.nml.com:5000/smash-webapp-node:$CI_COMMIT_SHA
+#     - 'echo "Push Docker Images:latest"'
+#     - docker push $CI_REGISTRY_IMAGE:latest
+#     - docker push regt.nmlv.nml.com:5000/smash-webapp-node:latest
+#   only:
+#     - master
+#   except:
+#     - tags
+#   when: on_success
+
+Clair:
+  stage: Clair
+  image: $CI_REGISTRY/lvcd/gitlabci-image-scanner:latest
+  script:
+    - DOCKER_PASSWORD=$DOCKER_PWORD klar $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - master
+  except:
+    - tags
+  when: on_success
+  # set this to true if you need to skip Clair for a false-positive failure
+  allow_failure: true
+
+# Deploy to Int:
+#   stage: Deploy Int
+#   image: $CI_REGISTRY/lvcd/gitlabci-deploy:latest
+#   script:
+#     - '/etc/tower-deploy-client-v3/tower-submittask.js -h $TOWER_URL -u builduser -p $TOWERV3_PASSWORD -b "pre-deploy-auto-promotion.yml" -j "Kubernetes V2 Non-Prod Deploy" -o "tower-stdout.html" -e "{\"extra_vars\": \"---\ngit_project: git@git.nmlv.nml.com:$CI_PROJECT_PATH.git\ndocker_version: $CI_COMMIT_SHA\ngit_sha: $CI_COMMIT_SHA\nkube_cluster_id: $CLUST_INT\nregion: $AWS_REGION\nvpc_name: VA-Non-VPC\ndocker_registry: regt.nmlv.nml.com:5000\ngit_project_name: $CI_PROJECT_NAME\nkube_env: int\"}"'
+#   only:
+#     - master
+#   except:
+#     - tags
+#   environment: int
+#   when: on_success
+
+# Deploy to QA:
+#   stage: Deploy QA
+#   image: $CI_REGISTRY/lvcd/gitlabci-deploy:latest
+#   script:
+#     - '/etc/tower-deploy-client-v3/tower-submittask.js -h $TOWER_URL -u builduser -p $TOWERV3_PASSWORD -j "Kubernetes V2 Non-Prod Deploy" -o "tower-stdout.html" -e "{\"extra_vars\": \"---\ngit_project: git@git.nmlv.nml.com:$CI_PROJECT_PATH.git\ndocker_version: $CI_COMMIT_SHA\ngit_sha: $CI_COMMIT_SHA\nkube_cluster_id: $CLUST_QA\nregion: $AWS_REGION\nvpc_name: VA-Non-VPC\ndocker_registry: regt.nmlv.nml.com:5000\ngit_project_name: $CI_PROJECT_NAME\nkube_env: qa\"}"'
+#   only:
+#     - master
+#   except:
+#     - tags
+#   environment: QA
+#   when: manual
+#   allow_failure: false
