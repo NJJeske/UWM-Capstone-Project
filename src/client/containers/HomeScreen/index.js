@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Palindrome, Concatenation } from '../../components';
 
-class HomeScreen extends Component {
-    componentDidMount() {
-        //   this.props.exampleAction();
-    }
+const DESCRIPTION = `The two "cards" below demonstrate the use of redux in an application.
+Checking the palindrome and concatenating fire off an action that sends a GET to the backend service.
+The response is handled and using a reducer we are setting the global state.
+This is picked up in the "connected" component and triggers the rerender for that element`;
 
+class HomeScreen extends Component {
     render() {
         return (
             <main>
                 <h1>Home Screen example</h1>
-                <p>If the redux extension is installed, you should see that an action was called and that the reducer was triggered.</p>
+                <section>
+                    <h3>What is happening here?</h3>
+                    <p style={{whiteSpace: 'pre-line', paddingBottom: '1em'}}>{DESCRIPTION}</p>
+                </section>
                 <Palindrome />
                 <Concatenation />
             </main>

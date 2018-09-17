@@ -1,7 +1,7 @@
 
 import { CONCATENATION_RESULT } from '../actions/concatenation_actions';
 
-const initialState = '';
+const initialState = {};
 const concatenationReducer = (state = initialState, action) => {
     switch (action.type) {
         case CONCATENATION_RESULT:
