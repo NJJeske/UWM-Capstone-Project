@@ -9,6 +9,7 @@ export class Concatenation extends React.Component {
     }
     render() {
         const { val1, val2 } = this.state;
+        const { concatValue } = this.props;
         return (
             <div className="card">
                 <h3>Concatenation:</h3>
@@ -26,7 +27,7 @@ export class Concatenation extends React.Component {
                     </div>
                 </div>
                 <div className="result-container">
-                    {this.props.concatValue && <p>{`Result: ${this.props.concatValue}`}</p>}
+                    <p>{concatValue && `Result: ${concatValue}`}</p>
                 </div>
             </div>
         );

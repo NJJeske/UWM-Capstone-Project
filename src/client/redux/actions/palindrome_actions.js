@@ -5,7 +5,8 @@ const API_PALINDROME = '/api/palindrome';
 export const checkPalindrome = (val) =>
     async dispatch => {
         try {
-            const result = await axios.get(`${API_PALINDROME}/${val}`);
+            const value = encodeURI(val);
+            const result = await axios.get(`${API_PALINDROME}/${value}`);
             if (result.data) {
                 dispatch({
                     type: PALINDROME_RESULT,
