@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const PALINDROME_RESULT = 'PALINDROME_RESULT';
-const API_PALINDROME = '/api/palindrome';
+export const API_PALINDROME = '/api/palindrome';
 
 export const checkPalindrome = (val) =>
     async dispatch => {
@@ -14,7 +14,11 @@ export const checkPalindrome = (val) =>
                 });
             }
         } catch (err) {
-            console.log(err);
             // TODO: show the user what went wrong rather than logging it to the console.
+            // for testing purposes:
+            dispatch({
+                type: PALINDROME_RESULT,
+                isPalindrome: false
+            });
         }
     };

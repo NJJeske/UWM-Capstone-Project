@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const CONCATENATION_RESULT = 'CONCATENATION_RESULT';
-const API_CONCAT = '/api/concatenate';
+export const API_CONCAT = '/api/concatenate';
 
 export const createConcatenation = (val1, val2) =>
     async dispatch => {
@@ -15,7 +15,6 @@ export const createConcatenation = (val1, val2) =>
                 });
             }
         } catch (err) {
-            console.log(err);
             // TODO: show the user what went wrong rather than logging it to the console.
         }
     };
