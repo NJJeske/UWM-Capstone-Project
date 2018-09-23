@@ -45,18 +45,18 @@ Test:
 #     - tags
 #   when: on_success
 
-Clair:
-  stage: Clair
-  image: $CI_REGISTRY/lvcd/gitlabci-image-scanner:latest
-  script:
-    - DOCKER_PASSWORD=$DOCKER_PWORD klar $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-  only:
-    - master
-  except:
-    - tags
-  when: on_success
-  # set this to true if you need to skip Clair for a false-positive failure
-  allow_failure: true
+# Clair:
+#   stage: Clair
+#   image: $CI_REGISTRY/lvcd/gitlabci-image-scanner:latest
+#   script:
+#     - DOCKER_PASSWORD=$DOCKER_PWORD klar $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+#   only:
+#     - master
+#   except:
+#     - tags
+#   when: on_success
+#   # set this to true if you need to skip Clair for a false-positive failure
+#   allow_failure: true
 
 # Deploy to Int:
 #   stage: Deploy Int
