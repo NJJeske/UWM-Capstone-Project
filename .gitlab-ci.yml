@@ -1,6 +1,6 @@
 stages:
-  # - Test
-  # - SonarQube
+  - Test
+  - SonarQube
   # - Build
   # - Clair
   # - Deploy Int
