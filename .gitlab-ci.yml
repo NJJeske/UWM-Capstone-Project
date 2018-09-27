@@ -1,21 +1,21 @@
+image: node:latest
+
 stages:
   - Test
   - Build
 
+cache:
+  paths:
+  - node_modules/
+
 Test:
   stage: Test
-  image: node:latest
-  artifacts:
-      paths:
-      - ./coverage/lcov.info
-      expire_in: 1d
   script:
   - npm install --quiet
   - npm test
 
 Build:
   stage: Build
-  image: node:latest
   script:
     - docker login -u $NEXUS_USER -p $NEXUS_PASSWORD registry.uwm-nm-te-capstone.com
     - docker build -t registry.uwm-nm-te-capstone.com:8083/$CI_PROJECT_NAME:$CI_COMMIT_SHA -t registry.uwm-nm-te-capstone.com:8083/CI_PROJECT_NAME:latest .
