@@ -11,7 +11,7 @@ cache:
 Test:
   stage: Test
   script:
-  - npm install --quiet
+  - npm install
   - npm test
 
 Build:
