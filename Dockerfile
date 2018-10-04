@@ -1,4 +1,4 @@
-FROM registry.uwm-nm-te-capstone.com:8083/node:latest
+FROM registry.uwm-nm-te-capstone.com:8083/node-docker:latest
 
 COPY . /app
 
