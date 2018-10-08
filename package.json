@@ -1,6 +1,6 @@
 {
-  "name": "frontend-example",
-  "version": "1.0.0",
+  "name": "frontend",
+  "version": "0.0.1",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -24,6 +24,10 @@
     "webpack"
   ],
   "author": "Paul van Woensel",
+  "contributors": [
+    "Casey Van Groll",
+    "Matthew Fleijter"
+  ],
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
