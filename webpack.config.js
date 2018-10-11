@@ -1,12 +1,25 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const contexPath = path.join(__dirname, 'src/client');
+const outputPath = path.join(__dirname, 'dist');
 
 module.exports = {
-    context: './src/client',
+    context: contexPath,
     entry: ['./app.js'],
     output: {
-        path: 'dist',
+        path: outputPath,
         filename: 'bundle.js'
+    },
+    mode: 'development',
+    devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+        open: true,
+        historyApiFallback: true,
+        proxy: {
+            '/api': 'http://localhost:4000'
+        }
     },
     module: {
         rules: [
@@ -32,7 +45,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Trails',
+            title: 'Job Hunter',
             favicon: '../server/template/favicon.ico',
             template: '../server/template/index.html'
         })

@@ -30,10 +30,10 @@ app.use(bodyParser.json());
 app.use('/api', server);
 
 // serve static files from public
-app.use(express.static(resolve(__dirname, '..', '..', 'www')));
+app.use(express.static(resolve(__dirname, '..', '..', 'dist')));
 
 // request any page and receive index.html
-app.get('*', (req, res) => res.sendFile(resolve(__dirname, '..', '..', 'www/index.html')));
+app.get('*', (req, res) => res.sendFile(resolve(__dirname, '..', '..', 'dist/index.html')));
 
 if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production') {
     try {
