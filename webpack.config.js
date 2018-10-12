@@ -1,11 +1,11 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const contexPath = path.join(__dirname, 'src/client');
+const contextPath = path.join(__dirname, 'src/client');
 const outputPath = path.join(__dirname, 'dist');
 
 module.exports = {
-    context: contexPath,
+    context: contextPath,
     entry: ['./app.js'],
     output: {
         path: outputPath,
@@ -17,6 +17,7 @@ module.exports = {
         contentBase: './dist',
         open: true,
         historyApiFallback: true,
+        stats: 'minimal',
         proxy: {
             '/api': 'http://localhost:4000'
         }

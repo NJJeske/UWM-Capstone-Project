@@ -1,14 +1,13 @@
 {
   "name": "frontend",
   "version": "0.0.1",
-  "description": "",
-  "main": "app.js",
   "scripts": {
     "start": "npm run server",
     "server": "node ./src/server/app.js",
     "server:dev": "nodemon ./src/server/app.js",
-    "build": "webpack",
     "client": "webpack-dev-server --hot",
+    "dev": "concurrently --kill-others \"npm run server:dev\" \"npm run client\"",
+    "build": "webpack",
     "test": "jest"
   },
   "dependencies": {
@@ -26,6 +25,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.4",
     "chalk": "^2.1.0",
+    "concurrently": "^4.0.1",
     "css-loader": "^0.28.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -54,12 +54,10 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "supertest": "^3.3.0",
-    "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.1",
     "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.9",
-    "webpack-merge": "^4.1.4"
+    "webpack-dev-server": "^3.1.9"
   },
   "jest": {
     "collectCoverage": true,
