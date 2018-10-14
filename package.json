@@ -1,56 +1,31 @@
 {
   "name": "frontend",
   "version": "0.0.1",
-  "description": "",
-  "main": "app.js",
   "scripts": {
-    "start": "node ./src/server/app.js",
-    "start:dev": "nodemon --exec npm run build:dev",
-    "build": "webpack --config ./config/webpack.config.js",
-    "build:dev": "webpack --config ./config/webpack.config.js && node ./src/server/app.js",
-    "test": "jest --forceExit"
+    "start": "npm run server",
+    "server": "node ./src/server/app.js",
+    "server:dev": "nodemon ./src/server/app.js",
+    "client": "webpack-dev-server --hot",
+    "dev": "concurrently --kill-others \"npm run server:dev\" \"npm run client\"",
+    "build": "webpack",
+    "test": "jest"
   },
-  "babel": {
-    "presets": [
-      "react",
-      "env",
-      "stage-3"
-    ]
-  },
-  "keywords": [
-    "react",
-    "express",
-    "node",
-    "webpack"
-  ],
-  "author": "Paul van Woensel",
-  "contributors": [
-    "Casey Van Groll",
-    "Matthew Fleijter"
-  ],
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "babel-preset-stage-3": "^6.24.1",
     "body-parser": "^1.17.1",
     "config": "^2.0.1",
-    "express": "^4.15.2",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.4",
-    "react-router-dom": "^4.1.1",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
+    "express": "^4.15.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "axios-mock-adapter": "^1.15.0",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.0.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
     "chalk": "^2.1.0",
+    "concurrently": "^4.0.1",
     "css-loader": "^0.28.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -62,20 +37,27 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.1.0",
-    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^22.4.3",
     "jest-junit": "^3.7.0",
     "morgan": "^1.8.1",
     "node-sass": "^4.9.2",
     "nodemon": "^1.17.5",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.4",
+    "react-router-dom": "^4.1.1",
+    "redux": "^4.0.0",
     "redux-mock-store": "^1.5.3",
+    "redux-thunk": "^2.2.0",
+    "regenerator-runtime": "^0.12.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "supertest": "^3.3.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.1",
-    "webpack-cli": "^3.1.1"
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
   },
   "jest": {
     "collectCoverage": true,
@@ -85,10 +67,18 @@
     ]
   },
   "nodemonConfig": {
-    "ext": "js, jsx, scss, css, json",
+    "watch": [
+      "config/",
+      "src/server/"
+    ],
     "ignore": [
-      "www/",
       "*.test.js"
     ]
-  }
+  },
+  "author": "Paul van Woensel",
+  "contributors": [
+    "Casey Van Groll",
+    "Matthew Fleijter"
+  ],
+  "license": "ISC"
 }
