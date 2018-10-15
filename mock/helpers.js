@@ -24,4 +24,14 @@ module.exports = {
             : new Date(startDate.getTime() + Math.random() * (Date.now() - startDate.getTime()));
         return [startDate, endDate];
     },
+
+    /**
+     * Generates a pair of random increasing hourly pay amounts.
+     * @param  {boolean} useSalary Generate salary amounts instead of hourly (default false)
+     */
+    randomPayRange: (useSalary = false) => {
+        const startPay = faker.finance.amount(useSalary ? 20000 : 7, useSalary ? 500000 : 20, useSalary ? 0 : 2, '$');
+        const endPay = faker.finance.amount(startPay.replace('$', ''), useSalary ? 1000000 : 40, useSalary ? 0 : 2, '$');
+        return [startPay, endPay];
+    },
 };
