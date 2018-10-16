@@ -4,7 +4,8 @@
         "sourceType": "module"
     },
     "globals": {
-        "workbox": false
+        "workbox": false,
+        "CONFIG": true
     },
     "env": {
         "node": true,
