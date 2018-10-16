@@ -13,6 +13,7 @@ if (seed) {
 rand.maybe = (value, likelihood = 0.5, defaultValue = '') => rand.random() < likelihood ? defaultValue : value;
 const generate = generateArray.bind(null, faker, rand);
 
+// To be imported as initial state of their respective reducers
 const mockData = {
     addresses: generate(generator.address, 5, 8),
     certifications: generate(generator.certification, 0, 3),
@@ -24,5 +25,7 @@ const mockData = {
     user: generate(generator.user, 1, 1)[0]
 };
 
-console.log(JSON.stringify(mockData, null, 2));
 // TODO - link together generated data with IDs
+// console.log(JSON.stringify(mockData, null, 2));
+
+module.exports = mockData;
