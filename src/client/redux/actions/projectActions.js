@@ -10,11 +10,7 @@ export const actions = {
     ERROR_PROJECT: 'ERROR_PROJECT',
 };
 
-const dispatchError = (dispatch, data) => dispatch({
-    type: actions.ERROR_PROJECT,
-    message: 'Error creating project through API',
-    data
-});
+const dispatchError = (dispatch, message, error) => dispatch({ type: actions.ERROR_PROJECT, message, error });
 
 // Assumes newProject is already loaded with userId - may want to move that
 // request preparing here instead (userId, auth stuff if needed, ...)
@@ -25,7 +21,7 @@ export const createProject = newProject => async dispatch => {
             type: actions.CREATE_PROJECT,
             newProject: result.data,
         });
-    } catch (err) {
-        dispatchError(dispatch, err);
+    } catch (error) {
+        dispatchError(dispatch, 'Error creating project through API', error);
     }
 };
