@@ -59,7 +59,5 @@ mockData.projects.forEach(project => {
     project.positionId = randomElement('positions');
 });
 
-const fs = require('fs');
-fs.writeFileSync('blah.json', JSON.stringify(mockData, null, 2));
-console.log(mockData);
+// console.log(mockData);
 module.exports = mockData;
