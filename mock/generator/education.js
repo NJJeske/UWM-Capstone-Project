@@ -1,14 +1,12 @@
-const faker = require('faker');
 const { randomDateRange } = require('../helpers');
-const randomInt = require('random-int');
 
-module.exports = () => {
-    const [startDate, endDate] = randomDateRange();
+module.exports = (faker, rand) => {
+    const [startDate, endDate] = randomDateRange(faker, rand);
     return {
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        degree: Math.random() < 0.5 ? '' : faker.lorem.words(randomInt(1, 4)),
-        fieldOfStudy: Math.random() < 0.5 ? '' : faker.lorem.words(randomInt(1, 4)),
+        degree: faker.lorem.words(rand.intBetween(1, 4)),
+        fieldOfStudy: rand.maybe(faker.lorem.words(rand.intBetween(1, 4), 0.3)),
         startDate,
         endDate
     };

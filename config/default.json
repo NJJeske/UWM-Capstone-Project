@@ -4,5 +4,6 @@
     "serviceUri": "/backend",
     "httpListenerPort": 4000,
     "httpsListenerPort": 8443,
-    "useMock": true
+    "useMock": true,
+    "seed": 12345
 }

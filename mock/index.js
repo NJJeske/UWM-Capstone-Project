@@ -1,18 +1,28 @@
+const faker = require('faker');
+const rand = require('random-seed').create();
+const config = require('config');
 const { generateArray } = require('./helpers');
 const generator = require('./generator');
 
+// Seed faker and RNG and pass to generators
+const seed = config.get('seed');
+if (seed) {
+    faker.seed(seed);
+    rand.seed(seed);
+}
+rand.maybe = (value, likelihood = 0.5, defaultValue = '') => rand.random() < likelihood ? defaultValue : value;
+const generate = generateArray.bind(null, faker, rand);
+
 const mockData = {
-    addresses: generateArray(generator.address, 5, 8),
-    certifications: generateArray(generator.certification, 0, 3),
-    companies: generateArray(generator.company, 1, 6),
-    contacts: generateArray(generator.contact, 3, 8),
-    education: generateArray(generator.education, 1, 3),
-    positions: generateArray(generator.position, 1, 6),
-    projects: generateArray(generator.project, 0, 4),
-    user: generator.user(),
+    addresses: generate(generator.address, 5, 8),
+    certifications: generate(generator.certification, 0, 3),
+    companies: generate(generator.company, 1, 6),
+    contacts: generate(generator.contact, 3, 8),
+    education: generate(generator.education, 1, 3),
+    positions: generate(generator.position, 1, 6),
+    projects: generate(generator.project, 0, 4),
+    user: generate(generator.user, 1, 1)[0]
 };
 
 console.log(JSON.stringify(mockData, null, 2));
-
-// TODO - generate mock data using generators
 // TODO - link together generated data with IDs

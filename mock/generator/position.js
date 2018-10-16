@@ -1,10 +1,9 @@
-const faker = require('faker');
 const { randomDateRange, randomPayRange } = require('../helpers');
 
-module.exports = () => {
-    const [startDate, endDate] = randomDateRange();
-    const useSalary = Math.random() < 0.5;
-    const [startPay, endPay] = randomPayRange(useSalary);
+module.exports = (faker, rand) => {
+    const [startDate, endDate] = randomDateRange(faker, rand);
+    const useSalary = rand.maybe(true);
+    const [startPay, endPay] = randomPayRange(faker, useSalary);
     const payPeriod = useSalary ? 'Yearly' : 'Hourly';
 
     return {

@@ -1,13 +1,11 @@
-const faker = require('faker');
 const { randomDateRange } = require('../helpers');
-const randomInt = require('random-int');
 
-module.exports = () => {
-    const [startDate, endDate] = randomDateRange();
+module.exports = (faker, rand) => {
+    const [startDate, endDate] = randomDateRange(faker, rand);
     return {
         id: faker.random.uuid(),
         title: faker.commerce.productName(),
-        description: faker.lorem.paragraphs(randomInt(1, 5), '\n'),
+        description: faker.lorem.paragraphs(rand.intBetween(1, 5), '\n'),
         startDate,
         endDate
     };

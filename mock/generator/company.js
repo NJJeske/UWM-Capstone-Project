@@ -1,8 +1,6 @@
-const faker = require('faker');
-
-module.exports = () => ({
+module.exports = (faker, rand) => ({
     id: faker.random.uuid(),
     name: faker.company.companyName(),
     phone: faker.phone.phoneNumber('###-###-####'),
-    website: Math.random() < 0.5 ? '' : faker.internet.url()
+    website: rand.maybe(faker.internet.url(), 0.4)
 });
