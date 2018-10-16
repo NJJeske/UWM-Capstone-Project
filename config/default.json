@@ -5,5 +5,5 @@
     "httpListenerPort": 4000,
     "httpsListenerPort": 8443,
     "useMock": true,
-    "seed": 12345
+    "seed": 196036
 }

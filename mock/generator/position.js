@@ -4,11 +4,11 @@ module.exports = (faker, rand) => {
     const [startDate, endDate] = randomDateRange(faker, rand);
     const useSalary = rand.maybe(true);
     const [startPay, endPay] = randomPayRange(faker, useSalary);
-    const payPeriod = useSalary ? 'Yearly' : 'Hourly';
+    const payPeriod = useSalary ? 'Salary' : 'Hourly';
 
     return {
         id: faker.random.uuid(),
-        title: faker.name.jobTitle,
+        title: faker.name.jobTitle(),
         startPay,
         endPay,
         payPeriod,

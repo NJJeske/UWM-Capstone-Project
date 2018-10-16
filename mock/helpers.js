@@ -16,12 +16,12 @@ module.exports = {
      * Generates a pair of random sequential dates.
      * @param  {object} faker Faker instance (possibly seeded)
      * @param  {object} rand RNG (possibly seeded)
-     * @param  {boolean} allowNullEndDate If true then the second date may be null. (default true)
+     * @param  {boolean} allowUndefined If true then the second date may be undefined. (default true)
      */
-    randomDateRange: (faker, rand, allowNullEndDate = true) => {
+    randomDateRange: (faker, rand, allowUndefined = true) => {
         const startDate = new Date(faker.date.past(20));
-        const endDate = allowNullEndDate && rand.maybe(true)
-            ? null
+        const endDate = allowUndefined && rand.maybe(true)
+            ? undefined
             : new Date(startDate.getTime() + rand.random() * (Date.now() - startDate.getTime()));
         return [startDate, endDate];
     },

@@ -4,9 +4,9 @@ module.exports = (faker, rand) => {
     const [startDate, endDate] = randomDateRange(faker, rand);
     return {
         id: faker.random.uuid(),
-        name: faker.company.companyName(),
-        degree: faker.lorem.words(rand.intBetween(1, 4)),
-        fieldOfStudy: rand.maybe(faker.lorem.words(rand.intBetween(1, 4), 0.3)),
+        name: `U${faker.address.stateAbbr()}`,
+        degree: rand.maybe('BA', 0.5, 'GED'),
+        fieldOfStudy: `${faker.name.jobDescriptor()} ${faker.name.jobArea()}`,
         startDate,
         endDate
     };
