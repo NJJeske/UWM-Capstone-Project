@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Project from '../../components/Project';
 import { createProject } from '../../redux/actions/projectActions';
 
 class ProjectsPage extends Component {
@@ -10,19 +9,26 @@ class ProjectsPage extends Component {
     }
 
     render() {
-        const { projects } = this.props;
-
-        const projectsList = projects.map(project => {
-            return <Project key={project.id} />;
+        const projectsList = (this.props.projects || []).map(project => {
+            const projectProperties = Object.entries(project).map(([key, val]) => <tr key={key}><td>{key}</td><td>{`${val}` || ''}</td></tr>);
+            return (
+                <table key={project.id}>
+                    <tbody>
+                        {projectProperties}
+                    </tbody>
+                </table>
+            );
         });
 
         return (
-            <main>
-                <h1>Projects are listed here</h1>
-                <section>
-                    {projectsList}
-                </section>
-            </main>
+            <div>
+                <main>
+                    <h1>Projects</h1>
+                    <section>
+                        {projectsList}
+                    </section>
+                </main>
+            </div>
         );
     }
 }
