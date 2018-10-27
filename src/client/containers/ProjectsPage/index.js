@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createProject } from '../../redux/actions/projectActions';
-// import { Header, Sidebar, Project } from '../../components';
+// import { Header, Sidebar } from '../../components';
+import { Project } from '../../components';
 import { Container, Card, Button } from 'reactstrap';
 
 class ProjectsPage extends Component {
@@ -12,13 +13,7 @@ class ProjectsPage extends Component {
 
     render() {
         const { projects } = this.props;
-
-        const projectsList = projects.map(project => (
-            // <Project {...project} />
-            <div key={project._id}>
-                Placeholder for project {project._id}.
-            </div>
-        ));
+        const projectsList = projects.map(project => <Project key={project.id} {...project} />);
 
         return (
             <Container id="PROJECTS_PAGE">
