@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createProject } from '../../redux/actions/projectActions';
+// import { Header, Sidebar, Project } from '../../components';
+import { Container, Card, Button } from 'reactstrap';
 
 class ProjectsPage extends Component {
     constructor(props) {
@@ -9,26 +11,26 @@ class ProjectsPage extends Component {
     }
 
     render() {
-        const projectsList = (this.props.projects || []).map(project => {
-            const projectProperties = Object.entries(project).map(([key, val]) => <tr key={key}><td>{key}</td><td>{`${val}` || ''}</td></tr>);
-            return (
-                <table key={project.id}>
-                    <tbody>
-                        {projectProperties}
-                    </tbody>
-                </table>
-            );
-        });
+        const { projects } = this.props;
+
+        const projectsList = projects.map(project => (
+            // <Project {...project} />
+            <div key={project._id}>
+                Placeholder for project {project._id}.
+            </div>
+        ));
 
         return (
-            <div>
+            <Container id="PROJECTS_PAGE">
+                {/* <Header />
+                <Sidebar /> */}
                 <main>
-                    <h1>Projects</h1>
-                    <section>
-                        {projectsList}
-                    </section>
+                    {projectsList}
+                    <Card className='project'>
+                        <Button>New</Button>
+                    </Card>
                 </main>
-            </div>
+            </Container>
         );
     }
 }
