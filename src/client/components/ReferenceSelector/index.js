@@ -29,7 +29,13 @@ const ReferenceSelector = props => {
 
     return (
         <FormGroup>
-            <Input type='select' onChange={props.onChange} defaultValue={selectedId} disabled={disabled} >
+            <Input
+                type='select'
+                className={props.className}
+                onChange={props.onChange}
+                defaultValue={selectedId}
+                disabled={disabled}
+            >
                 {options}
             </Input>
         </FormGroup>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pick } from 'lodash';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import TextArea from 'react-textarea-autosize';
 import { createProject } from '../../redux/actions/projectActions';
-import { ReferenceSelector } from '../';
-import {
-    Container, Row, Col,
-    Button, Form, FormGroup, Label, Input, Alert
-} from 'reactstrap';
+import { EntityActionBar, ReferenceSelector } from '../';
+
+import './index.scss';
 
 // Local States
 const [VIEW, EDIT, SAVING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'ERROR'];
@@ -50,6 +50,7 @@ class Project extends Component {
     }
 
     render() {
+        const { mode } = this.state;
         const {
             positionId,
             educationId,
@@ -58,34 +59,40 @@ class Project extends Component {
             // TODO:
             // startDate,
             // endDate
-        } = (this.state.mode === VIEW) ? this.props : this.state.formData;
-        const disabled = (this.state.mode !== EDIT);
+        } = (mode === VIEW) ? this.props : this.state.formData;
+        const disabled = (mode !== EDIT);
+        const disabledClass = disabled ? 'disabled' : '';
 
         // Create mask for SAVING/ERROR modes
-        let mask = null;
-        if (this.state.mode === SAVING) {
-            mask = (
-                <div className='entityMask'>
-                    <Alert color='info'>
-                        <h4>Saving...</h4>
-                    </Alert>
+        let overlay = null;
+        if (mode === SAVING) {
+            overlay = (
+                <div className='entityOverlay saving'>
+                    <h3>Saving...</h3>
                 </div>
             );
-        } else if (this.state.mode === ERROR) {
-            mask = (
-                <div className='entityMask'>
-                    <Alert color='danger'>
-                        <h4>Error</h4>
-                        <p>{this.props.error.message}</p>
-                        <Button onClick={() => this.switchMode(VIEW)}>Ok</Button>
-                    </Alert>
+        } else if (mode === ERROR) {
+            overlay = (
+                <div className='entityOverlay error'>
+                    <h3>Error</h3>
+                    <p>{this.props.error.message}</p>
+                    <Button onClick={() => this.switchMode(VIEW)}>Ok</Button>
                 </div>
             );
         }
 
+        // Set up button handlers for entity mode bar
+        const entityActionHandlers = {
+            editButton: this.switchMode.bind(this, EDIT),
+            saveButton: this.switchMode.bind(this, SAVING),
+            cancelButton: this.switchMode.bind(this, VIEW),
+            deleteButton: this.switchMode.bind(this, SAVING)
+        };
+
         return (
-            <Container className='project'>
-                {mask}
+            <Container className='project card'>
+                {overlay}
+                <EntityActionBar mode={mode} handlers={entityActionHandlers} />
                 <Form>
                     <Row form={true}>
                         <Col xs='12' lg='9'>
@@ -95,6 +102,7 @@ class Project extends Component {
                                     name='title'
                                     placeholder='Title'
                                     disabled={disabled}
+                                    className={disabledClass}
                                     value={title}
                                     onChange={this.changeField}
                                 />
@@ -105,10 +113,11 @@ class Project extends Component {
                         <Col xs='12'>
                             <FormGroup disabled={disabled} >
                                 <Input
-                                    type='textarea'
+                                    tag={TextArea}
                                     name='description'
                                     placeholder='Description'
                                     disabled={disabled}
+                                    className={disabledClass}
                                     value={description}
                                     onChange={this.changeField}
                                 />
@@ -126,6 +135,7 @@ class Project extends Component {
                                         entityType='positions'
                                         selectedId={positionId}
                                         disabled={disabled}
+                                        className={disabledClass}
                                         onChange={this.changeField}
                                     />
                                 </Col>
@@ -141,6 +151,7 @@ class Project extends Component {
                                         entityType='education'
                                         selectedId={educationId}
                                         disabled={disabled}
+                                        className={disabledClass}
                                         onChange={this.changeField}
                                     />
                                 </Col>
@@ -158,8 +169,9 @@ class Project extends Component {
                                         <Input
                                             type="date"
                                             name="startDate"
-                                            placeholder="date placeholder"
+                                            placeholder="None"
                                             disabled={disabled}
+                                            className={disabledClass}
                                             onChange={this.changeField}
                                         />
                                     </FormGroup>
@@ -176,8 +188,9 @@ class Project extends Component {
                                         <Input
                                             type="date"
                                             name="endDate"
-                                            placeholder="date placeholder"
+                                            placeholder="iohastroihast"
                                             disabled={disabled}
+                                            className={disabledClass}
                                             onChange={this.changeField}
                                         />
                                     </FormGroup>
@@ -186,7 +199,6 @@ class Project extends Component {
                         </Col>
                     </Row>
                 </Form>
-                <Button onClick={() => this.switchMode(EDIT)}>Edit</Button>
             </Container>
         );
     }
