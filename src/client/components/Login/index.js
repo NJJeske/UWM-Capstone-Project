@@ -1,49 +1,36 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
+import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-export class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { user: "", pass: "" };
-  }
+export class Login extends Component {
   render() {
-    const { user, pass } = this.state;
-    const { concatValue } = this.props;
     return (
-      <div className="card">
-        <h3>Concatenation:</h3>
-        <div className="card-body">
-          <div className="email-input">
-            <label forhtml="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              value={user}
-              onChange={e => this.setState({ user: e.target.value })}
+      <Container>
+        <Form inline>
+          <FormGroup bsSize="large">
+            <Label for="exampleEmail" hidden>
+              Email
+            </Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="Email"
             />
-          </div>
-          <div className="password-input">
-            <label forhtml="password">Password</label>
-            <input
-              type="text"
-              id="password"
-              value={pass}
-              onChange={e => this.setState({ pass: e.target.value })}
+          </FormGroup>{" "}
+          <FormGroup bsSize="large">
+            <Label for="examplePassword" hidden bsSize="large">
+              Password
+            </Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              placeholder="Password"
             />
-          </div>
-          <div className="login-button">
-            <button
-              className="button"
-              disabled={!val1 || !val2}
-              onClick={() => this.props.createConcatenation(val1, val2)}
-            >
-              Login
-            </button>
-          </div>
-        </div>
-      </div>
+          </FormGroup>{" "}
+          <Button bsSize="large">Login</Button>
+        </Form>
+      </Container>
     );
   }
 }
-
-export default connect()(Login);
