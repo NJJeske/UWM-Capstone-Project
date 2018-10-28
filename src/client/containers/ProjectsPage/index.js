@@ -16,7 +16,7 @@ class ProjectsPage extends Component {
         const projectsList = projects.map(project => <Project key={project.id} {...project} />);
 
         return (
-            <Container id="PROJECTS_PAGE">
+            <Container fluid={true} id="PROJECTS_PAGE">
                 {/* <Header />
                 <Sidebar /> */}
                 <main>

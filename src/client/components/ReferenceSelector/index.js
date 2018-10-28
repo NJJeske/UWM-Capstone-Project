@@ -14,8 +14,9 @@ const ReferenceSelector = props => {
     // Each entity type has different properties used to identify it
     const makeOptionText = entity => {
         switch (entityType) {
-            case 'contacts': return `{entity.firstName} {entity.lastName}`;
-            case 'education': return entity.schoolName;
+            case 'contacts': return `${entity.name.first} ${entity.name.last}`;
+            case 'projects':
+            case 'positions': return entity.title;
             default: return entity.name;
         }
     };
@@ -27,8 +28,8 @@ const ReferenceSelector = props => {
     ));
 
     return (
-        <FormGroup disabled={disabled} >
-            <Input type='select' onChange={props.onChange} defaultValue={selectedId}>
+        <FormGroup>
+            <Input type='select' onChange={props.onChange} defaultValue={selectedId} disabled={disabled} >
                 {options}
             </Input>
         </FormGroup>

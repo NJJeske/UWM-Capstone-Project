@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { pick } from 'lodash';
 import { createProject } from '../../redux/actions/projectActions';
 import { ReferenceSelector } from '../';
-import { Card, Button, Form, FormGroup, Input, Alert } from 'reactstrap';
+import {
+    Container, Row, Col,
+    Button, Form, FormGroup, Label, Input, Alert
+} from 'reactstrap';
 
 // Local States
 const [VIEW, EDIT, SAVING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'ERROR'];
@@ -81,41 +84,110 @@ class Project extends Component {
         }
 
         return (
-            <Card className='project'>
+            <Container className='project'>
                 {mask}
                 <Form>
-                    <FormGroup disabled={disabled} >
-                        <Input
-                            type='text'
-                            name='title'
-                            placeholder='Title'
-                            value={title}
-                            onChange={this.changeField}
-                        />
-                    </FormGroup>
-                    <FormGroup disabled={disabled} >
-                        <Input
-                            type='textArea'
-                            name='description'
-                            placeholder='Description'
-                            value={description}
-                            onChange={this.changeField}
-                        />
-                    </FormGroup>
-                    <ReferenceSelector
-                        disabled={disabled}
-                        onChange={this.changeField}
-                        entityType='positions'
-                        selectedId={positionId}
-                    />
-                    <ReferenceSelector
-                        disabled={disabled}
-                        onChange={this.changeField}
-                        entityType='education'
-                        selectedId={educationId}
-                    />
+                    <Row form={true}>
+                        <Col xs='12' lg='9'>
+                            <FormGroup >
+                                <Input
+                                    type='text'
+                                    name='title'
+                                    placeholder='Title'
+                                    disabled={disabled}
+                                    value={title}
+                                    onChange={this.changeField}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row form={true}>
+                        <Col xs='12'>
+                            <FormGroup disabled={disabled} >
+                                <Input
+                                    type='textarea'
+                                    name='description'
+                                    placeholder='Description'
+                                    disabled={disabled}
+                                    value={description}
+                                    onChange={this.changeField}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row form={true}>
+                        <Col lg='6'>
+                            <Row form={true}>
+                                <Col sm='2'>
+                                    <Label>Position</Label>
+                                </Col>
+                                <Col sm='10'>
+                                    <ReferenceSelector
+                                        entityType='positions'
+                                        selectedId={positionId}
+                                        disabled={disabled}
+                                        onChange={this.changeField}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col lg='6'>
+                            <Row form={true}>
+                                <Col sm='2'>
+                                    <Label>Education</Label>
+                                </Col>
+                                <Col sm='10'>
+                                    <ReferenceSelector
+                                        entityType='education'
+                                        selectedId={educationId}
+                                        disabled={disabled}
+                                        onChange={this.changeField}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row form={true}>
+                        <Col lg='6'>
+                            <Row form={true}>
+                                <Col sm='2'>
+                                    <Label>Start Date</Label>
+                                </Col>
+                                <Col sm='10'>
+                                    <FormGroup>
+                                        <Input
+                                            type="date"
+                                            name="startDate"
+                                            placeholder="date placeholder"
+                                            disabled={disabled}
+                                            onChange={this.changeField}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col lg='6'>
+                            <Row form={true}>
+                                <Col sm='2'>
+                                    <Label>End Date</Label>
+                                </Col>
+                                <Col sm='10'>
+                                    <FormGroup>
+                                        <Input
+                                            type="date"
+                                            name="endDate"
+                                            placeholder="date placeholder"
+                                            disabled={disabled}
+                                            onChange={this.changeField}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
                 </Form>
-            </Card>
+                <Button onClick={() => this.switchMode(EDIT)}>Edit</Button>
+            </Container>
         );
     }
 }
