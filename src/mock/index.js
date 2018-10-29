@@ -1,13 +1,13 @@
 const faker = require('faker');
 const rand = require('random-seed').create();
-const config = require('config');
+const _ = require('lodash');
 const { generateArray } = require('./helpers');
 const generator = require('./generator');
 
 let initialState = {};
-if (config.get('useMock')) {
+if (_.get(CONFIG, 'useMock')) {
     // Seed faker and extend RNG, pass to generators
-    const seed = config.get('seed');
+    const seed = _.get(CONFIG, 'seed') || faker.random.uuid();
     if (seed) {
         faker.seed(seed);
         rand.seed(seed);
@@ -16,7 +16,7 @@ if (config.get('useMock')) {
     const generate = generateArray.bind(null, faker, rand);
 
     // To be imported as initial state of their respective reducers after linkage
-    const initialState = {
+    initialState = {
         addresses: generate(generator.address, 5, 8),
         certifications: generate(generator.certification, 0, 3),
         companies: generate(generator.company, 1, 6),

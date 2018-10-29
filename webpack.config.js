@@ -1,7 +1,8 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
-const contextPath = path.join(__dirname, "src/client");
-const outputPath = path.join(__dirname, "dist");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const contextPath = path.join(__dirname, 'src/client');
+const outputPath = path.join(__dirname, 'dist');
 
 module.exports = {
   context: contextPath,
@@ -43,6 +44,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({ CONFIG: JSON.stringify(require('config')) }),
     new HtmlWebpackPlugin({
       title: "Job Hunter",
       favicon: "../server/template/favicon.ico",
