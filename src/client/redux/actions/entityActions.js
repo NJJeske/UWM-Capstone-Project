@@ -1,24 +1,68 @@
 import axios from 'axios';
 
 export const actions = {
-    CREATE_ENTITY: 'CREATE_ENTITY',
-    RETRIEVE_ENTITY: 'RETRIEVE_ENTITY',
-    UPDATE_ENTITY: 'UPDATE_ENTITY',
-    DELETE_ENTITY: 'DELETE_ENTITY',
-    ERROR_ENTITY: 'ERROR_ENTITY',
+    ENTITY_CREATE: 'ENTITY_CREATE',
+    ENTITY_UPDATE: 'ENTITY_UPDATE',
+    ENTITY_DELETE: 'ENTITY_DELETE',
+    ENTITY_ERROR: 'ENTITY_ERROR',
 };
 
-const dispatchError = (dispatch, message, error) => dispatch({ type: actions.ERROR_ENTITY, message, error });
-
-export const createEntity = ({ apiPath, entityRoot, newEntity }) => async dispatch => {
+export const createEntity = (entityType, newEntity) => async dispatch => {
     try {
-        const result = await axios.post(apiPath, newEntity);
+        const result = await axios.post(entityType, newEntity);
         dispatch({
-            type: actions.CREATE_ENTITY,
-            entityRoot,
+            type: actions.ENTITY_CREATE,
+            entityType,
             newEntity: result.data,
         });
     } catch (error) {
-        dispatchError(dispatch, 'Error creating project through API', error);
+        error.message = `Error creating entity in '${entityType}' through API`;
+        dispatch({
+            type: actions.ENTITY_ERROR,
+            entityType,
+            entityId: newEntity.id,
+            error
+        });
     }
 };
+
+export const updateEntity = (entityType, updatedEntity) => async dispatch => {
+    try {
+        const result = await axios.put(entityType, updatedEntity);
+        dispatch({
+            type: actions.ENTITY_UPDATE,
+            entityType,
+            updatedEntity: result.data,
+        });
+    } catch (error) {
+        error.message = `Error updating entity in '${entityType}' through API`;
+        dispatch({
+            type: actions.ENTITY_ERROR,
+            entityType,
+            entityId: updatedEntity.id,
+            error
+        });
+    }
+};
+
+export const deleteEntity = (entityType, entityId) => async dispatch => {
+    try {
+        const result = await axios.post(entityType, entityId);
+        dispatch({
+            type: actions.ENTITY_DELETE,
+            entityType,
+            entityId: result.data,
+        });
+    } catch (error) {
+        error.message = `Error deleting entity in '${entityType}' through API`;
+        dispatch({
+            type: actions.ENTITY_ERROR,
+            entityType,
+            entityId,
+            error
+        });
+    }
+};
+
+// When no error is passed along reducer will interpret that as a request to clear.
+export const clearErrorEntity = (entityType, entityId) => ({ type: actions.ENTITY_ERROR, entityType, entityId });
