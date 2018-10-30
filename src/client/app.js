@@ -7,7 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store.js';
 import Routes from './routes.js';
 
-import './sass/main.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+library.add(faEdit, faCheck, faBan, faTrashAlt);
 
 ReactDOM.render(
     <Provider store={store}>
