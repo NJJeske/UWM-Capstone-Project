@@ -9,7 +9,7 @@ export const actions = {
 
 export const createEntity = (entityType, newEntity) => async dispatch => {
     try {
-        const result = await axios.post(entityType, newEntity);
+        const result = await axios.post(`/${entityType}`, newEntity);
         dispatch({
             type: actions.ENTITY_CREATE,
             entityType,
@@ -28,11 +28,11 @@ export const createEntity = (entityType, newEntity) => async dispatch => {
 
 export const updateEntity = (entityType, updatedEntity) => async dispatch => {
     try {
-        const result = await axios.put(entityType, updatedEntity);
+        await axios.put(`/${entityType}/${updatedEntity.id}`, updatedEntity);
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,
-            updatedEntity: result.data,
+            updatedEntity
         });
     } catch (error) {
         error.message = `Error updating entity in '${entityType}' through API`;
@@ -47,11 +47,11 @@ export const updateEntity = (entityType, updatedEntity) => async dispatch => {
 
 export const deleteEntity = (entityType, entityId) => async dispatch => {
     try {
-        const result = await axios.post(entityType, entityId);
+        await axios.delete(`/${entityType}/${entityId}`);
         dispatch({
             type: actions.ENTITY_DELETE,
             entityType,
-            entityId: result.data,
+            entityId
         });
     } catch (error) {
         error.message = `Error deleting entity in '${entityType}' through API`;

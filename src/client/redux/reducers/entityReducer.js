@@ -10,7 +10,7 @@ export default (state = mock || {}, action) => {
             const { newEntity } = action;
             return {
                 ...state,
-                [entityType]: state[entityType].concat(newEntity),
+                [entityType]: (state[entityType] || []).concat(newEntity),
             };
         }
         case actions.ENTITY_UPDATE: {
@@ -26,7 +26,7 @@ export default (state = mock || {}, action) => {
             const { entityId } = action;
             return {
                 ...state,
-                [entityType]: state[entityType].filter(entity => entity.id === entityId),
+                [entityType]: state[entityType].filter(entity => entity.id !== entityId),
             };
         }
         case actions.ENTITY_ERROR: {
