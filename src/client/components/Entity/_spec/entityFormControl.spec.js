@@ -20,7 +20,7 @@ export const AppleForm = props => {
 };
 export const defaultProps = {
     entityType: 'apples',
-    entityData: { rating: 6 },
+    entityData: { rating: '6' },
     children: <AppleForm />,
     createEntity: jest.fn(),
     updateEntity: jest.fn(),
@@ -35,11 +35,14 @@ describe('Entity', () => {
     });
 
     describe('defaults', () => {
+        it('should be in VIEW mode', () => {
+            expect(component.state('mode')).toEqual('VIEW');
+        });
         it('should disable the form fields', () => {
-            expect(component.find('input').props().disabled).toBeTruthy();
+            expect(component.find('input').prop('disabled')).toBeTruthy();
         });
         it('should populate the form fields from props', () => {
-            expect(component.find('input').props().value).toEqual(defaultProps.entityData.rating);
+            expect(component.find('input').prop('value')).toEqual('6');
         });
         it('should only have edit button in action bar', () => {
             expect(component.find('button')).toHaveLength(1);
@@ -47,17 +50,25 @@ describe('Entity', () => {
         });
     });
 
+    const simulateInput = value => {
+        component.find('input').simulate('change', { target: { name: 'rating', value } });
+    };
+
     describe('click edit button', () => {
+        beforeEach(() => {
+            component.find('button.edit').simulate('click');
+            simulateInput('0');
+        });
+        it('should be in EDIT mode', () => {
+            expect(component.state('mode')).toEqual('EDIT');
+        });
         it('should enable the form fields', () => {
-            component.find('button.edit').simulate('click');
-            expect(component.find('input').props().disabled).toBeFalsy();
+            expect(component.find('input').prop('disabled')).toBeFalsy();
         });
-        it('should populate the form fields from props', () => {
-            component.find('button.edit').simulate('click');
-            expect(component.find('input').props().value).toEqual(defaultProps.entityData.rating);
+        it('should populate the form fields from state', () => {
+            expect(component.find('input').prop('value')).toEqual('0');
         });
-        it('should have the save, cancel, and delete buttons in action bar', () => {
-            component.find('button.edit').simulate('click');
+        it('should put the save, cancel, and delete buttons in action bar', () => {
             expect(component.find('button')).toHaveLength(3);
             expect(component.find('button.save')).toHaveLength(1);
             expect(component.find('button.cancel')).toHaveLength(1);
@@ -65,16 +76,53 @@ describe('Entity', () => {
         });
     });
 
+    describe('click cancel button after edit button', () => {
+        beforeEach(() => {
+            component.find('button.edit').simulate('click');
+            simulateInput('4');
+            component.find('button.cancel').simulate('click');
+        });
+        it('should be in VIEW mode', () => {
+            expect(component.state('mode')).toEqual('VIEW');
+        });
+        it('should disable the form fields', () => {
+            expect(component.find('input').prop('disabled')).toBeTruthy();
+        });
+        it('should populate the form fields from props', () => {
+            expect(component.find('input').prop('value')).toEqual('6');
+        });
+        it('should only have edit button in action bar', () => {
+            expect(component.find('button')).toHaveLength(1);
+            expect(component.find('button').hasClass('edit')).toBeTruthy();
+        });
+    });
+
+    describe('click save button after edit button', () => {
+        beforeEach(() => {
+            component.find('button.edit').simulate('click');
+            simulateInput('5');
+            component.find('button.save').simulate('click');
+        });
+        it('should be in SAVING mode', () => {
+            expect(component.state('mode')).toEqual('SAVING');
+        });
+        it('should disable the form fields', () => {
+            expect(component.find('input').prop('disabled')).toBeTruthy();
+        });
+        it('should show an overlay', () => {
+            expect(component.find('div.overlay')).toHaveLength(1);
+        });
+    });
+
     // it('should enable form fields and load form data into local state when edit button is clicked', () => {
-        
     //     component.find('#edit').first().simulate('click');
     //     expect(component.state('entityData')).toEqual(defaultProps.entityData);
-    //     expect(component.find('input').props().disabled).toBeFalsy();
+    //     expect(component.find('input').prop('disabled')).toBeFalsy();
     // });
 
     // it('should enable the button if a value is entered', () => {
     //     component.find('#value').simulate('change', { target: { value: 'test' } });
-    //     expect(component.find('button').props().disabled).toBeFalsy();
+    //     expect(component.find('button').prop('disabled')).toBeFalsy();
     // });
 
     // it('should call the action when submitting', () => {
@@ -94,7 +142,7 @@ describe('Entity', () => {
 //     });
 
 //     it('should by default disable the submit button', () => {
-//         expect(component.find('button').props().disabled).toBeTruthy();
+//         expect(component.find('button').prop('disabled')).toBeTruthy();
 //     });
 
 //     describe('Changing the state', () => {
@@ -103,7 +151,7 @@ describe('Entity', () => {
 //         it('should enable the button if a value is entered', () => {
 //             component.find('#value1').simulate('change', { target: { value: 'test1' } });
 //             component.find('#value2').simulate('change', { target: { value: 'test2' } });
-//             expect(component.find('button').props().disabled).toBeFalsy();
+//             expect(component.find('button').prop('disabled')).toBeFalsy();
 //         });
 
 //         // value1 and value2 are set in the test above. this is a dependency!
