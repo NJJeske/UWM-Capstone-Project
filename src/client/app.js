@@ -12,9 +12,30 @@ import {
   faEdit,
   faCheck,
   faBan,
-  faTrashAlt
+  faTrashAlt,
+  faHome,
+  faUser,
+  faFileAlt,
+  faGraduationCap,
+  faBriefcase,
+  faCalendarAlt,
+  faProjectDiagram,
+  faAddressBook
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faEdit, faCheck, faBan, faTrashAlt);
+library.add(
+  faEdit,
+  faCheck,
+  faBan,
+  faTrashAlt,
+  faHome,
+  faUser,
+  faFileAlt,
+  faGraduationCap,
+  faBriefcase,
+  faCalendarAlt,
+  faProjectDiagram,
+  faAddressBook
+);
 
 ReactDOM.render(
   <Provider store={store}>

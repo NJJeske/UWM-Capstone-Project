@@ -1,52 +1,42 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
-import { Nav, NavItem, NavLink, button } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.css";
+import { slide as Menu } from "react-burger-menu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../sass/_sidebar.scss";
-import { HomeScreen } from "../../containers/HomeScreen";
-import { ProfilePage } from "../../containers/ProfilePage";
-import { DocumentsPage } from "../../containers/DocumentsPage";
-import { ExperiencePage } from "../../containers/ExperiencePage";
-import { EducationPage } from "../../containers/EducationPage";
-import { ProjectsPage } from "../../containers/ProjectsPage";
-import { ContactsPage } from "../../containers/ContactsPage";
-import { TimelinePage } from "../../containers/TimelinePage";
 
+/* 
+* Sidebar component of the project that will be used on all pages aside from the
+* homescreen. This sidebar makes use of the react-burger-menu library component
+* and is retractable.
+*/
 export class Sidebar extends Component {
   render() {
     return (
-      <div class="sidebar">
-        <Nav className="navbar col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="h1-holder">
-            <h1>MyPortfolio</h1>
-          </div>
-          <div class="gap" />
-          <NavItem>
-            <NavLink href="TODO">Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Profile</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">My Documents</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Experience</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Education</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Projects</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Contacts</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="TODO">Timeline</NavLink>
-          </NavItem>
-        </Nav>
-      </div>
+      <Menu>
+        <a className="menu-item" href="/">
+          <FontAwesomeIcon icon="home" /> Home
+        </a>
+        <a className="menu-item" href="/profile">
+          <FontAwesomeIcon icon="user" /> Profile
+        </a>
+        <a className="menu-item" href="/documents">
+          <FontAwesomeIcon icon="file-alt" /> My Documents
+        </a>
+        <a className="menu-item" href="/experience">
+          <FontAwesomeIcon icon="briefcase" /> Experience
+        </a>
+        <a className="menu-item" href="/education">
+          <FontAwesomeIcon icon="graduation-cap" /> Education
+        </a>
+        <a className="menu-item" href="/projects">
+          <FontAwesomeIcon icon="project-diagram" /> Projects
+        </a>
+        <a className="menu-item" href="/contacts">
+          <FontAwesomeIcon icon="address-book" /> Contacts
+        </a>
+        <a className="menu-item" href="/timeline">
+          <FontAwesomeIcon icon="calendar-alt" /> Timeline
+        </a>
+      </Menu>
     );
   }
 }

@@ -1,27 +1,29 @@
-<<<<<<< HEAD
 import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-import { HomeScreen } from "./containers/";
+import {
+  HomeScreen,
+  ContactsPage,
+  DocumentsPage,
+  EducationPage,
+  ExperiencePage,
+  ProfilePage,
+  ProjectsPage,
+  TimelinePage
+} from "./containers";
 
 const routes = () => (
   <React.Fragment>
     <Switch>
       <Route exact path="/" component={HomeScreen} />
+      <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/contacts" component={ContactsPage} />
+      <Route exact path="/documents" component={DocumentsPage} />
+      <Route exact path="/education" component={EducationPage} />
+      <Route exact path="/experience" component={ExperiencePage} />
+      <Route exact path="/projects" component={ProjectsPage} />
+      <Route exact path="/timeline" component={TimelinePage} />
     </Switch>
   </React.Fragment>
-=======
-import React from 'react';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
-import { ProjectsPage } from './containers';
-
-const routes = () => (
-    <React.Fragment>
-        <Switch>
-            <Route exact path="/" render={() => <Redirect to="/projects"/>}/>
-            <Route exact path="/projects" component={ProjectsPage} />
-        </Switch>
-    </React.Fragment>
->>>>>>> projects/component
 );
 
 export default withRouter(routes);

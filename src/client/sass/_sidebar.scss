@@ -1,50 +1,61 @@
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 0;
-  padding-top: 0%;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-  h1 {
-    font-style: italic;
-    font-weight: 700;
-    color: black;
-    padding-top: 10%;
-    padding-left: 7px;
-  }
-  .h1-holder {
-    height: 6em;
-    border-bottom-color: white;
-    background-color: silver;
-  }
-  .gap {
-    padding-top: 100px;
-  }
+html,
+body {
+  margin: 0;
 }
 
-.sidebar .nav-link {
-  font-weight: 500;
-  font-size: 24px;
+#page-wrap {
+  text-align: center;
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+  font-size: 24pt;
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* Change color on hover */
+.bm-item:hover {
   color: black;
+  text-decoration: none;
 }
 
-.sidebar .nav-link {
-  margin-right: 4px;
-  color: gray;
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  left: 24px;
+  top: 24px;
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: gray;
 }
 
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
-  color: inherit;
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
 }
 
-.sidebar-heading {
-  font-size: 0.75rem;
-  text-transform: uppercase;
+/* Color/shape of close button cross */
+.bm-cross {
+  background: white;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: gray;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }
