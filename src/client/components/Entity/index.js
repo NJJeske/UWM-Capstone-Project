@@ -42,10 +42,15 @@ export class Entity extends Component {
     }
 
     save() {
-        const { updateEntity, entityType } = this.props;
+        const { updateEntity, entityType, entityData } = this.props;
         const updatedEntityData = this.state.entityData;
-        this.setState({ mode: SAVING });
-        updateEntity(entityType, updatedEntityData);
+        // Only make update call if something changed.
+        if (!isEqual(entityData, updatedEntityData)) {
+            this.setState({ mode: SAVING });
+            updateEntity(entityType, updatedEntityData);
+        } else {
+            this.cancel();
+        }
     }
 
     remove() {

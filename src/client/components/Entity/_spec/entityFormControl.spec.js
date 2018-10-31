@@ -112,6 +112,13 @@ describe('Entity', () => {
         it('should show an overlay', () => {
             expect(component.find('div.overlay')).toHaveLength(1);
         });
+        it('should call save action creator', () => {
+            expect(component.find('div.overlay')).toHaveLength(1);
+        });
+        it('should enter view mode when state entityData matches props entityData', () => {
+            
+            expect(component.find('div.overlay')).toHaveLength(1);
+        });
     });
 
     // it('should enable form fields and load form data into local state when edit button is clicked', () => {
