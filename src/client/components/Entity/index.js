@@ -4,8 +4,12 @@ import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Container, Row, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import './styles.scss';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+library.add(faEdit, faCheck, faBan, faTrashAlt);
 
 // Local States
 const [VIEW, EDIT, SAVING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'ERROR'];
@@ -19,7 +23,7 @@ const [VIEW, EDIT, SAVING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'ERROR'];
  * @class Entity
  * @extends Component
  */
-class Entity extends Component {
+export class Entity extends Component {
     constructor(props) {
         super(props);
         this.changeField = this.changeField.bind(this);
@@ -44,7 +48,7 @@ class Entity extends Component {
         updateEntity(entityType, updatedEntityData);
     }
 
-    delete() {
+    remove() {
         const { deleteEntity, entityType } = this.props;
         const entityId = this.state.entityData.id;
         this.setState({ mode: SAVING });
@@ -54,7 +58,7 @@ class Entity extends Component {
     acknowledgeError() {
         const { clearErrorEntity, entityType } = this.props;
         const entityId = this.state.entityData.id;
-        this.setState({ mode: VIEW, error: null });
+        this.setState({ mode: VIEW, entityData: null, error: null });
         clearErrorEntity(entityType, entityId);
     }
 
@@ -67,6 +71,7 @@ class Entity extends Component {
         if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
             return { mode: VIEW, entityData: null };
         }
+        return null;
     }
 
     changeField(event) {
@@ -104,19 +109,19 @@ class Entity extends Component {
         // Set up action bar based on mode
         const actionBar = mode === 'VIEW' ? (
             <React.Fragment>
-                <Button onClick={this.edit.bind(this)} >
+                <Button className='edit' onClick={this.edit.bind(this)} >
                     <FontAwesomeIcon icon='edit' />
                 </Button>
             </React.Fragment>
         ) : (
             <React.Fragment>
-                <Button onClick={this.delete.bind(this)}>
+                <Button className='delete' onClick={this.remove.bind(this)}>
                     <FontAwesomeIcon icon='trash-alt' />
                 </Button>
-                <Button onClick={this.cancel.bind(this)}>
+                <Button className='cancel' onClick={this.cancel.bind(this)}>
                     <FontAwesomeIcon icon='ban' />
                 </Button>
-                <Button onClick={this.save.bind(this)}>
+                <Button className='save' onClick={this.save.bind(this)}>
                     <FontAwesomeIcon icon='check' />
                 </Button>
             </React.Fragment>
