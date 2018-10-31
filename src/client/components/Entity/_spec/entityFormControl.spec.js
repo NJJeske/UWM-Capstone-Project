@@ -54,7 +54,7 @@ describe('Entity', () => {
         component.find('input').simulate('change', { target: { name: 'rating', value } });
     };
 
-    describe('click edit button', () => {
+    describe('click edit', () => {
         beforeEach(() => {
             component.find('button.edit').simulate('click');
             simulateInput('0');
@@ -76,7 +76,7 @@ describe('Entity', () => {
         });
     });
 
-    describe('click cancel button after edit button', () => {
+    describe('click edit -> click cancel', () => {
         beforeEach(() => {
             component.find('button.edit').simulate('click');
             simulateInput('4');
@@ -97,7 +97,7 @@ describe('Entity', () => {
         });
     });
 
-    describe('click save button after edit button', () => {
+    describe('click edit -> click save', () => {
         beforeEach(() => {
             component.find('button.edit').simulate('click');
             simulateInput('5');
