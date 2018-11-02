@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(faEdit, faCheck, faBan, faTrashAlt);
 
 // Local States
-const [VIEW, EDIT, SAVING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'ERROR'];
+const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];
 
 /**
  * This is a wrapper class for the forms of each entity type (contacts, projects, companies, etc).
@@ -56,7 +56,7 @@ export class Entity extends Component {
     remove() {
         const { deleteEntity, entityType } = this.props;
         const entityId = this.state.entityData.id;
-        this.setState({ mode: SAVING });
+        this.setState({ mode: DELETING });
         deleteEntity(entityType, entityId);
     }
 
@@ -68,13 +68,15 @@ export class Entity extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        // If an error exists in store but not locally then it's new -> enter error state
-        if (nextProps.error && !nextState.error) {
-            return { mode: ERROR, error: nextProps.error };
-        }
-        // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
-        if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
-            return { mode: VIEW, entityData: null };
+        if (nextState.mode === SAVING) {
+            // If an error exists in store but not locally then it's new -> enter error state
+            if (nextProps.error && !nextState.error) {
+                return { mode: ERROR, error: nextProps.error };
+            }
+            // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
+            if (isEqual(nextProps.entityData, nextState.entityData)) {
+                return { mode: VIEW, entityData: null };
+            }
         }
         return null;
     }
@@ -95,7 +97,7 @@ export class Entity extends Component {
 
         // Set up overlay for SAVING/ERROR modes
         let overlay = null;
-        if (mode === SAVING) {
+        if (mode === SAVING || mode === DELETING) {
             overlay = (
                 <div className={`overlay saving ${entityType}`}>
                     <h3>Saving...</h3>
