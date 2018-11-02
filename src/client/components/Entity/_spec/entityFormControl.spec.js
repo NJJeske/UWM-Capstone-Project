@@ -1,27 +1,22 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Entity } from '..';
 
 // Sample form to test that correct props are flowing to child
-export const AppleForm = props => {
-    const { changeField, entityData, disabled } = props;
-    const { rating } = entityData;
-    return (
-        <form>
-            <input
-                type='text'
-                name='rating'
-                disabled={disabled}
-                onChange={changeField}
-                value={rating}
-            />
-        </form>
-    );
-};
-export const defaultProps = {
+// export const AppleForm = props => {
+//     const { changeField, entityData, disabled } = props;
+//     const { rating } = entityData;
+//     return (
+//         <div />
+//     );
+// };
+
+const Child = () => <div />;
+
+export const props = {
     entityType: 'apples',
     entityData: { rating: '6' },
-    children: <AppleForm />,
+    children: <Child />,
     createEntity: jest.fn(),
     updateEntity: jest.fn(),
     deleteEntity: jest.fn(),
@@ -29,96 +24,103 @@ export const defaultProps = {
 };
 
 describe('Entity', () => {
-    let component;
+    let entity;
     beforeEach(() => {
-        component = mount(<Entity {...defaultProps} />);
+        entity = shallow(<Entity {...props} />);
     });
 
     describe('defaults', () => {
         it('should be in VIEW mode', () => {
-            expect(component.state('mode')).toEqual('VIEW');
+            expect(entity.state('mode')).toEqual('VIEW');
         });
-        it('should disable the form fields', () => {
-            expect(component.find('input').prop('disabled')).toBeTruthy();
+        it('should pass changeField to child', () => {
+            expect(entity.find('Child').prop('changeField')).toBeTruthy();
         });
-        it('should populate the form fields from props', () => {
-            expect(component.find('input').prop('value')).toEqual('6');
+        it('should pass disabled=true to child', () => {
+            expect(entity.find('Child').prop('disabled')).toBeTruthy();
+        });
+        it('should pass props entityData to child', () => {
+            expect(entity.find('Child').prop('entityData')).toEqual(props.entityData);
         });
         it('should only have edit button in action bar', () => {
-            expect(component.find('button')).toHaveLength(1);
-            expect(component.find('button').hasClass('edit')).toBeTruthy();
+            const actionBar = entity.find('Row.actionBar');
+            expect(actionBar.find('Button')).toHaveLength(1);
+            expect(actionBar.find('Button').hasClass('edit')).toBeTruthy();
         });
     });
 
-    const simulateInput = value => {
-        component.find('input').simulate('change', { target: { name: 'rating', value } });
-    };
-
     describe('click edit', () => {
         beforeEach(() => {
-            component.find('button.edit').simulate('click');
-            simulateInput('0');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
         });
         it('should be in EDIT mode', () => {
-            expect(component.state('mode')).toEqual('EDIT');
+            expect(entity.state('mode')).toEqual('EDIT');
         });
-        it('should enable the form fields', () => {
-            expect(component.find('input').prop('disabled')).toBeFalsy();
+        it('should pass disabled=false to child', () => {
+            expect(entity.find('Child').prop('disabled')).toBeFalsy();
         });
-        it('should populate the form fields from state', () => {
-            expect(component.find('input').prop('value')).toEqual('0');
+        it('should pass state.entityData to child', () => {
+            entity.setState({ entityData: { rating: '-1' } });
+            expect(entity.find('Child').prop('entityData')).toEqual({ rating: '-1' });
+        });
+        it('should update state when changeField is invoked', () => {
+            entity.instance().changeField({ target: { name: 'rating', value: '0' } });
+            expect(entity.state('entityData')).toEqual({ rating: '0' });
         });
         it('should put the save, cancel, and delete buttons in action bar', () => {
-            expect(component.find('button')).toHaveLength(3);
-            expect(component.find('button.save')).toHaveLength(1);
-            expect(component.find('button.cancel')).toHaveLength(1);
-            expect(component.find('button.delete')).toHaveLength(1);
+            const actionBar = entity.find('Row.actionBar');
+            expect(actionBar.find('Button')).toHaveLength(3);
+            expect(actionBar.find('Button.save')).toHaveLength(1);
+            expect(actionBar.find('Button.cancel')).toHaveLength(1);
+            expect(actionBar.find('Button.delete')).toHaveLength(1);
         });
     });
 
     describe('click edit -> click cancel', () => {
         beforeEach(() => {
-            component.find('button.edit').simulate('click');
-            simulateInput('4');
-            component.find('button.cancel').simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
+            entity.find('Row.actionBar').find('Button.cancel').simulate('click');
         });
         it('should be in VIEW mode', () => {
-            expect(component.state('mode')).toEqual('VIEW');
+            expect(entity.state('mode')).toEqual('VIEW');
         });
-        it('should disable the form fields', () => {
-            expect(component.find('input').prop('disabled')).toBeTruthy();
+        it('should pass disabled=true to child', () => {
+            expect(entity.find('Child').prop('disabled')).toBeTruthy();
         });
-        it('should populate the form fields from props', () => {
-            expect(component.find('input').prop('value')).toEqual('6');
+        it('should pass props entityData to child', () => {
+            expect(entity.find('Child').prop('entityData')).toEqual(props.entityData);
         });
         it('should only have edit button in action bar', () => {
-            expect(component.find('button')).toHaveLength(1);
-            expect(component.find('button').hasClass('edit')).toBeTruthy();
+            const actionBar = entity.find('Row.actionBar');
+            expect(actionBar.find('Button')).toHaveLength(1);
+            expect(actionBar.find('Button').hasClass('edit')).toBeTruthy();
         });
     });
 
     describe('click edit -> click save', () => {
         beforeEach(() => {
-            component.find('button.edit').simulate('click');
-            simulateInput('5');
-            component.find('button.save').simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
+            entity.find('Row.actionBar').find('Button.save').simulate('click');
         });
         it('should be in SAVING mode', () => {
-            expect(component.state('mode')).toEqual('SAVING');
+            expect(entity.state('mode')).toEqual('SAVING');
         });
         it('should disable the form fields', () => {
-            expect(component.find('input').prop('disabled')).toBeTruthy();
+            expect(entity.find('Child').prop('disabled')).toBeTruthy();
         });
         it('should show an overlay', () => {
-            expect(component.find('div.overlay')).toHaveLength(1);
+            expect(entity.find('div.overlay')).toHaveLength(1);
         });
-        it('should call save action creator', () => {
-            expect(component.find('div.overlay')).toHaveLength(1);
+        it('should call save action creator with state data', () => {
+            expect(props.updateEntity).toBeCalledWith(props.entityType, props.entityData);
         });
-        it('should enter view mode when state entityData matches props entityData', () => {
-            
-            expect(component.find('div.overlay')).toHaveLength(1);
-        });
+
+        // describe('success', () => {
+
+        // });
+        // it('should enter view mode when state entityData matches props entityData', () => {
+        //     expect(entity.find('div.overlay')).toHaveLength(1);
+        // });
     });
 
     // it('should enable form fields and load form data into local state when edit button is clicked', () => {
