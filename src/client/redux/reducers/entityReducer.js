@@ -1,11 +1,17 @@
 import { actions } from '../actions/entityActions';
 import { omit } from 'lodash';
-import { data as mock } from '../../../mock';
 
-export default (state = mock || {}, action) => {
+export default (state = {}, action) => {
     const { type, entityType } = action;
 
     switch (type) {
+        case actions.ENTITY_FETCH: {
+            const { loadedEntities } = action;
+            return {
+                ...state,
+                [entityType]: loadedEntities || [],
+            };
+        }
         case actions.ENTITY_CREATE: {
             const { newEntity } = action;
             return {
@@ -44,6 +50,13 @@ export default (state = mock || {}, action) => {
                     }
                     return entity;
                 }),
+            };
+        }
+        case actions.ENTITY_FETCH_ERROR: {
+            const { error } = action;
+            return {
+                ...state,
+                [entityType]: { error },
             };
         }
         default:

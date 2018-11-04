@@ -1,15 +1,13 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
-import { Header, Footer } from './components';
-import { HomeScreen } from './containers/';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { ProjectsPage } from './containers';
 
 const routes = () => (
     <React.Fragment>
-        <Header />
         <Switch>
-            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/" render={() => <Redirect to="/projects"/>}/>
+            <Route exact path="/projects" component={ProjectsPage} />
         </Switch>
-        <Footer />
     </React.Fragment>
 );
 

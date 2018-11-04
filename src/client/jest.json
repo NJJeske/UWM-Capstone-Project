@@ -6,19 +6,11 @@
     "setupTestFrameworkScriptFile": "<rootDir>/jestSetup/enzyme.js",
     "coveragePathIgnorePatterns": [
         "/node_modules/",
-        "/jestSetup/",
-        "/src/mock/"
+        "/jestSetup/"
     ],
-    "collectCoverageFrom": [
-        "<rootDir>/src/client/**/*.{js,jsx}",
-        "!<rootDir>/src/client/app.jsx",
-        "!<rootDir>/src/client/store.js",
-        "!<rootDir>/src/client/routes.js"
-    ],
+    "collectCoverageFrom": ["<rootDir>/src/client/**/*.{js,jsx}", "!<rootDir>/src/client/app.jsx", "!<rootDir>/src/client/store.js", "!<rootDir>/src/client/routes.js"],
     "testResultsProcessor":  "<rootDir>/node_modules/jest-junit",
-    "testMatch": [
-        "**/client/**/*.spec.*"
-    ],
+    "testMatch": ["**/client/**/*.test.*"],
     "moduleNameMapper": {
         "\\.(s?css|less)$": "<rootDir>/jestSetup/ignoreFileType.js",
         "\\.(gif|tff|eot|svg)$": "<rootDir>/jestSetup/fileMock.js"
@@ -26,10 +18,5 @@
     "moduleFileExtensions": [
         "js",
         "jsx"
-    ],
-    "globals": {
-        "CONFIG": {
-            "useMock": false
-        }
-    }
+    ]
 }
