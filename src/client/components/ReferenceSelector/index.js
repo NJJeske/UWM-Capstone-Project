@@ -29,7 +29,7 @@ const ReferenceSelector = props => {
         }
     };
 
-    const options = (entities[entityType] || []).map(entity => (
+    const options = (entities[entityType].list || []).map(entity => (
         <option key={entity.id} value={entity.id}>
             {makeOptionText(entity)}
         </option>
