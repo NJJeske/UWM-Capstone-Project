@@ -15,7 +15,6 @@ library.add(faEdit, faCheck, faBan, faTrashAlt);
 
 class App extends Component {
     componentDidMount() {
-        console.log('mounted');
         [
             'addresses',
             'certifications',
@@ -25,7 +24,7 @@ class App extends Component {
             'positions',
             'projects'
         ].forEach(entityType => {
-            fetchEntities(entityType, store.dispatch);
+            store.dispatch(fetchEntities(entityType));
         });
     }
     render() {
