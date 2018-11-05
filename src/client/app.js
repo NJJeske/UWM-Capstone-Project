@@ -1,9 +1,10 @@
 'use strict';
 import '@babel/polyfill';
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { fetchEntities } from './redux/actions/entityActions';
 import store from './redux/store.js';
 import Routes from './routes.js';
 
@@ -12,11 +13,32 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit, faCheck, faBan, faTrashAlt);
 
+class App extends Component {
+    componentDidMount() {
+        [
+            'addresses',
+            'certifications',
+            'companies',
+            'contacts',
+            'education',
+            'positions',
+            'projects'
+        ].forEach(entityType => {
+            fetchEntities(entityType, store.dispatch);
+        });
+    }
+    render() {
+        return (
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Routes />
+                </BrowserRouter>
+            </Provider>
+        );
+    }
+}
+
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Routes />
-        </BrowserRouter>
-    </Provider>,
+    <App />,
     document.getElementById('origin')
 );
