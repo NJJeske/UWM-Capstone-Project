@@ -56,7 +56,11 @@ export default (state = {}, action) => {
             const { error } = action;
             return {
                 ...state,
-                [entityType]: { error },
+                meta: {
+                    errors: {
+                        [entityType]: (state.meta.errors[entityType] || []).concat({type: 'fetch', error})
+                    }
+                }
             };
         }
         default:
