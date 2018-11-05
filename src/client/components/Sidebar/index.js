@@ -19,7 +19,7 @@ export class Sidebar extends Component {
           <FontAwesomeIcon icon="user" /> Profile
         </a>
         <a className="menu-item" href="/documents">
-          <FontAwesomeIcon icon="file-alt" /> My Documents
+          <FontAwesomeIcon icon="file-alt" /> Documents
         </a>
         <a className="menu-item" href="/experience">
           <FontAwesomeIcon icon="briefcase" /> Experience
@@ -40,3 +40,5 @@ export class Sidebar extends Component {
     );
   }
 }
+
+export default Sidebar;

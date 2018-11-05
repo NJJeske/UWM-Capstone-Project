@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
+import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../sass/_homepagebuttoncluster.scss";
 
 /*
  * Class component that will represent the cluster of 6 main buttons that will appear on
@@ -7,19 +10,93 @@ import { Button } from "reactstrap";
  * page. These buttons will be "Documents", "Education", "Experience", "Projects", "Contacts", 
  * and "Timeline".
  */
-export class ButtonCluster extends Component {
+export class HomepageButtonCluster extends Component {
+  constructor(props) {
+    super(props);
+    this.routeTo = this.routeTo.bind(this);
+  }
+
+  routeTo(p) {
+    let path = p;
+    this.props.history.push(path);
+  }
+
   render() {
-    <div className="ButtonCluster">
-      <div className="FirstRow">
-        <Button color="Secondary">Documents</Button>;
-        <Button color="Secondary">Experience</Button>;
-        <Button color="Secondary">Education</Button>;
+    return (
+      <div className="ButtonCluster">
+        <Row className="FirstRow">
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/documents")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="file-alt" size="3x" />
+              <br />
+              <span className="label">Documents</span>
+            </Button>
+          </Col>
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/experience")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="briefcase" size="3x" />
+              <br />
+              <span className="label">Experience</span>
+            </Button>
+          </Col>
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/education")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="graduation-cap" size="3x" />
+              <br />
+              <span className="label">Education</span>
+            </Button>
+          </Col>
+        </Row>
+        <Row className="SecondRow">
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/projects")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="project-diagram" size="3x" />
+              <br />
+              <span className="label">Projects</span>
+            </Button>
+          </Col>
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/contacts")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="address-book" size="3x" />
+              <br />
+              <span className="label">Contacts</span>
+            </Button>
+          </Col>
+          <Col className="buttoncombo">
+            <Button
+              color="Secondary"
+              onClick={() => this.routeTo("/timeline")}
+              style={{ borderRadius: 12 }}
+            >
+              <FontAwesomeIcon icon="calendar-alt" size="3x" />
+              <br />
+              <span className="label">Timeline</span>
+            </Button>
+          </Col>
+        </Row>
       </div>
-      <div className="SecondRow">
-        <Button color="Secondary">Projects</Button>;
-        <Button color="Secondary">Contacts</Button>;
-        <Button color="Secondary">Timeline</Button>;
-      </div>
-    </div>;
+    );
   }
 }
+
+export default withRouter(HomepageButtonCluster);

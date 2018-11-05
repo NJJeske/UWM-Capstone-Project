@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Sidebar } from "../../components/Sidebar";
+import HomepageButtonCluster from "../../components/HomepageButtonCluster";
+import ProfileButton from "../../components/ProfileButton";
+import "../../sass/_homescreen.scss";
 
-class HomeScreen extends Component {
+export class HomeScreen extends Component {
   render() {
     return (
       <main>
-        <Sidebar />
+        <div className="profileButton">
+          <ProfileButton />
+        </div>
+        <h1 className="title">MyPortfolio</h1>
+        <div className="buttonCluster">
+          <HomepageButtonCluster />
+        </div>
       </main>
     );
   }

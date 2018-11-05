@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const contextPath = path.join(__dirname, 'src/client');
-const outputPath = path.join(__dirname, 'dist');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const contextPath = path.join(__dirname, "src/client");
+const outputPath = path.join(__dirname, "dist");
 
 module.exports = {
   context: contextPath,
@@ -40,11 +40,23 @@ module.exports = {
       {
         test: /\.css$/,
         loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.jsx?$/,
+        include: path.join(__dirname, "/client/src"),
+        loader: "babel-loader",
+        query: {
+          presets: ["react", "es2015", "stage-1"]
+        }
+      },
+      {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: "file-loader"
       }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({ CONFIG: JSON.stringify(require('config')) }),
+    new webpack.DefinePlugin({ CONFIG: JSON.stringify(require("config")) }),
     new HtmlWebpackPlugin({
       title: "Job Hunter",
       favicon: "../server/template/favicon.ico",

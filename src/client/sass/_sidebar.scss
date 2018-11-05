@@ -8,7 +8,7 @@ body {
   overflow: auto;
 }
 
-/* Individual item */
+// Individual item
 .bm-item {
   display: inline-block;
   font-size: 24pt;
@@ -17,13 +17,13 @@ body {
   color: white;
 }
 
-/* Change color on hover */
+// Change color on hover
 .bm-item:hover {
   color: black;
   text-decoration: none;
 }
 
-/* Position and sizing of burger button */
+// Position and sizing of burger button
 .bm-burger-button {
   position: fixed;
   width: 24px;
@@ -32,30 +32,30 @@ body {
   top: 24px;
 }
 
-/* Color/shape of burger icon bars */
+// Color/shape of burger icon bars
 .bm-burger-bars {
   background: gray;
 }
 
-/* Position and sizing of clickable cross button */
+// Position and sizing of clickable cross button
 .bm-cross-button {
   height: 24px;
   width: 24px;
 }
 
-/* Color/shape of close button cross */
+// Color/shape of close button cross
 .bm-cross {
   background: white;
 }
 
-/* General sidebar styles */
+// General sidebar styles
 .bm-menu {
-  background: gray;
+  background: #393939;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
-/* Styling of overlay */
+// Styling of overlay
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
