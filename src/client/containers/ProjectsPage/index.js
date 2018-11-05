@@ -30,7 +30,7 @@ class ProjectsPage extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    projects: state.data.projects,
+    projects: state.data.projects.list,
 });
 
 const mapDispatchToProps = {
