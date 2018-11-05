@@ -25,7 +25,7 @@ module.exports = entityConfig => {
             if (mockConfig.responses.getAll) {
                 return res.status(200).send(mock);
             } else {
-                return res.status(401).send({ error: new Error("Uhhhh you're not authenticated to fetch.") });
+                return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
             // TODO - wire this up correctly
@@ -44,7 +44,7 @@ module.exports = entityConfig => {
                 mock.push(createdEntity);
                 return res.status(200).send(createdEntity);
             } else {
-                return res.status(401).send({ error: new Error("Uhhhh you're not authenticated to fetch.") });
+                return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
             // TODO - wire this up correctly
@@ -64,7 +64,7 @@ module.exports = entityConfig => {
                 Object.assign(mock.find(entity => entity.id === entityID), updatedEntity);
                 return res.status(200).send();
             } else {
-                return res.status(401).send({ error: new Error("Uhhhh you're not authenticated to update.") });
+                return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
             }
         } else {
             // TODO - wire this up correctly
@@ -83,7 +83,7 @@ module.exports = entityConfig => {
                 mock = mock.filter(entity => entity.id !== entityID);
                 return res.status(200).send();
             } else {
-                return res.status(401).send({ error: new Error("Uhhhh you're not authenticated to delete.") });
+                return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
             }
         } else {
             // TODO - wire this up correctly
