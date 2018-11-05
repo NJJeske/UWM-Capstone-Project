@@ -26,10 +26,5 @@
     "moduleFileExtensions": [
         "js",
         "jsx"
-    ],
-    "globals": {
-        "CONFIG": {
-            "useMock": false
-        }
-    }
+    ]
 }

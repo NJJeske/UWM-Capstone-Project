@@ -1,8 +1,17 @@
 import { actions } from '../actions/entityActions';
 import { omit } from 'lodash';
-import { data as mock } from '../../../mock';
 
-export default (state = mock || {}, action) => {
+const initialState = {
+    addresses: [],
+    certifications: [],
+    companies: [],
+    contacts: [],
+    education: [],
+    positions: [],
+    projects: [],
+};
+
+export default (state = initialState, action) => {
     const { type, entityType } = action;
 
     switch (type) {
