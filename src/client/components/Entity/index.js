@@ -68,7 +68,7 @@ export class Entity extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        if (nextState.mode === SAVING) {
+        if (nextState.mode === SAVING || nextState.mode === DELETING) {
             // If an error exists in store but not locally then it's new -> enter error state
             if (nextProps.error && !nextState.error) {
                 return { mode: ERROR, error: nextProps.error };
