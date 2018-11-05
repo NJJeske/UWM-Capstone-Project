@@ -12,14 +12,17 @@ export const actions = {
 };
 
 export const fetchEntities = entityType => async dispatch => {
+    console.log(`fetching ${entityType}`);
     try {
         const result = await axios.get(`${serverURL}/${entityType}`);
+        console.log(`got result ${entityType}`);
         dispatch({
             type: actions.ENTITY_FETCH,
             entityType,
             loadedEntities: result.data,
         });
     } catch (error) {
+        console.log(`error ${entityType}`);
         error.message = `Error loading entities of type '${entityType}' through API`;
         dispatch({
             type: actions.ENTITY_FETCH_ERROR,

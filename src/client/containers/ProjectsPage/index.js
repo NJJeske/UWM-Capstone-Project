@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Card, Button } from 'reactstrap';
-import { fetchEntities } from '../../redux/actions/entityActions';
 import { Project } from '../../components';
 
 class ProjectsPage extends Component {
-    componentDidMount() {
-        this.props.fetchEntities('projects');
-    }
-
     render() {
         const { projects, error } = this.props;
         const mainBody = error
@@ -33,8 +28,4 @@ const mapStateToProps = state => ({
     projects: state.data.projects.list,
 });
 
-const mapDispatchToProps = {
-    fetchEntities,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsPage);
+export default connect(mapStateToProps)(ProjectsPage);

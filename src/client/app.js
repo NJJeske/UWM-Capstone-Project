@@ -15,6 +15,7 @@ library.add(faEdit, faCheck, faBan, faTrashAlt);
 
 class App extends Component {
     componentDidMount() {
+        console.log('mounted');
         [
             'addresses',
             'certifications',
