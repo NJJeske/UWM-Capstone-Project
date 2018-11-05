@@ -70,8 +70,8 @@ export class Entity extends Component {
     static getDerivedStateFromProps(nextProps, nextState) {
         if (nextState.mode === SAVING || nextState.mode === DELETING) {
             // If an error exists in store but not locally then it's new -> enter error state
-            if (nextProps.error && !nextState.error) {
-                return { mode: ERROR, error: nextProps.error };
+            if (nextProps.entityData.error && !nextState.error) {
+                return { mode: ERROR, error: nextProps.entityData.error };
             }
             // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
             if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
