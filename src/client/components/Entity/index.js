@@ -74,7 +74,7 @@ export class Entity extends Component {
                 return { mode: ERROR, error: nextProps.error };
             }
             // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
-            if (isEqual(nextProps.entityData, nextState.entityData)) {
+            if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
                 return { mode: VIEW, entityData: null };
             }
         }
