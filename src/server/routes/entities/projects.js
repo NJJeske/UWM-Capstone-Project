@@ -16,8 +16,8 @@ module.exports = {
         root: 'projects',
         responses: {
             getAll: true,
-            create: false,
-            update: false,
+            create: true,
+            update: true,
             delete: false
         }
     }
