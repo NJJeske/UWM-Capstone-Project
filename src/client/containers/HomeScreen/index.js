@@ -7,7 +7,7 @@ import "../../sass/_homescreen.scss";
 export class HomeScreen extends Component {
   render() {
     return (
-      <main>
+      <main className="homescreen-main">
         <div className="profileButton">
           <ProfileButton />
         </div>

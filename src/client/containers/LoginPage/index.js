@@ -4,7 +4,7 @@ import "../../sass/_loginpage.scss";
 
 export class LoginPage extends Component {
   render() {
-    return;
+    return <main className="login-main" />;
   }
 }
 

@@ -1,3 +1,13 @@
+.homescreen-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url("../../Images/homescreen-background.png");
+  background-size: cover;
+}
+
 .profileButton {
   position: absolute;
   right: 0;
@@ -20,8 +30,4 @@
   font-weight: 800;
   font-style: italic;
   color: white;
-}
-
-body {
-  background-image: url("../../Images/homescreen-background.png");
 }
