@@ -1,0 +1,35 @@
+// Styling for the block of both rows of buttons
+.ButtonCluster {
+  position: relative;
+  margin: auto;
+  .FirstRow {
+    padding-bottom: 135px;
+  }
+}
+
+// Styling for the text label inside of a button
+.label {
+  color: white;
+  align-content: center;
+  font-family: verdana;
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+// Styling for the row that contains a button
+.buttoncombo {
+  button {
+    height: 125px;
+    width: 125px;
+    color: white;
+    background-color: #393939;
+  }
+
+  button:hover {
+    background-color: black;
+  }
+
+  button {
+    border-radius: 12px;
+  }
+}

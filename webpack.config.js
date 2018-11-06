@@ -24,17 +24,31 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-            }, {
+                loader: 'babel-loader'
+            },
+            {
                 test: /\.(scss|sass)$/,
                 loader: [
                     'style-loader', // creates style nodes from JS strings
                     'css-loader', // translates CSS into CommonJS
-                    'sass-loader', // compiles Sass to CSS
+                    'sass-loader' // compiles Sass to CSS
                 ]
-            }, {
+            },
+            {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.jsx?$/,
+                include: path.join(__dirname, '/client/src'),
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react', 'es2015', 'stage-1']
+                }
+            },
+            {
+                test: /\.(gif|svg|jpg|png)$/,
+                loader: 'file-loader'
             }
         ]
     },
@@ -44,7 +58,7 @@ module.exports = {
             title: 'Job Hunter',
             favicon: '../server/template/favicon.ico',
             template: '../server/template/index.html'
-        }),
+        })
     ],
     optimization: {
         splitChunks: {
@@ -52,7 +66,7 @@ module.exports = {
                 vendor: {
                     test: /[\\/]node_modules[\\/](react.*)[\\/]/,
                     name: 'vendor',
-                    chunks: 'all',
+                    chunks: 'all'
                 }
             }
         }
