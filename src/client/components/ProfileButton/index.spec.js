@@ -4,18 +4,15 @@ import { shallow } from "enzyme";
 
 const wrapper = shallow(<ProfileButton />);
 
-// Test case that uncontrolled button dropdown exists
-it("renders", () => {
+it("should render an UncontrolledButtonDropdown", () => {
   expect(wrapper.find("UncontrolledButtonDropdown"));
 });
 
-// Test case that dropdown menu exists
-it("renders", () => {
+it("should render a DropdownMenu", () => {
   expect(wrapper.find("DropdownMenu"));
 });
 
-// Test case for dropdown button with user settings icon
-it("renders", () => {
+it("should render a dropdown button with the user settings fontawesome icon", () => {
   expect(
     wrapper
       .find(".toggle")
@@ -26,8 +23,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> ");
 });
 
-// Test case for first occurence in list of links that popup when clicking on user settings button
-it("renders", () => {
+it("should render a link for profile settings in first option of two in dropdown", () => {
   expect(
     wrapper
       .find("DropdownItem")
@@ -37,8 +33,7 @@ it("renders", () => {
   ).toEqual("Settings");
 });
 
-// Test case for second occurence in list of links that popup when clicking on user settings button
-it("renders", () => {
+it("should render a link for logout in second option of two in dropdown", () => {
   expect(
     wrapper
       .find("DropdownItem")
@@ -48,7 +43,6 @@ it("renders", () => {
   ).toEqual("Logout");
 });
 
-// Test case that dropdown menu should have a total of two dropdown items
-it("renders", () => {
+it("should render a dropdown menu that has a total of two items", () => {
   expect(wrapper.find("DropdownMenu").children()).toHaveLength(2);
 });

@@ -6,18 +6,15 @@ import { shallow } from "enzyme";
 var wrapper = shallow(<Sidebar />);
 var item = TestUtils.renderIntoDocument(<Sidebar />);
 
-// Test case that menu exists
-it("renders", () => {
+it("should render a menu element", () => {
   expect(wrapper.find("Menu"));
 });
 
-// Test case that sidebar has 8 different links
-it("renders", () => {
+it("should render 8 different child elements for links", () => {
   expect(wrapper.find("Menu").children()).toHaveLength(8);
 });
 
-// Test case that first link of sidebar is for home
-it("renders", () => {
+it("should render a first link for home", () => {
   expect(
     wrapper
       .find("Menu")
@@ -26,8 +23,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Home");
 });
 
-// Test case that second link of sidebar is for profile
-it("renders", () => {
+it("should render a second link for profile", () => {
   expect(
     wrapper
       .find("Menu")
@@ -36,8 +32,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Profile");
 });
 
-// Test case that third link of sidebar is for documents
-it("renders", () => {
+it("should render a third link for documents", () => {
   expect(
     wrapper
       .find("Menu")
@@ -46,8 +41,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Documents");
 });
 
-// Test case that fourth link of sidebar is for experience
-it("renders", () => {
+it("should render a fourth link for experience", () => {
   expect(
     wrapper
       .find("Menu")
@@ -56,8 +50,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Experience");
 });
 
-// Test case that fifth link of sidebar is for education
-it("renders", () => {
+it("should render a fifth link for education", () => {
   expect(
     wrapper
       .find("Menu")
@@ -66,8 +59,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Education");
 });
 
-// Test case that sixth link of sidebar is for projects
-it("renders", () => {
+it("should render a sixth link for projects", () => {
   expect(
     wrapper
       .find("Menu")
@@ -76,8 +68,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Projects");
 });
 
-// Test case that seventh link of sidebar is for contacts
-it("renders", () => {
+it("should render a seventh link for contacts", () => {
   expect(
     wrapper
       .find("Menu")
@@ -86,8 +77,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Contacts");
 });
 
-// Test case that eigth link of sidebar is for timeline
-it("renders", () => {
+it("should render an eighth link for timeline", () => {
   expect(
     wrapper
       .find("Menu")
@@ -96,64 +86,56 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon /> Timeline");
 });
 
-// Test case that first link of sidebar has href for homepage
-it("renders", () => {
+it("should render a href in the first link for homepage", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[0];
   let href = a.getAttribute("href");
   expect(href).toEqual("/");
 });
 
-// Test case that second link of sidebar has href for profile
-it("renders", () => {
+it("should render an href in second link for profile", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[1];
   let href = a.getAttribute("href");
   expect(href).toEqual("/profile");
 });
 
-// Test case that third link of sidebar has href for documents
-it("renders", () => {
+it("should render an href in third link for documents", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[2];
   let href = a.getAttribute("href");
   expect(href).toEqual("/documents");
 });
 
-// Test case that fourth link of sidebar has href for experience
-it("renders", () => {
+it("should render an href in fourth link for experience", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[3];
   let href = a.getAttribute("href");
   expect(href).toEqual("/experience");
 });
 
-// Test case that fifth link of sidebar has href for education
-it("renders", () => {
+it("should render an href in fifth link for education", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[4];
   let href = a.getAttribute("href");
   expect(href).toEqual("/education");
 });
 
-// Test case that sixth link of sidebar has href for projects
-it("renders", () => {
+it("should render an href in sixth link for projects", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[5];
   let href = a.getAttribute("href");
   expect(href).toEqual("/projects");
 });
 
-// Test case that seventh link of sidebar has href for contacts
-it("renders", () => {
+it("should render an href in seventh link for contacts", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[6];
   let href = a.getAttribute("href");
   expect(href).toEqual("/contacts");
 });
 
-// Test case that eigth link of sidebar has href for timeline
-it("renders", () => {
+it("should render an href in eighth link for timeline", () => {
   let all = TestUtils.scryRenderedDOMComponentsWithTag(item, "a");
   let a = all[7];
   let href = a.getAttribute("href");

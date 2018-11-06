@@ -4,13 +4,11 @@ import { shallow } from "enzyme";
 
 var wrapper = shallow(<HomepageButtonCluster />);
 
-// Test case that there exists two rows of buttons
-it("renders", () => {
+it("should render two rows of buttons", () => {
   expect(wrapper.find("Row")).toHaveLength(2);
 });
 
-// Test case that first row contains 3 child elements for 3 different buttons
-it("renders", () => {
+it("should render a first row with 3 child elements", () => {
   expect(
     wrapper
       .find("Row")
@@ -19,8 +17,7 @@ it("renders", () => {
   ).toHaveLength(3);
 });
 
-// Test case that second row contains 3 child elements for 3 different buttons
-it("renders", () => {
+it("should render a second row with 3 child elements", () => {
   expect(
     wrapper
       .find("Row")
@@ -29,8 +26,7 @@ it("renders", () => {
   ).toHaveLength(3);
 });
 
-// Testing that 1st child element in first row is a column
-it("renders", () => {
+it("should render a Col element as the first child element in the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -40,8 +36,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 2nd child element in first row is a column
-it("renders", () => {
+it("should render a Col element as the second child element in the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -51,8 +46,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 3rd child element in first row is a column
-it("renders", () => {
+it("should render a Col as the third child element in the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -62,8 +56,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 1st child element in second row is a column
-it("renders", () => {
+it("should render a Col as the first child element in the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -73,8 +66,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 2nd child element in second row is a column
-it("renders", () => {
+it("should render a Col as the second child element in the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -84,8 +76,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 2nd child element in 2nd row is a column
-it("renders", () => {
+it("should render a Col as the third child element in the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -95,8 +86,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 1st child element in first row contains a button
-it("renders", () => {
+it("should render a button in the first child element of the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -107,8 +97,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 2nd child element in first row contains a button
-it("renders", () => {
+it("should render a button in the second child element in the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -119,8 +108,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 3rd child element in first row contains a button
-it("renders", () => {
+it("should render a butoon in the third child element of the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -131,8 +119,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 1st child element in second row contains a button
-it("renders", () => {
+it("should render a button in the first child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -143,8 +130,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 2nd child element in second row contains a button
-it("renders", () => {
+it("should render a button in the second child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -155,8 +141,7 @@ it("renders", () => {
   );
 });
 
-// Testing that 3rd child element in second row contains a button
-it("renders", () => {
+it("should render a button in the third child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -167,8 +152,7 @@ it("renders", () => {
   );
 });
 
-// Test case that 1st button in 1st row is button for documents
-it("renders", () => {
+it("should render a button for documents in the first child element of the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -181,8 +165,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon />Documents");
 });
 
-// Test case that 2nd button in 1st row is button for experience
-it("renders", () => {
+it("should render a button for experience in the second child element of the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -195,8 +178,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon />Experience");
 });
 
-// Test case that 3rd button in 1st row is button for education
-it("renders", () => {
+it("should render a button for education in the third child element of the first row", () => {
   expect(
     wrapper
       .find("Row")
@@ -209,8 +191,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon />Education");
 });
 
-// Test case that 1st button in 2nd row is button for projects
-it("renders", () => {
+it("should render a button for projects in the first child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -223,8 +204,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon />Projects");
 });
 
-// Test case that 2nd button in 2nd row is button for contacts
-it("renders", () => {
+it("should render a button for contacts in the second child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
@@ -237,8 +217,7 @@ it("renders", () => {
   ).toEqual("<FontAwesomeIcon />Contacts");
 });
 
-// Test case that 3rd button in 2nd row is button for timeline
-it("renders", () => {
+it("should render a button for timeline in the 3rd child element of the second row", () => {
   expect(
     wrapper
       .find("Row")
