@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ContactsPage extends Component {
-  render() {}
+    render() {}
 }
 
 export default connect()(ContactsPage);
