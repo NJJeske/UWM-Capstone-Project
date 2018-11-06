@@ -63,11 +63,9 @@ describe("Entity", () => {
       expect(entity.find("Child").prop("entityData")).toEqual(nextEntityData);
     });
     it("should update state when changeField is invoked", () => {
-      entity
-        .instance()
-        .changeField({
-          target: { name: "rating", value: nextEntityData.rating }
-        });
+      entity.instance().changeField({
+        target: { name: "rating", value: nextEntityData.rating }
+      });
       expect(entity.state("entityData")).toEqual(nextEntityData);
     });
     it("should put the save, cancel, and delete buttons in action bar", () => {
