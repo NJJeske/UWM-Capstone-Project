@@ -25,8 +25,8 @@ const handleAuthentication = ({location}) => {
 const routes = () => (
     <React.Fragment>
         <Switch>
-            <Route path="/" render={(props) => <LoginPage auth={auth} {...props}/>} />
-            <Route exact path="/home" render={(props) => <HomeScreen auth={auth} {...props}/>} />
+            <Route path="/" render={() => <LoginPage auth={auth}/>} />
+            <Route exact path="/home" render={() => <HomeScreen auth={auth}/>} />
             <Route path="/profile" render={ProfilePage} />
             <Route path="/contacts" render={ContactsPage} />
             <Route path="/documents" render={DocumentsPage} />

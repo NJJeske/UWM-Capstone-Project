@@ -9,7 +9,7 @@ export class LoginPage extends Component {
             <main className="login-main">
                 <div className="loginButton">
                     <h4>My portfolio</h4>
-                    <LoginButton />
+                    <LoginButton auth={this.props.auth}/>
                 </div>
             </main>
         );
