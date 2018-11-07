@@ -8,6 +8,7 @@ export class LoginPage extends Component {
         return (
             <main className="login-main">
                 <div className="loginButton">
+                    <h4>My portfolio</h4>
                     <LoginButton />
                 </div>
             </main>
