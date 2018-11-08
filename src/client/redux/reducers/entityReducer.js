@@ -1,7 +1,7 @@
 import { actions } from '../actions/entityActions';
-import { omit } from 'lodash';
+import { get, omit } from 'lodash';
 
-const initialState = {
+export const initialState = {
     addresses: { list: [] },
     certifications: { list: [] },
     companies: { list: [] },
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
                 ...state,
                 [entityType]: {
                     ...state[entityType],
-                    list: state[entityType].list.concat(newEntity),
+                    list: get(state, [entityType, 'list'], []).concat(newEntity),
                 },
             };
         }
