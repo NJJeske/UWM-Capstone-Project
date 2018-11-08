@@ -4,6 +4,8 @@ import { shallow } from 'enzyme';
 
 const wrapper = shallow(<ProfileButton />);
 
+global.console.error = jest.fn();
+
 it('should render an UncontrolledButtonDropdown', () => {
     expect(wrapper.exists('UncontrolledButtonDropdown'));
 });
