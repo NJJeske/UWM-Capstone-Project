@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Container, Row, Button } from 'reactstrap';
-
-import './styles.scss';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-library.add(faEdit, faCheck, faBan, faTrashAlt);
+import './styles.scss';
 
 // Local States
 const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];

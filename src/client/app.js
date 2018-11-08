@@ -40,11 +40,6 @@ library.add(
     faAddressBook
 );
 
-import 'bootstrap/dist/css/bootstrap.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-library.add(faEdit, faCheck, faBan, faTrashAlt);
-
 class App extends Component {
     componentDidMount() {
         [
