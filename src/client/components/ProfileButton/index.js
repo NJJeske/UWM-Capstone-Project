@@ -36,7 +36,7 @@ export class ProfileButton extends Component {
             <DropdownItem onClick={() => this.routeTo("/profile")}>
               Settings
             </DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
+            <DropdownItem onClick = {() => this.logout()}>Logout</DropdownItem>
           </DropdownMenu>
         </UncontrolledButtonDropdown>
       </div>
