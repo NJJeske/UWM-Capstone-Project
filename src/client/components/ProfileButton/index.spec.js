@@ -4,6 +4,9 @@ import { shallow } from 'enzyme';
 
 const wrapper = shallow(<ProfileButton />);
 
+// This test was giving console.errors due to PropTypes being off for the DropdownToggle
+// I suspect it has something to do with using dive() to pass the context of its parent.
+// The tests will still be able to fail.
 global.console.error = jest.fn();
 
 it('should render an UncontrolledButtonDropdown', () => {
