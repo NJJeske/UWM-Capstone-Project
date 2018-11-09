@@ -8,6 +8,7 @@ import {
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../sass/_profilebutton.scss";
+import axios from 'axios'
 
 export class ProfileButton extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export class ProfileButton extends Component {
 
   logout() {
     this.props.auth.logout();
-    this.routeTo("/");
+    location.href='https://uwm-capstone.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A8080%2F&client_id=UhJh8oO1lZ41WeP52AihFavNxSkkEK3c';
   }
 
   render() {
