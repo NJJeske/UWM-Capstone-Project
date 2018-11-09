@@ -1,9 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
-const Callback = () => (
-  <div className="loading">
-    <h4>Loading...</h4>
-  </div>
-);
+function CallbackPage(props) {
+  props.auth.handleAuthentication().then(() => {
+    props.history.push('/home');
+  });
 
-export default Callback;
+  return (
+    <div>
+      Loading user profile.
+    </div>
+  );
+}
+
+export default withRouter(CallbackPage);

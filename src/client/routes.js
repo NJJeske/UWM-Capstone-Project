@@ -16,11 +16,6 @@ import Auth from "./Auth/Auth";
 import history from "./history";
 
 const auth = new Auth();
-const handleAuthentication = ({ location }) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-};
 
 const routes = () => (
   <React.Fragment>
@@ -34,13 +29,7 @@ const routes = () => (
       <Route path="/experience" component={ExperiencePage} />
       <Route path="/projects" component={ProjectsPage} />
       <Route path="/timeline" component={TimelinePage} />
-      <Route
-        path="/callback"
-        render={props => {
-          handleAuthentication(props);
-          return <CallbackPage {...props} />;
-        }}
-      />
+      <Route path="/callback" component={() => <CallbackPage auth={auth} />} />
     </Switch>
   </React.Fragment>
 );
