@@ -9,21 +9,28 @@ import {
     ProfilePage,
     ProjectsPage,
     TimelinePage,
-    LoginPage
+    LoginPage,
 } from './containers';
+import { Sidebar, Footer } from './components';
 
 const routes = () => (
     <React.Fragment>
         <Switch>
-            <Route exact path="/" component={HomeScreen} />
             <Route exact path="/login" component={LoginPage} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/contacts" component={ContactsPage} />
-            <Route path="/documents" component={DocumentsPage} />
-            <Route path="/education" component={EducationPage} />
-            <Route path="/experience" component={ExperiencePage} />
-            <Route path="/projects" component={ProjectsPage} />
-            <Route path="/timeline" component={TimelinePage} />
+            <Route exact path="/" component={HomeScreen} />
+            <Route>
+                <React.Fragment>
+                    <Sidebar />
+                    <Route exact path="/profile" component={ProfilePage} />
+                    <Route exact path="/contacts" component={ContactsPage} />
+                    <Route exact path="/documents" component={DocumentsPage} />
+                    <Route exact path="/education" component={EducationPage} />
+                    <Route exact path="/experience" component={ExperiencePage} />
+                    <Route exact path="/projects" component={ProjectsPage} />
+                    <Route exact path="/timeline" component={TimelinePage} />
+                    <Footer />
+                </React.Fragment>
+            </Route>
         </Switch>
     </React.Fragment>
 );

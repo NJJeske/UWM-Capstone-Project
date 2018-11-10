@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Card, Button } from 'reactstrap';
-import { Project } from '../../components';
+import { Header, Project } from '../../components';
 
 class ProjectsPage extends Component {
     render() {
@@ -12,6 +12,7 @@ class ProjectsPage extends Component {
 
         return (
             <Container fluid={true} id="PROJECTS_PAGE">
+                <Header title='Projects' />
                 <main>
                     {mainBody}
                     <Card className='project'>
