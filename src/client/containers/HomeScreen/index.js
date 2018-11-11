@@ -9,7 +9,7 @@ export class HomeScreen extends Component {
         return (
             <main className="homescreen-main">
                 <div className="profileButton">
-                    <ProfileButton auth={this.props.auth} />
+                    <ProfileButton />
                 </div>
                 <h1 className="title">MyPortfolio</h1>
                 <div className="buttonCluster">

@@ -9,6 +9,8 @@ import {
     deleteEntity,
     clearErrorEntity
 } from '../entityActions';
+import config from '../../config';
+const { serverURL } = config;
 
 describe('Entity Action Creators', () => {
     const mock = new MockAdapter(axios);
@@ -23,7 +25,7 @@ describe('Entity Action Creators', () => {
         it('should handle success', async () => {
             const newApple = { rating: 8 };
             const mockReply = { id: 2, rating: 8 };
-            mock.onPost('/apples', newApple).reply(200, mockReply);
+            mock.onPost(`${serverURL}/apples`, newApple).reply(200, mockReply);
 
             const expectedActions = [
                 {
@@ -38,14 +40,14 @@ describe('Entity Action Creators', () => {
 
         it('should handle failure', async () => {
             const newApple = { id: 2, rating: 8 };
-            mock.onPost('/apples', newApple).reply(400, new Error());
+            mock.onPost(`${serverURL}/apples`, newApple).reply(400, new Error());
 
             const expectedActions = [
                 {
                     type: actions.ENTITY_ERROR,
                     entityType: 'apples',
                     entityId: 2,
-                    error: new Error("Error creating entity in 'apples' through API")
+                    error: new Error("Error creating entity of type 'apples' through API")
                 }
             ];
             await store.dispatch(createEntity('apples', newApple));
@@ -56,7 +58,7 @@ describe('Entity Action Creators', () => {
     describe('updateEntity', () => {
         it('should handle success', async () => {
             const updatedApple = { id: 2, rating: 8 };
-            mock.onPut('/apples/2', updatedApple).reply(200);
+            mock.onPut(`${serverURL}/apples/2`, updatedApple).reply(200);
 
             const expectedActions = [
                 {
@@ -71,14 +73,14 @@ describe('Entity Action Creators', () => {
 
         it('should handle failure', async () => {
             const updatedApple = { id: 2, rating: 8 };
-            mock.onPost('/apples/2', updatedApple).reply(400, new Error());
+            mock.onPost(`${serverURL}/apples/2`, updatedApple).reply(400, new Error());
 
             const expectedActions = [
                 {
                     type: actions.ENTITY_ERROR,
                     entityType: 'apples',
                     entityId: 2,
-                    error: new Error("Error updating entity in 'apples' through API")
+                    error: new Error("Error updating entity of type 'apples' through API")
                 }
             ];
             await store.dispatch(updateEntity('apples', updatedApple));
@@ -88,7 +90,7 @@ describe('Entity Action Creators', () => {
 
     describe('deleteEntity', () => {
         it('should handle success', async () => {
-            mock.onDelete('/apples/3').reply(200);
+            mock.onDelete(`${serverURL}/apples/3`).reply(200);
 
             const expectedActions = [
                 {
@@ -102,13 +104,13 @@ describe('Entity Action Creators', () => {
         });
 
         it('should handle failure', async () => {
-            mock.onDelete('/apples/3').reply(400, new Error());
+            mock.onDelete(`${serverURL}/apples/3`).reply(400, new Error());
             const expectedActions = [
                 {
                     type: actions.ENTITY_ERROR,
                     entityType: 'apples',
                     entityId: 3,
-                    error: new Error("Error deleting entity in 'apples' through API")
+                    error: new Error("Error deleting entity of type 'apples' through API")
                 }
             ];
             await store.dispatch(deleteEntity('apples', 3));

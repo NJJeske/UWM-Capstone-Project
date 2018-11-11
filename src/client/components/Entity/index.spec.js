@@ -47,10 +47,7 @@ describe('Entity', () => {
 
     describe('click edit', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
         });
         it('should be in EDIT mode', () => {
             expect(entity.state('mode')).toEqual('EDIT');
@@ -79,14 +76,8 @@ describe('Entity', () => {
 
     describe('click edit -> click cancel', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
-            entity
-                .find('Row.actionBar')
-                .find('Button.cancel')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
+            entity.find('Row.actionBar').find('Button.cancel').simulate('click');
         });
         it('should be in VIEW mode', () => {
             expect(entity.state('mode')).toEqual('VIEW');
@@ -106,15 +97,9 @@ describe('Entity', () => {
 
     describe('click edit -> make changes -> click save', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
             entity.setState({ entityData: nextEntityData });
-            entity
-                .find('Row.actionBar')
-                .find('Button.save')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.save').simulate('click');
         });
         it('should be in SAVING mode', () => {
             expect(entity.state('mode')).toEqual('SAVING');
@@ -128,10 +113,7 @@ describe('Entity', () => {
         it('should call save action creator once, with state data if different from props', () => {
             expect(props.updateEntity).toBeCalled();
             expect(props.updateEntity.mock.calls).toHaveLength(1);
-            expect(props.updateEntity).toBeCalledWith(
-                props.entityType,
-                nextEntityData
-            );
+            expect(props.updateEntity).toBeCalledWith(props.entityType, nextEntityData);
         });
 
         it('should enter view mode when state entityData matches props entityData', () => {
@@ -142,14 +124,8 @@ describe('Entity', () => {
 
     describe('click edit -> no changes -> click save', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
-            entity
-                .find('Row.actionBar')
-                .find('Button.save')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
+            entity.find('Row.actionBar').find('Button.save').simulate('click');
         });
         it('should be in VIEW mode', () => {
             expect(entity.state('mode')).toEqual('VIEW');
@@ -161,14 +137,8 @@ describe('Entity', () => {
 
     describe('click edit -> click delete', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
-            entity
-                .find('Row.actionBar')
-                .find('Button.delete')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
+            entity.find('Row.actionBar').find('Button.delete').simulate('click');
         });
         it('should be in DELETING mode', () => {
             expect(entity.state('mode')).toEqual('DELETING');
@@ -179,25 +149,16 @@ describe('Entity', () => {
         it('should call delete action creator once', () => {
             expect(props.deleteEntity).toBeCalled();
             expect(props.deleteEntity.mock.calls).toHaveLength(1);
-            expect(props.deleteEntity).toBeCalledWith(
-                props.entityType,
-                props.entityData.id
-            );
+            expect(props.deleteEntity).toBeCalledWith(props.entityType, props.entityData.id);
         });
     });
 
     describe('action creator receives error from API', () => {
         beforeEach(() => {
-            entity
-                .find('Row.actionBar')
-                .find('Button.edit')
-                .simulate('click');
+            entity.find('Row.actionBar').find('Button.edit').simulate('click');
             entity.setState({ entityData: nextEntityData });
-            entity
-                .find('Row.actionBar')
-                .find('Button.save')
-                .simulate('click');
-            entity.setProps({ error: new Error('bad stuff happened') });
+            entity.find('Row.actionBar').find('Button.save').simulate('click');
+            entity.setProps({ entityData: { ...nextEntityData, error: new Error('bad stuff happened') } });
         });
         it('should enter error mode when error in props', () => {
             expect(entity.state('mode')).toEqual('ERROR');
@@ -211,10 +172,8 @@ describe('Entity', () => {
 
         describe('click OK on error overlay', () => {
             beforeEach(() => {
-                entity
-                    .find('div.overlay')
-                    .find('Button')
-                    .simulate('click');
+                entity.find('div.overlay').find('Button').simulate('click');
+                entity.setProps({ ...props });
             });
             it('should enter VIEW mode', () => {
                 expect(entity.state('mode')).toEqual('VIEW');
@@ -231,10 +190,7 @@ describe('Entity', () => {
             it('should call clear error action creator once when OK is clicked', () => {
                 expect(props.clearErrorEntity).toBeCalled();
                 expect(props.clearErrorEntity.mock.calls).toHaveLength(1);
-                expect(props.clearErrorEntity).toBeCalledWith(
-                    props.entityType,
-                    props.entityData.id
-                );
+                expect(props.clearErrorEntity).toBeCalledWith(props.entityType, props.entityData.id);
             });
         });
     });
