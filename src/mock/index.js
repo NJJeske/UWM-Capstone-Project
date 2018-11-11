@@ -1,13 +1,13 @@
 const faker = require('faker');
 const rand = require('random-seed').create();
-const _ = require('lodash');
+const config = require('config');
 const { generateArray } = require('./helpers');
 const generator = require('./generator');
 
 let initialState = {};
-if (_.get(CONFIG, 'useMock')) {
+if (config.get('useMock')) {
     // Seed faker and extend RNG, pass to generators
-    const seed = _.get(CONFIG, 'seed') || faker.random.uuid();
+    const seed = config.get('seed') || faker.random.uuid();
     if (seed) {
         faker.seed(seed);
         rand.seed(seed);

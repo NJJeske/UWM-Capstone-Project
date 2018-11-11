@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Container, Row, Button } from 'reactstrap';
-
-import './styles.scss';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-library.add(faEdit, faCheck, faBan, faTrashAlt);
+import './styles.scss';
 
 // Local States
 const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];
@@ -68,13 +64,13 @@ export class Entity extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        if (nextState.mode === SAVING) {
+        if (nextState.mode === SAVING || nextState.mode === DELETING) {
             // If an error exists in store but not locally then it's new -> enter error state
-            if (nextProps.error && !nextState.error) {
-                return { mode: ERROR, error: nextProps.error };
+            if (nextProps.entityData.error && !nextState.error) {
+                return { mode: ERROR, error: nextProps.entityData.error };
             }
             // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
-            if (isEqual(nextProps.entityData, nextState.entityData)) {
+            if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
                 return { mode: VIEW, entityData: null };
             }
         }
