@@ -1,7 +1,7 @@
-import { withRouter } from "react-router-dom";
-import React, { Component } from "react";
-import { Button } from "reactstrap";
-import "../../sass/_loginbutton.scss";
+import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+import '../../sass/_loginbutton.scss';
 
 /*
  * Button that will be used on the landing page of the application
@@ -11,26 +11,26 @@ import "../../sass/_loginbutton.scss";
  * and is set up in the auth0 application.
  */
 export class LoginButton extends Component {
-  constructor(props) {
-    super(props);
-    this.login = this.login.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.login = this.login.bind(this);
+    }
 
-  login() {
-    this.props.auth.login();
-  }
+    login() {
+        this.props.auth.login();
+    }
 
-  render() {
-    return (
-      <Button
-        className="loginbtn"
-        color="Secondary"
-        onClick={() => this.login()}
-      >
-        <span className="btntext">Login Or Create An Account</span>
-      </Button>
-    );
-  }
+    render() {
+        return (
+            <Button
+                className="loginbtn"
+                color="Secondary"
+                onClick={() => this.login()}
+            >
+                <span className="btntext">Login Or Create An Account</span>
+            </Button>
+        );
+    }
 }
 
 export default withRouter(LoginButton);
