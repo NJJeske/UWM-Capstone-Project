@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import React from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
 import {
     HomeScreen,
     ContactsPage,
@@ -16,8 +16,8 @@ import { Sidebar, Footer } from './components';
 const routes = () => (
     <React.Fragment>
         <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/" component={LoginPage} />
+            <Route exact path="/home" component={HomeScreen} />
             <Route>
                 <React.Fragment>
                     <Sidebar />
