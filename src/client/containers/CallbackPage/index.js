@@ -1,14 +1,16 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from "react";
+import { withRouter } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../sass/_callbackpage.scss";
 
 function CallbackPage(props) {
   props.auth.handleAuthentication().then(() => {
-    props.history.push('/home');
+    props.history.push("/home");
   });
 
   return (
-    <div>
-      Loading user profile.
+    <div className="callbackPageDiv">
+      <FontAwesomeIcon icon="spinner" /> Loading user profile...
     </div>
   );
 }

@@ -5,10 +5,6 @@ import ProfileButton from "../../components/ProfileButton";
 import "../../sass/_homescreen.scss";
 
 export class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <main className="homescreen-main">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import {
   HomeScreen,
   ContactsPage,
@@ -13,22 +13,39 @@ import {
   CallbackPage
 } from "./containers";
 import Auth from "./Auth/Auth";
-import history from "./history";
 
 const auth = new Auth();
+
+const SecretRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      auth.isAuthenticated() === true ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
 
 const routes = () => (
   <React.Fragment>
     <Switch>
       <Route exact path="/" component={() => <LoginPage auth={auth} />} />
-      <Route path="/home" component={() => <HomeScreen auth={auth} />} />
-      <Route path="/profile" component={ProfilePage} />
-      <Route path="/contacts" component={ContactsPage} />
-      <Route path="/documents" component={DocumentsPage} />
-      <Route path="/education" component={EducationPage} />
-      <Route path="/experience" component={ExperiencePage} />
-      <Route path="/projects" component={ProjectsPage} />
-      <Route path="/timeline" component={TimelinePage} />
+      <SecretRoute path="/home" component={() => <HomeScreen auth={auth} />} />
+      <SecretRoute path="/profile" component={ProfilePage} />
+      <SecretRoute path="/contacts" component={ContactsPage} />
+      <SecretRoute path="/documents" component={DocumentsPage} />
+      <SecretRoute path="/education" component={EducationPage} />
+      <SecretRoute path="/experience" component={ExperiencePage} />
+      <SecretRoute path="/projects" component={ProjectsPage} />
+      <SecretRoute path="/timeline" component={TimelinePage} />
       <Route path="/callback" component={() => <CallbackPage auth={auth} />} />
     </Switch>
   </React.Fragment>
