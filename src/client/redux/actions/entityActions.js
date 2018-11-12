@@ -31,7 +31,7 @@ export const fetchEntities = entityType => async dispatch => {
 
 export const createEntity = (entityType, newEntity) => async dispatch => {
     try {
-        const result = await axios.post(`${serverURL}/${entityType}`, newEntity);
+        const result = await axios.post(`${serverURL}/${entityType}`, { newEntity });
         dispatch({
             type: actions.ENTITY_CREATE,
             entityType,
@@ -50,7 +50,7 @@ export const createEntity = (entityType, newEntity) => async dispatch => {
 
 export const updateEntity = (entityType, updatedEntity) => async dispatch => {
     try {
-        await axios.put(`${serverURL}/${entityType}/${updatedEntity.id}`, updatedEntity);
+        await axios.put(`${serverURL}/${entityType}/${updatedEntity.id}`, { updatedEntity });
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,
