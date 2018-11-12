@@ -1,7 +1,7 @@
 import { actions } from '../actions/entityActions';
 import { omit } from 'lodash';
 
-const initialState = {
+export const initialState = {
     addresses: [],
     certifications: [],
     companies: [],

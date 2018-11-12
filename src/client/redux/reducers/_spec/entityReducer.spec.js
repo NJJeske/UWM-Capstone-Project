@@ -1,10 +1,10 @@
-import entityReducer from '../entityReducer';
+import entityReducer, { initialState } from '../entityReducer';
 import { actions } from '../../actions/entityActions';
 
 describe('Entity Reducer', () => {
     describe('default', () => {
         it('should return the initial state', () => {
-            expect(entityReducer(undefined, {})).toEqual({});
+            expect(entityReducer(undefined, {})).toEqual(initialState);
         });
     });
     describe('create', () => {
