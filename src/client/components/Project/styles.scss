@@ -1,0 +1,30 @@
+
+// Project Theme
+$project-light: #BA9FCB;
+$project-medium: #845A9E;
+$project-dark: #6D3E8A;
+$project-saving: rgba(109, 62, 138, 0.8);
+$project-error: rgba(195, 98, 120, 0.8);
+
+.projects.container {
+    // Main background
+    background-color: $project-medium;
+
+    // Actionbar background
+    .actionBar { background-color: $project-dark; }
+
+    // Overlay colors (semi-transparent)
+    .saving { background-color: $project-saving; }
+    .error { background-color: $project-error; }
+
+    // Disabled form field background
+    input, textarea, select {
+        &.disabled { background-color: $project-light; }
+    }
+    
+    // Overlay text is white
+    .overlay * {
+        color: white;
+    }
+}
+
