@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import HomepageButtonCluster from "../../components/HomepageButtonCluster";
 import ProfileButton from "../../components/ProfileButton";
 import "../../sass/_homescreen.scss";
-import { Sidebar } from "../../components";
 
 export class HomeScreen extends Component {
   render() {
