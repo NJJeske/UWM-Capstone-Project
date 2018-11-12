@@ -92,6 +92,6 @@ module.exports = entityConfig => {
                 .catch(err => next(err));
         }
     });
-    
+
     return router;
 };
