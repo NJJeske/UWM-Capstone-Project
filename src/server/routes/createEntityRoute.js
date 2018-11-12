@@ -41,7 +41,7 @@ module.exports = entityConfig => {
         if (useMock) {
             if (mockConfig.responses.create) {
                 const createdEntity = { id: uuid.v4(), ...newEntity };
-                mock.push(createdEntity);
+                mock = [...mock, createdEntity];
                 return res.status(200).send(createdEntity);
             } else {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
@@ -61,7 +61,7 @@ module.exports = entityConfig => {
 
         if (useMock) {
             if (mockConfig.responses.update) {
-                Object.assign(mock.find(entity => entity.id === entityID), updatedEntity);
+                mock = mock.map(entity => entity.id === entityID ? updatedEntity : entity);
                 return res.status(200).send();
             } else {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
