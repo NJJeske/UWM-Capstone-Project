@@ -28,7 +28,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - wire this up correctly
+            // TODO - Wire this up to make calls to real Spring backend
             return axios.get(serviceURI)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
@@ -47,7 +47,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - wire this up correctly
+            // TODO - Wire this up to make calls to real Spring backend
             return axios.post(serviceURI, transform.clientToSpring.create(newEntity))
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
@@ -67,7 +67,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
             }
         } else {
-            // TODO - wire this up correctly
+            // TODO - Wire this up to make calls to real Spring backend
             return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update(updatedEntity))
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
@@ -86,7 +86,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
             }
         } else {
-            // TODO - wire this up correctly
+            // TODO - Wire this up to make calls to real Spring backend
             return axios.delete(`${serviceURI}/${entityID}`)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));
