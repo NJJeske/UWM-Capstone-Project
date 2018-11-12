@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Footer = () => {
+export default () => {
     return (
         <footer>
             <a href="#" target="_self">Contact us!</a>
