@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../sass/_sidebar.scss';
@@ -13,30 +12,30 @@ export class Sidebar extends Component {
     render() {
         return (
             <Menu>
-                <Link className="menu-item" to="/">
+                <a className="menu-item" href="/">
                     <FontAwesomeIcon icon="home" /> Home
-                </Link>
-                <Link className="menu-item" to="/profile">
+                </a>
+                <a className="menu-item" href="/profile">
                     <FontAwesomeIcon icon="user" /> Profile
-                </Link>
-                <Link className="menu-item" to="/documents">
+                </a>
+                <a className="menu-item" href="/documents">
                     <FontAwesomeIcon icon="file-alt" /> Documents
-                </Link>
-                <Link className="menu-item" to="/experience">
+                </a>
+                <a className="menu-item" href="/experience">
                     <FontAwesomeIcon icon="briefcase" /> Experience
-                </Link>
-                <Link className="menu-item" to="/education">
+                </a>
+                <a className="menu-item" href="/education">
                     <FontAwesomeIcon icon="graduation-cap" /> Education
-                </Link>
-                <Link className="menu-item" to="/projects">
+                </a>
+                <a className="menu-item" href="/projects">
                     <FontAwesomeIcon icon="project-diagram" /> Projects
-                </Link>
-                <Link className="menu-item" to="/contacts">
+                </a>
+                <a className="menu-item" href="/contacts">
                     <FontAwesomeIcon icon="address-book" /> Contacts
-                </Link>
-                <Link className="menu-item" to="/timeline">
+                </a>
+                <a className="menu-item" href="/timeline">
                     <FontAwesomeIcon icon="calendar-alt" /> Timeline
-                </Link>
+                </a>
             </Menu>
         );
     }
