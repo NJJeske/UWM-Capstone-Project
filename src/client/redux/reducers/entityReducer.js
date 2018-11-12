@@ -1,57 +1,32 @@
 import { actions } from '../actions/entityActions';
-import { get, omit } from 'lodash';
+import { omit } from 'lodash';
+import { data as mock } from '../../../mock';
 
-export const initialState = {
-    addresses: { list: [] },
-    certifications: { list: [] },
-    companies: { list: [] },
-    contacts: { list: [] },
-    education: { list: [] },
-    positions: { list: [] },
-    projects: { list: [] },
-};
-
-export default (state = initialState, action) => {
+export default (state = mock || {}, action) => {
     const { type, entityType } = action;
 
     switch (type) {
-        case actions.ENTITY_FETCH: {
-            const { loadedEntities } = action;
-            return {
-                ...state,
-                [entityType]: {
-                    list: loadedEntities || []
-                },
-            };
-        }
         case actions.ENTITY_CREATE: {
             const { newEntity } = action;
             return {
                 ...state,
-                [entityType]: {
-                    ...state[entityType],
-                    list: get(state, [entityType, 'list'], []).concat(newEntity),
-                },
+                [entityType]: (state[entityType] || []).concat(newEntity),
             };
         }
         case actions.ENTITY_UPDATE: {
             const { updatedEntity } = action;
             return {
                 ...state,
-                [entityType]: {
-                    ...state[entityType],
-                    list: state[entityType].list.map(entity => (entity.id === updatedEntity.id) ? updatedEntity : entity),
-                },
+                [entityType]: state[entityType].map(entity => {
+                    return entity.id === updatedEntity.id ? updatedEntity : entity;
+                }),
             };
         }
         case actions.ENTITY_DELETE: {
             const { entityId } = action;
             return {
                 ...state,
-                [entityType]: {
-                    ...state[entityType],
-                    list: state[entityType].list.filter(entity => entity.id !== entityId),
-                },
+                [entityType]: state[entityType].filter(entity => entity.id !== entityId),
             };
         }
         case actions.ENTITY_ERROR: {
@@ -59,29 +34,16 @@ export default (state = initialState, action) => {
             const { entityId, error } = action;
             return {
                 ...state,
-                [entityType]: {
-                    ...state[entityType],
-                    list: state[entityType].list.map(entity => {
-                        if (entity.id === entityId) {
-                            if (error) {
-                                return { ...entity, error };
-                            } else {
-                                return omit(entity, 'error');
-                            }
+                [entityType]: state[entityType].map(entity => {
+                    if (entity.id === entityId) {
+                        if (error) {
+                            return { ...entity, error };
+                        } else {
+                            return omit(entity, 'error');
                         }
-                        return entity;
-                    }),
-                },
-            };
-        }
-        case actions.ENTITY_FETCH_ERROR: {
-            const { error } = action;
-            return {
-                ...state,
-                [entityType]: {
-                    ...state[entityType],
-                    error,
-                },
+                    }
+                    return entity;
+                }),
             };
         }
         default:
