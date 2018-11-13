@@ -31,12 +31,12 @@ export const fetchEntities = entityType => async dispatch => {
 };
 
 // Creates entity skeleton in store but doesn't save to backend
-export const createLocalEntity = (entityType, entityData) => ({
+export const createLocalEntity = entityType => ({
     type: actions.ENTITY_CREATE,
     entityType,
     newEntity: {
         _local: true,
-        ...entityData
+        id: uuid.v4(),
     },
 });
 

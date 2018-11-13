@@ -121,15 +121,15 @@ describe('Entity Action Creators', () => {
     describe('createLocalEntity', () => {
         const entityData = { rating: 8 };
         it('should dispatch correct action', async () => {
-            const expectedActions = [
-                {
-                    type: actions.ENTITY_CREATE,
-                    entityType: 'apples',
-                    newEntity: { _local: true, ...entityData }
-                }
-            ];
             await store.dispatch(createLocalEntity('apples', entityData));
-            expect(store.getActions()).toEqual(expectedActions);
+            expect(store.getActions()[0]).toMatchObject({
+                type: actions.ENTITY_CREATE,
+                entityType: 'apples',
+                newEntity: {
+                    _local: true,
+                    id: expect.any(String),
+                }
+            });
         });
     });
 

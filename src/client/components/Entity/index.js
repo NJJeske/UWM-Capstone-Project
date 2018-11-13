@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
-import { createEntity, updateEntity, deleteEntity, clearErrorEntity } from '../../redux/actions/entityActions';
+import { createEntity, updateEntity, deleteEntity, deleteLocalEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Container, Row, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
@@ -23,7 +23,7 @@ export class Entity extends Component {
     constructor(props) {
         super(props);
         this.changeField = this.changeField.bind(this);
-        if (props.creating) {
+        if (props.entityData._local) {
             this.state = { mode: CREATING, entityData: props.entityData };
         } else {
             this.state = { mode: VIEW };
@@ -37,17 +37,26 @@ export class Entity extends Component {
     }
 
     cancel() {
-        // Clear form data from local state
-        this.setState({ mode: VIEW, entityData: null });
+        if (this.state.mode === CREATING) {
+            const { deleteLocalEntity, entityType, entityData } = this.props;
+            deleteLocalEntity(entityType, entityData.id);
+            this.setState({ mode: DELETING, entityData: null });
+        } else {
+            // Clear form data from local state
+            this.setState({ mode: VIEW, entityData: null });
+        }
     }
 
     save() {
-        const { updateEntity, entityType, entityData } = this.props;
-        const updatedEntityData = this.state.entityData;
-        // Only make update call if something changed.
-        if (!isEqual(entityData, updatedEntityData)) {
+        const { createEntity, updateEntity, entityType, entityData } = this.props;
+        const newEntityData = this.state.entityData;
+        if (this.state.mode === CREATING) {
             this.setState({ mode: SAVING });
-            updateEntity(entityType, updatedEntityData);
+            createEntity(entityType, newEntityData);
+        } else if (!isEqual(entityData, newEntityData)) {
+            // Don't make save call if nothing changed
+            this.setState({ mode: SAVING });
+            updateEntity(entityType, newEntityData);
         } else {
             this.cancel();
         }
@@ -122,9 +131,14 @@ export class Entity extends Component {
             </React.Fragment>
         ) : (
             <React.Fragment>
-                <Button className='delete' onClick={this.remove.bind(this)}>
-                    <FontAwesomeIcon icon='trash-alt' />
-                </Button>
+                {
+                    // Only show delete button in EDIT mode
+                    mode === 'EDIT' ? (
+                        <Button className='delete' onClick={this.remove.bind(this)}>
+                            <FontAwesomeIcon icon='trash-alt' />
+                        </Button>
+                    ) : null
+                }
                 <Button className='cancel' onClick={this.cancel.bind(this)}>
                     <FontAwesomeIcon icon='ban' />
                 </Button>
@@ -138,7 +152,7 @@ export class Entity extends Component {
         const form = React.cloneElement(this.props.children, {
             changeField: this.changeField, // It can update entity's state when a field changes
             entityData, // Its fields hold these values
-            disabled: mode !== EDIT,
+            disabled: ![CREATING, EDIT].includes(mode),
         });
 
         return (
@@ -162,6 +176,7 @@ Entity.propTypes = {
     createEntity: PropTypes.func.isRequired,
     updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
+    deleteLocalEntity: PropTypes.func.isRequired,
     clearErrorEntity: PropTypes.func.isRequired
 };
 
@@ -169,6 +184,7 @@ const mapDispatchToProps = {
     createEntity,
     updateEntity,
     deleteEntity,
+    deleteLocalEntity,
     clearErrorEntity
 };
 
