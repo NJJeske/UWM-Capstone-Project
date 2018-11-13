@@ -19,6 +19,15 @@ let httpsServer = null;
 // here is a good spot to do this
 // axios.defaults.headers.common['apikey'] = process.env.MY_VARIABLE_NAME;
 
+if (config.get('allowCORS')) {
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        next();
+    });
+}
+
 // logging middleware
 app.use(morgan('dev'));
 

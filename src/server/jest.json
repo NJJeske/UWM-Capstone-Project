@@ -8,5 +8,5 @@
     ],
     "collectCoverageFrom": ["<rootDir>/src/server/**/*.js", "!<rootDir>/src/server/app.js", "!<rootDir>/src/server/index.js"],
     "testResultsProcessor":  "<rootDir>/node_modules/jest-junit",
-    "testMatch": ["**/server/**/*.test.*"]
+    "testMatch": ["**/server/**/*.spec.*"]
 }
