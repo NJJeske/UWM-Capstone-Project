@@ -23,7 +23,7 @@ module.exports = {
         const endDate = allowUndefined && rand.maybe(true)
             ? undefined
             : new Date(startDate.getTime() + rand.random() * (Date.now() - startDate.getTime()));
-        return [startDate, endDate];
+        return [startDate, endDate].map(date => date ? date.toISOString().split('T')[0] : undefined);
     },
 
     /**
