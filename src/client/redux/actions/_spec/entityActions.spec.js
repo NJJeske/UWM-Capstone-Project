@@ -7,6 +7,8 @@ import {
     createEntity,
     updateEntity,
     deleteEntity,
+    createLocalEntity,
+    deleteLocalEntity,
     clearErrorEntity
 } from '../entityActions';
 import config from '../../config';
@@ -22,58 +24,56 @@ describe('Entity Action Creators', () => {
     });
 
     describe('createEntity', () => {
-        it('should handle success', async () => {
-            const newApple = { rating: 8 };
-            const mockReply = { id: 2, rating: 8 };
-            mock.onPost(`${serverURL}/apples`, newApple).reply(200, mockReply);
+        const entityData = { rating: 8 };
+        const localEntityData = { _local: true, id: 1, ...entityData };
 
+        it('should handle success', async () => {
+            const responseEntityData = { id: 2, rating: 8 };
+            mock.onPost(`${serverURL}/apples`, { entityData }).reply(200, responseEntityData);
             const expectedActions = [
                 {
                     type: actions.ENTITY_CREATE,
                     entityType: 'apples',
-                    newEntity: { id: 2, rating: 8 }
+                    newEntity: responseEntityData
                 }
             ];
-            await store.dispatch(createEntity('apples', newApple));
+            await store.dispatch(createEntity('apples', localEntityData));
             expect(store.getActions()).toEqual(expectedActions);
         });
 
         it('should handle failure', async () => {
-            const newApple = { id: 2, rating: 8 };
-            mock.onPost(`${serverURL}/apples`, newApple).reply(400, new Error());
-
+            mock.onPost(`${serverURL}/apples`, { entityData }).reply(400, new Error());
             const expectedActions = [
                 {
                     type: actions.ENTITY_ERROR,
                     entityType: 'apples',
-                    entityId: 2,
+                    entityId: 1,
                     error: new Error("Error creating entity of type 'apples' through API")
                 }
             ];
-            await store.dispatch(createEntity('apples', newApple));
+            await store.dispatch(createEntity('apples', localEntityData));
             expect(store.getActions()).toEqual(expectedActions);
         });
     });
 
     describe('updateEntity', () => {
+        const entityData = { id: 2, rating: 8 };
         it('should handle success', async () => {
-            const updatedApple = { id: 2, rating: 8 };
-            mock.onPut(`${serverURL}/apples/2`, updatedApple).reply(200);
+            mock.onPut(`${serverURL}/apples/2`, { entityData }).reply(200);
 
             const expectedActions = [
                 {
                     type: actions.ENTITY_UPDATE,
                     entityType: 'apples',
-                    updatedEntity: { id: 2, rating: 8 }
+                    updatedEntity: entityData
                 }
             ];
-            await store.dispatch(updateEntity('apples', updatedApple));
+            await store.dispatch(updateEntity('apples', entityData));
             expect(store.getActions()).toEqual(expectedActions);
         });
 
         it('should handle failure', async () => {
-            const updatedApple = { id: 2, rating: 8 };
-            mock.onPost(`${serverURL}/apples/2`, updatedApple).reply(400, new Error());
+            mock.onPost(`${serverURL}/apples/2`, entityData).reply(400, new Error());
 
             const expectedActions = [
                 {
@@ -83,7 +83,7 @@ describe('Entity Action Creators', () => {
                     error: new Error("Error updating entity of type 'apples' through API")
                 }
             ];
-            await store.dispatch(updateEntity('apples', updatedApple));
+            await store.dispatch(updateEntity('apples', entityData));
             expect(store.getActions()).toEqual(expectedActions);
         });
     });
@@ -114,6 +114,35 @@ describe('Entity Action Creators', () => {
                 }
             ];
             await store.dispatch(deleteEntity('apples', 3));
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+
+    describe('createLocalEntity', () => {
+        const entityData = { rating: 8 };
+        it('should dispatch correct action', async () => {
+            const expectedActions = [
+                {
+                    type: actions.ENTITY_CREATE,
+                    entityType: 'apples',
+                    newEntity: { _local: true, ...entityData }
+                }
+            ];
+            await store.dispatch(createLocalEntity('apples', entityData));
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+
+    describe('deleteLocalEntity', () => {
+        it('should dispatch correct action', async () => {
+            const expectedActions = [
+                {
+                    type: actions.ENTITY_DELETE,
+                    entityType: 'apples',
+                    entityId: 3
+                }
+            ];
+            await store.dispatch(deleteLocalEntity('apples', 3));
             expect(store.getActions()).toEqual(expectedActions);
         });
     });

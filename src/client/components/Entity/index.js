@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 
 // Local States
-const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];
+const [VIEW, EDIT, CREATING, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'CREATING', 'SAVING', 'DELETING', 'ERROR'];
 
 /**
  * This is a wrapper class for the forms of each entity type (contacts, projects, companies, etc).
@@ -23,7 +23,11 @@ export class Entity extends Component {
     constructor(props) {
         super(props);
         this.changeField = this.changeField.bind(this);
-        this.state = { mode: VIEW };
+        if (props.creating) {
+            this.state = { mode: CREATING, entityData: props.entityData };
+        } else {
+            this.state = { mode: VIEW };
+        }
     }
 
     edit() {
