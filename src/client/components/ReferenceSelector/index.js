@@ -8,7 +8,7 @@ import { FormGroup, Input } from 'reactstrap';
  *   For example, can be created with props: { entityType: 'companies' } to create select input
  *   to choose between companies in the store. If provided, selectedId will set the default selection.
  */
-const ReferenceSelector = props => {
+export const ReferenceSelector = props => {
     const {
         entityType,
         name,
