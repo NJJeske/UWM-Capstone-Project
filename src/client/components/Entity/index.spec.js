@@ -10,12 +10,25 @@ const props = {
     createEntity: jest.fn(),
     updateEntity: jest.fn(),
     deleteEntity: jest.fn(),
+    deleteLocalEntity: jest.fn(),
     clearErrorEntity: jest.fn()
 };
 
-const nextEntityData = { id: '1', rating: '2' };
+const nextEntityData = {
+    id: '1',
+    rating: '2'
+};
 
-describe('Entity', () => {
+const localProps = {
+    ...props,
+    entityData: { _local: true, id: 1 }
+};
+const localNextEntityData = {
+    ...localProps.entityData,
+    rating: '2',
+};
+
+describe('Existing Entity', () => {
     let entity;
     beforeEach(() => {
         entity = shallow(<Entity {...props} />);
@@ -196,9 +209,77 @@ describe('Entity', () => {
     });
 
     afterEach(() => {
-        props.createEntity.mockReset();
         props.updateEntity.mockReset();
         props.deleteEntity.mockReset();
         props.clearErrorEntity.mockReset();
+    });
+});
+
+describe('Local Entity', () => {
+    let entity;
+    beforeEach(() => {
+        entity = shallow(<Entity {...localProps} />);
+    });
+
+    it('should render the component without crashing', () => {
+        expect(entity).toHaveLength(1);
+    });
+
+    describe('defaults', () => {
+        it('should be in CREATING mode', () => {
+            expect(entity.state('mode')).toEqual('CREATING');
+        });
+        it('should pass changeField to child', () => {
+            expect(entity.find('Child').prop('changeField')).toBeTruthy();
+        });
+        it('should pass disabled=false to child', () => {
+            expect(entity.find('Child').prop('disabled')).toBeFalsy();
+        });
+        it('should pass props entityData to child', () => {
+            expect(entity.find('Child').prop('entityData')).toEqual(localProps.entityData);
+        });
+        it('should have save and cancel buttons in action bar', () => {
+            const actionBar = entity.find('Row.actionBar');
+            expect(actionBar.find('Button')).toHaveLength(2);
+            expect(actionBar.find('Button.save')).toHaveLength(1);
+            expect(actionBar.find('Button.cancel')).toHaveLength(1);
+        });
+    });
+
+    describe('click cancel', () => {
+        beforeEach(() => {
+            entity.find('Row.actionBar').find('Button.cancel').simulate('click');
+        });
+        it('should call delete local action creator once', () => {
+            expect(props.deleteLocalEntity).toBeCalled();
+            expect(props.deleteLocalEntity.mock.calls).toHaveLength(1);
+            expect(props.deleteLocalEntity).toBeCalledWith(localProps.entityType, localProps.entityData.id);
+        });
+    });
+
+    describe('click save', () => {
+        beforeEach(() => {
+            entity.setState({ entityData: localNextEntityData });
+            entity.find('Row.actionBar').find('Button.save').simulate('click');
+        });
+        it('should be in SAVING mode', () => {
+            expect(entity.state('mode')).toEqual('SAVING');
+        });
+        it('should disable the form fields', () => {
+            expect(entity.find('Child').prop('disabled')).toBeTruthy();
+        });
+        it('should show an overlay', () => {
+            expect(entity.find('div.overlay')).toHaveLength(1);
+        });
+        it('should call create action creator once with state data', () => {
+            expect(props.createEntity).toBeCalled();
+            expect(props.createEntity.mock.calls).toHaveLength(1);
+            expect(props.createEntity).toBeCalledWith(localProps.entityType, localNextEntityData);
+        });
+    });
+
+    afterEach(() => {
+        props.createEntity.mockReset();
+        props.deleteLocalEntity.mockReset();
     });
 });
