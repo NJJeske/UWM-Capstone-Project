@@ -18,7 +18,7 @@ const ProjectsPage = props => {
     );
 
     const createButton = alreadyCreating ? null : (
-        <Container className='card entity'>
+        <Container className='entity'>
             <Row>
                 <Col
                     xs={{ size: 8, offset: 2 }}
