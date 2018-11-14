@@ -42,7 +42,7 @@ const ReferenceSelector = props => {
                 name={name}
                 className={className}
                 onChange={onChange}
-                value={selectedId}
+                value={selectedId || ''}
                 disabled={disabled}
             >
                 {options}

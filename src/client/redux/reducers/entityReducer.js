@@ -26,11 +26,12 @@ export default (state = initialState, action) => {
         }
         case actions.ENTITY_CREATE: {
             const { newEntity } = action;
+            const prevList = get(state, [entityType, 'list'], []);
             return {
                 ...state,
                 [entityType]: {
                     ...state[entityType],
-                    list: get(state, [entityType, 'list'], []).concat(newEntity),
+                    list: prevList.filter(entity => !entity._local).concat(newEntity),
                 },
             };
         }

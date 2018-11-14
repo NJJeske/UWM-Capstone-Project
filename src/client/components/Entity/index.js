@@ -152,6 +152,7 @@ export class Entity extends Component {
         const form = React.cloneElement(this.props.children, {
             changeField: this.changeField, // It can update entity's state when a field changes
             entityData, // Its fields hold these values
+            isLocal: this.props.entityData._local,
             disabled: ![CREATING, EDIT].includes(mode),
         });
 

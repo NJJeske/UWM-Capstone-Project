@@ -7,7 +7,6 @@ import './styles.scss';
 export const ProjectForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
-
     const {
         title,
         description,
@@ -28,7 +27,7 @@ export const ProjectForm = props => {
                             placeholder='Title'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title}
+                            value={title || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
@@ -43,7 +42,7 @@ export const ProjectForm = props => {
                             placeholder='Description'
                             disabled={disabled}
                             className={disabledClass}
-                            value={description}
+                            value={description || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
@@ -98,7 +97,7 @@ export const ProjectForm = props => {
                                     name="startDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={startDate}
+                                    value={startDate || ''}
                                     onChange={changeField}
                                 />
                             </FormGroup>
@@ -117,7 +116,7 @@ export const ProjectForm = props => {
                                     name="endDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={endDate}
+                                    value={endDate || ''}
                                     onChange={changeField}
                                 />
                             </FormGroup>

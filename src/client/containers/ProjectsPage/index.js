@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Card, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { fetchEntities, createLocalEntity } from '../../redux/actions/entityActions';
 import { Header, Project } from '../../components';
 
@@ -9,18 +9,25 @@ const ProjectsPage = props => {
     const alreadyCreating = projects.some(project => project._local);
 
     const mainBody = error ? (
-        <Card>
+        <Container className='card entity projects'>
             <h3>Error fetching data</h3>
             <Button onClick={fetchEntities('projects')}>Retry</Button>
-        </Card>
+        </Container>
     ) : (
         projects.map(project => <Project key={project.id} {...project} />)
     );
 
     const createButton = alreadyCreating ? null : (
-        <Card className='project'>
-            <Button onClick={createLocalEntity.bind(null, 'projects')}>New</Button>
-        </Card>
+        <Container className='card entity'>
+            <Row>
+                <Col
+                    xs={{ size: 8, offset: 2 }}
+                    sm={{ size: 6, offset: 3 }}
+                >
+                    <Button className='projects createButton' onClick={createLocalEntity.bind(null, 'projects')}>Create</Button>
+                </Col>
+            </Row>
+        </Container>
     );
 
     return (
