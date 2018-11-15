@@ -121,18 +121,18 @@ export class Entity extends Component {
                 </Button>
             </React.Fragment>
         ) : (
-            <React.Fragment>
-                <Button className='delete' onClick={this.remove.bind(this)}>
-                    <FontAwesomeIcon icon='trash-alt' />
-                </Button>
-                <Button className='cancel' onClick={this.cancel.bind(this)}>
-                    <FontAwesomeIcon icon='ban' />
-                </Button>
-                <Button className='save' onClick={this.save.bind(this)}>
-                    <FontAwesomeIcon icon='check' />
-                </Button>
-            </React.Fragment>
-        );
+                <React.Fragment>
+                    <Button className='delete' onClick={this.remove.bind(this)}>
+                        <FontAwesomeIcon icon='trash-alt' />
+                    </Button>
+                    <Button className='cancel' onClick={this.cancel.bind(this)}>
+                        <FontAwesomeIcon icon='ban' />
+                    </Button>
+                    <Button className='save' onClick={this.save.bind(this)}>
+                        <FontAwesomeIcon icon='check' />
+                    </Button>
+                </React.Fragment>
+            );
 
         // Clone form child (passed through props) to pass additional props to it
         const form = React.cloneElement(this.props.children, {

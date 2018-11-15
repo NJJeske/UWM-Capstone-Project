@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import {
   HomeScreen,
   ContactsPage,
@@ -12,8 +12,8 @@ import {
   LoginPage,
   CallbackPage,
   UnfoundPage
-} from "./containers";
-import Auth from "./Auth/Auth";
+} from './containers';
+import Auth from './Auth/Auth';
 
 const auth = new Auth();
 
@@ -24,13 +24,13 @@ const SecretRoute = ({ component: Component, ...rest }) => (
       auth.isAuthenticated() === true ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location }
-          }}
-        />
-      )
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: props.location }
+            }}
+          />
+        )
     }
   />
 );

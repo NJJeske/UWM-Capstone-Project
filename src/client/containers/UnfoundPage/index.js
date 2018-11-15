@@ -1,16 +1,12 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../sass/_unfoundpage.scss";
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../../sass/_unfoundpage.scss';
 
 /*
  * Container for page that is displayed when user tries to navigate
  * to a page/link that does not exist.
  */
 export class UnfoundPage extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div className="unfoundPageDiv">

@@ -6,9 +6,9 @@ import '../../sass/_loginpage.scss';
 export class LoginPage extends Component {
     render() {
         return (
-            <main className="login-main">
+            <main className='login-main'>
                 <h1>Organize Your Job Hunt - Forever.</h1>
-                <div className="loginButton">
+                <div className='loginButton'>
                     <LoginButton auth={this.props.auth} />
                 </div>
             </main>

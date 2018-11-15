@@ -8,18 +8,14 @@ import '../../sass/_callbackpage.scss';
  * and their profile is being loaded.
  */
 export class CallbackPage extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         this.props.auth.handleAuthentication().then(() => {
             this.props.history.push('/home');
         });
 
         return (
-            <div className="callbackPageDiv">
-                <FontAwesomeIcon icon="spinner" /> Loading user profile...
+            <div className='callbackPageDiv'>
+                <FontAwesomeIcon icon='spinner' /> Loading user profile...
             </div>
         );
     }

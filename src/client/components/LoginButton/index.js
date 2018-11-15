@@ -23,11 +23,11 @@ export class LoginButton extends Component {
     render() {
         return (
             <Button
-                className="loginbtn"
-                color="Secondary"
+                className='loginbtn'
+                color='Secondary'
                 onClick={() => this.login()}
             >
-                <span className="btntext">Login Or Create An Account</span>
+                <span className='btntext'>Login Or Create An Account</span>
             </Button>
         );
     }
