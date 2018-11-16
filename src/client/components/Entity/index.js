@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
-import { createEntity, updateEntity, deleteEntity, clearErrorEntity } from '../../redux/actions/entityActions';
+import { createEntity, updateEntity, deleteEntity, deleteLocalEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Container, Row, Button } from 'reactstrap';
-
-import './styles.scss';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faCheck, faBan, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-library.add(faEdit, faCheck, faBan, faTrashAlt);
+import './styles.scss';
 
 // Local States
-const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];
+const [VIEW, EDIT, CREATING, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'CREATING', 'SAVING', 'DELETING', 'ERROR'];
 
 /**
  * This is a wrapper class for the forms of each entity type (contacts, projects, companies, etc).
@@ -27,7 +23,11 @@ export class Entity extends Component {
     constructor(props) {
         super(props);
         this.changeField = this.changeField.bind(this);
-        this.state = { mode: VIEW };
+        if (props.entityData._local) {
+            this.state = { mode: CREATING, entityData: props.entityData };
+        } else {
+            this.state = { mode: VIEW };
+        }
     }
 
     edit() {
@@ -37,17 +37,26 @@ export class Entity extends Component {
     }
 
     cancel() {
-        // Clear form data from local state
-        this.setState({ mode: VIEW, entityData: null });
+        if (this.state.mode === CREATING) {
+            const { deleteLocalEntity, entityType, entityData } = this.props;
+            deleteLocalEntity(entityType, entityData.id);
+            this.setState({ mode: DELETING, entityData: null });
+        } else {
+            // Clear form data from local state
+            this.setState({ mode: VIEW, entityData: null });
+        }
     }
 
     save() {
-        const { updateEntity, entityType, entityData } = this.props;
-        const updatedEntityData = this.state.entityData;
-        // Only make update call if something changed.
-        if (!isEqual(entityData, updatedEntityData)) {
+        const { createEntity, updateEntity, entityType, entityData } = this.props;
+        const newEntityData = this.state.entityData;
+        if (this.state.mode === CREATING) {
             this.setState({ mode: SAVING });
-            updateEntity(entityType, updatedEntityData);
+            createEntity(entityType, newEntityData);
+        } else if (!isEqual(entityData, newEntityData)) {
+            // Don't make save call if nothing changed
+            this.setState({ mode: SAVING });
+            updateEntity(entityType, newEntityData);
         } else {
             this.cancel();
         }
@@ -68,13 +77,13 @@ export class Entity extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        if (nextState.mode === SAVING) {
+        if (nextState.mode === SAVING || nextState.mode === DELETING) {
             // If an error exists in store but not locally then it's new -> enter error state
-            if (nextProps.error && !nextState.error) {
-                return { mode: ERROR, error: nextProps.error };
+            if (nextProps.entityData.error && !nextState.error) {
+                return { mode: ERROR, error: nextProps.entityData.error };
             }
             // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
-            if (isEqual(nextProps.entityData, nextState.entityData)) {
+            if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
                 return { mode: VIEW, entityData: null };
             }
         }
@@ -122,9 +131,14 @@ export class Entity extends Component {
             </React.Fragment>
         ) : (
                 <React.Fragment>
-                    <Button className='delete' onClick={this.remove.bind(this)}>
-                        <FontAwesomeIcon icon='trash-alt' />
-                    </Button>
+                    {
+                        // Only show delete button in EDIT mode
+                        mode === 'EDIT' ? (
+                            <Button className='delete' onClick={this.remove.bind(this)}>
+                                <FontAwesomeIcon icon='trash-alt' />
+                            </Button>
+                        ) : null
+                    }
                     <Button className='cancel' onClick={this.cancel.bind(this)}>
                         <FontAwesomeIcon icon='ban' />
                     </Button>
@@ -138,7 +152,8 @@ export class Entity extends Component {
         const form = React.cloneElement(this.props.children, {
             changeField: this.changeField, // It can update entity's state when a field changes
             entityData, // Its fields hold these values
-            disabled: mode !== EDIT,
+            isLocal: this.props.entityData._local,
+            disabled: ![CREATING, EDIT].includes(mode),
         });
 
         return (
@@ -162,6 +177,7 @@ Entity.propTypes = {
     createEntity: PropTypes.func.isRequired,
     updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
+    deleteLocalEntity: PropTypes.func.isRequired,
     clearErrorEntity: PropTypes.func.isRequired
 };
 
@@ -169,6 +185,7 @@ const mapDispatchToProps = {
     createEntity,
     updateEntity,
     deleteEntity,
+    deleteLocalEntity,
     clearErrorEntity
 };
 
