@@ -1,9 +1,10 @@
 'use strict';
 import '@babel/polyfill';
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { fetchEntities } from './redux/actions/entityActions';
 import store from './redux/store.js';
 import Routes from './routes.js';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -39,11 +40,32 @@ library.add(
     faAddressBook
 );
 
+class App extends Component {
+    componentDidMount() {
+        [
+            'addresses',
+            'certifications',
+            'companies',
+            'contacts',
+            'education',
+            'positions',
+            'projects'
+        ].forEach(entityType => {
+            store.dispatch(fetchEntities(entityType));
+        });
+    }
+    render() {
+        return (
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Routes />
+                </BrowserRouter>
+            </Provider>
+        );
+    }
+}
+
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Routes />
-        </BrowserRouter>
-    </Provider>,
+    <App />,
     document.getElementById('origin')
 );
