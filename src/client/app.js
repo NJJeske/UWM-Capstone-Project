@@ -22,7 +22,9 @@ import {
     faBriefcase,
     faCalendarAlt,
     faProjectDiagram,
-    faAddressBook
+    faAddressBook,
+    faSpinner,
+    faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 library.add(
     faEdit,
@@ -37,7 +39,9 @@ library.add(
     faBriefcase,
     faCalendarAlt,
     faProjectDiagram,
-    faAddressBook
+    faAddressBook,
+    faSpinner,
+    faExclamationCircle
 );
 
 class App extends Component {

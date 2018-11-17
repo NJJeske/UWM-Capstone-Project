@@ -8,8 +8,13 @@
         "/node_modules/",
         "/jestSetup/"
     ],
-    "collectCoverageFrom": ["<rootDir>/src/client/**/*.{js,jsx}", "!<rootDir>/src/client/app.jsx", "!<rootDir>/src/client/store.js", "!<rootDir>/src/client/routes.js"],
-    "testResultsProcessor":  "<rootDir>/node_modules/jest-junit",
+    "collectCoverageFrom": [
+        "<rootDir>/src/client/**/*.{js,jsx}",
+        "!<rootDir>/src/client/app.jsx",
+        "!<rootDir>/src/client/store.js",
+        "!<rootDir>/src/client/routes.js"
+    ],
+    "testResultsProcessor": "<rootDir>/node_modules/jest-junit",
     "testMatch": [
         "**/client/**/*.test.*",
         "**/client/**/*.spec.*"

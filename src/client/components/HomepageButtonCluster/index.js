@@ -7,8 +7,8 @@ import '../../sass/_homepagebuttoncluster.scss';
 /*
  * Class component that will represent the cluster of 6 main buttons that will appear on
  * the applications homepage. These 6 buttons will direct the user to the buttons corresponding
- * page. These buttons will be "Documents", "Education", "Experience", "Projects", "Contacts",
- * and "Timeline".
+ * page. These buttons will be 'Documents', 'Education', 'Experience', 'Projects', 'Contacts',
+ * and 'Timeline'.
  */
 export class HomepageButtonCluster extends Component {
     constructor(props) {
@@ -23,59 +23,59 @@ export class HomepageButtonCluster extends Component {
 
     render() {
         return (
-            <div className="ButtonCluster">
-                <Row className="FirstRow">
-                    <Col className="buttoncombo">
+            <div className='ButtonCluster'>
+                <Row className='FirstRow'>
+                    <Col className='buttoncombo'>
                         <Button
-                            color="Secondary"
+                            color='Secondary'
                             onClick={() => this.routeTo('/documents')}
                         >
-                            <FontAwesomeIcon icon="file-alt" size="3x" />
+                            <FontAwesomeIcon icon='file-alt' size='3x' />
                             <br />
-                            <span className="label">Documents</span>
+                            <span className='label'>Documents</span>
                         </Button>
                     </Col>
-                    <Col className="buttoncombo">
+                    <Col className='buttoncombo'>
                         <Button
-                            color="Secondary"
+                            color='Secondary'
                             onClick={() => this.routeTo('/experience')}
                         >
-                            <FontAwesomeIcon icon="briefcase" size="3x" />
+                            <FontAwesomeIcon icon='briefcase' size='3x' />
                             <br />
-                            <span className="label">Experience</span>
+                            <span className='label'>Experience</span>
                         </Button>
                     </Col>
-                    <Col className="buttoncombo">
+                    <Col className='buttoncombo'>
                         <Button
-                            color="Secondary"
+                            color='Secondary'
                             onClick={() => this.routeTo('/education')}
                         >
-                            <FontAwesomeIcon icon="graduation-cap" size="3x" />
+                            <FontAwesomeIcon icon='graduation-cap' size='3x' />
                             <br />
-                            <span className="label">Education</span>
+                            <span className='label'>Education</span>
                         </Button>
                     </Col>
                 </Row>
-                <Row className="SecondRow">
-                    <Col className="buttoncombo">
-                        <Button color="Secondary" onClick={() => this.routeTo('/projects')}>
-                            <FontAwesomeIcon icon="project-diagram" size="3x" />
+                <Row className='SecondRow'>
+                    <Col className='buttoncombo'>
+                        <Button color='Secondary' onClick={() => this.routeTo('/projects')}>
+                            <FontAwesomeIcon icon='project-diagram' size='3x' />
                             <br />
-                            <span className="label">Projects</span>
+                            <span className='label'>Projects</span>
                         </Button>
                     </Col>
-                    <Col className="buttoncombo">
-                        <Button color="Secondary" onClick={() => this.routeTo('/contacts')}>
-                            <FontAwesomeIcon icon="address-book" size="3x" />
+                    <Col className='buttoncombo'>
+                        <Button color='Secondary' onClick={() => this.routeTo('/contacts')}>
+                            <FontAwesomeIcon icon='address-book' size='3x' />
                             <br />
-                            <span className="label">Contacts</span>
+                            <span className='label'>Contacts</span>
                         </Button>
                     </Col>
-                    <Col className="buttoncombo">
-                        <Button color="Secondary" onClick={() => this.routeTo('/timeline')}>
-                            <FontAwesomeIcon icon="calendar-alt" size="3x" />
+                    <Col className='buttoncombo'>
+                        <Button color='Secondary' onClick={() => this.routeTo('/timeline')}>
+                            <FontAwesomeIcon icon='calendar-alt' size='3x' />
                             <br />
-                            <span className="label">Timeline</span>
+                            <span className='label'>Timeline</span>
                         </Button>
                     </Col>
                 </Row>

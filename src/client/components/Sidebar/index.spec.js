@@ -33,7 +33,7 @@ describe('Sidebar', () => {
         });
 
         const expectedLinks = {
-            'Home': '/',
+            'Home': '/home',
             'Profile': '/profile',
             'Documents': '/documents',
             'Experience': '/experience',

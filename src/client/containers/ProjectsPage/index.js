@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { fetchEntities, createLocalEntity } from '../../redux/actions/entityActions';
-import { Header, Project } from '../../components';
+import { Header, Project, Sidebar, Footer } from '../../components';
 
 const ProjectsPage = props => {
     const { projects, error, fetchEntities, createLocalEntity } = props;
@@ -14,8 +14,8 @@ const ProjectsPage = props => {
             <Button onClick={fetchEntities('projects')}>Retry</Button>
         </Container>
     ) : (
-        projects.map(project => <Project key={project.id} {...project} />)
-    );
+            projects.map(project => <Project key={project.id} {...project} />)
+        );
 
     const createButton = alreadyCreating ? null : (
         <Container className='entity'>
@@ -31,13 +31,17 @@ const ProjectsPage = props => {
     );
 
     return (
-        <Container fluid={true} id="PROJECTS_PAGE">
-            <Header title='Projects' />
-            <main>
-                {mainBody}
-                {createButton}
-            </main>
-        </Container>
+        <div>
+            <Sidebar />
+            <Container fluid={true} id="PROJECTS_PAGE">
+                <Header title='Projects' />
+                <main>
+                    {mainBody}
+                    {createButton}
+                </main>
+            </Container>
+            <Footer />
+        </div >
     );
 };
 
