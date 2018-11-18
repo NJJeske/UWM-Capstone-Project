@@ -1,19 +1,18 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
-import TextArea from 'react-textarea-autosize';
-import { Entity, ReferenceSelector } from '../';
+import { Entity, Address } from '../';
 import './styles.scss';
 
 export const ProjectForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        title,
-        description,
-        positionId,
-        educationId,
+        name,
+        degree,
+        fieldOfStudy,
         startDate,
         endDate,
+        address,
     } = entityData;
 
     return (
