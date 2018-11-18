@@ -3,7 +3,7 @@ import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, Address } from '../';
 import './styles.scss';
 
-export const ProjectForm = props => {
+export const EducationForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
@@ -128,7 +128,7 @@ export const ProjectForm = props => {
 };
 
 export default props => (
-    <Entity entityType='projects' entityData={props}>
-        <ProjectForm />
+    <Entity entityType='education' entityData={props}>
+        <EducationForm />
     </Entity>
 );
