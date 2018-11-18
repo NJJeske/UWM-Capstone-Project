@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import './styles.scss';
 
-export default props => {
+const Address = props => {
     const { changeField, disabled, address } = props;
     const { street1, street2, city, state, zip } = address;
     const disabledClass = disabled ? 'disabled' : '';
@@ -83,3 +83,5 @@ export default props => {
         </React.Fragment>
     );
 };
+
+export default Address;
