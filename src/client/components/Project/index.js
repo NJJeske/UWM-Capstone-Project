@@ -49,48 +49,42 @@ export const ProjectForm = props => {
                 </Col>
             </Row>
             <Row form={true}>
-                <Col lg='6'>
-                    <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Position</Label>
-                        </Col>
-                        <Col sm='10'>
-                            <ReferenceSelector
-                                entityType='positions'
-                                name='positionId'
-                                selectedId={positionId}
-                                disabled={disabled}
-                                className={disabledClass}
-                                onChange={changeField}
-                            />
-                        </Col>
-                    </Row>
+                <Col xs='2' className='formLabel'>
+                    <Label>Position</Label>
                 </Col>
-                <Col lg='6'>
-                    <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Education</Label>
-                        </Col>
-                        <Col sm='10'>
-                            <ReferenceSelector
-                                entityType='education'
-                                name='educationId'
-                                selectedId={educationId}
-                                disabled={disabled}
-                                className={disabledClass}
-                                onChange={changeField}
-                            />
-                        </Col>
-                    </Row>
+                <Col xs='10'>
+                    <ReferenceSelector
+                        entityType='positions'
+                        name='positionId'
+                        selectedId={positionId}
+                        disabled={disabled}
+                        className={disabledClass}
+                        onChange={changeField}
+                    />
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='2' className='formLabel'>
+                    <Label>Education</Label>
+                </Col>
+                <Col xs='10'>
+                    <ReferenceSelector
+                        entityType='education'
+                        name='educationId'
+                        selectedId={educationId}
+                        disabled={disabled}
+                        className={disabledClass}
+                        onChange={changeField}
+                    />
                 </Col>
             </Row>
             <Row form={true}>
                 <Col lg='6'>
                     <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Start Date</Label>
+                        <Col xs='2' className='formLabel'>
+                            <Label>Began</Label>
                         </Col>
-                        <Col sm='10'>
+                        <Col xs='10'>
                             <FormGroup>
                                 <Input
                                     type="date"
@@ -106,10 +100,10 @@ export const ProjectForm = props => {
                 </Col>
                 <Col lg='6'>
                     <Row form={true}>
-                        <Col sm='2'>
-                            <Label>End Date</Label>
+                        <Col xs='2' className='formLabel'>
+                            <Label>End</Label>
                         </Col>
-                        <Col sm='10'>
+                        <Col xs='10'>
                             <FormGroup>
                                 <Input
                                     type="date"

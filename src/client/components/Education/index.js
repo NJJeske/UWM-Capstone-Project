@@ -64,10 +64,10 @@ export const EducationForm = props => {
             <Row form={true}>
                 <Col lg='6'>
                     <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Start Date</Label>
+                        <Col xs='2'className='formLabel'>
+                            <Label>Began</Label>
                         </Col>
-                        <Col sm='10'>
+                        <Col xs='10'>
                             <FormGroup>
                                 <Input
                                     type="date"
@@ -83,10 +83,10 @@ export const EducationForm = props => {
                 </Col>
                 <Col lg='6'>
                     <Row form={true}>
-                        <Col sm='2'>
-                            <Label>End Date</Label>
+                        <Col xs='2' className='formLabel'>
+                            <Label>End</Label>
                         </Col>
-                        <Col sm='10'>
+                        <Col xs='10'>
                             <FormGroup>
                                 <Input
                                     type="date"
