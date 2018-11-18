@@ -5,17 +5,17 @@ import { fetchEntities, createLocalEntity } from '../../redux/actions/entityActi
 import { Header, Project, Sidebar, Footer } from '../../components';
 
 const ProjectsPage = props => {
-    const { projects, error, fetchEntities, createLocalEntity } = props;
-    const alreadyCreating = projects.some(project => project._local);
+    const { projects, fetchEntities, createLocalEntity } = props;
+    const alreadyCreating = projects.list.some(project => project._local);
 
-    const mainBody = error ? (
+    const mainBody = projects.error ? (
         <Container className='card entity projects'>
             <h3>Error fetching data</h3>
             <Button onClick={fetchEntities('projects')}>Retry</Button>
         </Container>
     ) : (
-            projects.map(project => <Project key={project.id} {...project} />)
-        );
+        projects.list.map(project => <Project key={project.id} {...project} />)
+    );
 
     const createButton = alreadyCreating ? null : (
         <Container className='entity'>
@@ -47,7 +47,7 @@ const ProjectsPage = props => {
 
 const mapStateToProps = state => ({
     user: state.user,
-    projects: state.data.projects.list,
+    projects: state.data.projects,
 });
 
 const mapDispatchToProps = {
