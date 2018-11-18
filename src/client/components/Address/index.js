@@ -10,7 +10,7 @@ export default props => {
     return (
         <React.Fragment>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
@@ -53,8 +53,6 @@ export default props => {
                         />
                     </FormGroup>
                 </Col>
-            </Row>
-            <Row form={true}>
                 <Col xs='3' sm='2'>
                     <FormGroup disabled={disabled} >
                         <Input
@@ -68,8 +66,6 @@ export default props => {
                         />
                     </FormGroup>
                 </Col>
-            </Row>
-            <Row form={true}>
                 <Col xs='9' sm='4'>
                     <FormGroup disabled={disabled} >
                         <Input
