@@ -14,8 +14,8 @@ const ProjectsPage = props => {
             <Button onClick={fetchEntities('projects')}>Retry</Button>
         </Container>
     ) : (
-            projects.map(project => <Project key={project.id} {...project} />)
-        );
+        projects.map(project => <Project key={project.id} {...project} />)
+    );
 
     const createButton = alreadyCreating ? null : (
         <Container className='entity'>

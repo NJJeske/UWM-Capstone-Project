@@ -3,15 +3,9 @@ import { Row, Col, FormGroup, Input } from 'reactstrap';
 import './styles.scss';
 
 export default props => {
-    const { changeField, disabled, ...addressData } = props;
+    const { changeField, disabled, address } = props;
+    const { street1, street2, city, state, zip } = address;
     const disabledClass = disabled ? 'disabled' : '';
-    const {
-        street1,
-        street2,
-        city,
-        state,
-        zip,
-    } = addressData;
 
     return (
         <React.Fragment>
