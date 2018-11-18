@@ -14,7 +14,7 @@ const props = {
     disabled: false,
 };
 
-describe('Sidebar', () => {
+describe('Address Form Fragment', () => {
     let address;
     beforeEach(() => {
         address = shallow(<Address {...props} />);
