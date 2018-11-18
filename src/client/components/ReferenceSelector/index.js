@@ -35,16 +35,24 @@ export const ReferenceSelector = props => {
         </option>
     ));
 
+    const onChangeWrapper = event => {
+        if (event.target.value === 'none') {
+            event.target.value = null;
+        }
+        onChange(event);
+    };
+
     return (
         <FormGroup>
             <Input
                 type='select'
                 name={name}
                 className={className}
-                onChange={onChange}
-                value={selectedId || ''}
+                onChange={onChangeWrapper}
+                value={selectedId || 'none'}
                 disabled={disabled}
             >
+                <option key='none' value='none'>-</option>
                 {options}
             </Input>
         </FormGroup>

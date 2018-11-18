@@ -95,10 +95,12 @@
       "*.test.js"
     ]
   },
-  "author": "Paul van Woensel",
-  "contributors": [
+  "authors": [
     "Casey Van Groll",
     "Matthew Fleijter"
+  ],
+  "contributors": [
+    "Paul van Woensel"
   ],
   "license": "ISC"
 }
