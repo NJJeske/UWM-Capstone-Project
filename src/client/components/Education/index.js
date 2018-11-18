@@ -10,9 +10,9 @@ export const EducationForm = props => {
         name,
         degree,
         fieldOfStudy,
-        address,
         startDate,
         endDate,
+        ...address
     } = entityData;
 
     return (
