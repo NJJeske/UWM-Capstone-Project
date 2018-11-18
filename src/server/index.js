@@ -5,7 +5,7 @@ const createEntityRoute = require('./routes/createEntityRoute');
 const router = new express.Router();
 
 // Entity routes
-['addresses', 'certifications', 'companies', 'contacts', 'education', 'positions', 'projects'].forEach(entityType => {
+['certifications', 'companies', 'contacts', 'education', 'positions', 'projects'].forEach(entityType => {
     const { proxyRoute, ...entityRouteConfig } = require(`./routes/entities/${entityType}`);
     router.use(proxyRoute, createEntityRoute(entityRouteConfig));
 });

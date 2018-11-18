@@ -1,3 +1,4 @@
+const addressGenerator = require('./address');
 const { randomDateRange } = require('../helpers');
 
 module.exports = (faker, rand) => {
@@ -8,6 +9,7 @@ module.exports = (faker, rand) => {
         degree: rand.maybe('BA', 0.5, 'GED'),
         fieldOfStudy: `${faker.name.jobDescriptor()} ${faker.name.jobArea()}`,
         startDate,
-        endDate
+        endDate,
+        address: addressGenerator(faker, rand),
     };
 };
