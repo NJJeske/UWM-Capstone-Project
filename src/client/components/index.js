@@ -1,3 +1,4 @@
+export { default as Address } from './Address';
 export { default as Entity } from './Entity';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';
