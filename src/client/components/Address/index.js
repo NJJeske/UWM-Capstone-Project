@@ -1,0 +1,95 @@
+import React from 'react';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
+import './styles.scss';
+
+export default props => {
+    const { changeField, disabled, ...addressData } = props;
+    const disabledClass = disabled ? 'disabled' : '';
+    const {
+        street1,
+        street2,
+        city,
+        state,
+        zip,
+    } = addressData;
+
+    return (
+        <React.Fragment>
+            <Row form={true}>
+                <Col xs='12' lg='9'>
+                    <FormGroup >
+                        <Input
+                            type='text'
+                            name='street1'
+                            placeholder='Street 1'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={street1 || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='12'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='street2'
+                            placeholder='Street 2'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={street2 || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col sm='6'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='city'
+                            placeholder='City'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={city || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='3' sm='2'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='state'
+                            placeholder='State'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={state || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='9' sm='4'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='zip'
+                            placeholder='Zip'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={zip || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+        </React.Fragment>
+    );
+};
