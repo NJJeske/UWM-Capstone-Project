@@ -15,7 +15,6 @@ const generate = generateArray.bind(null, faker, rand);
 
 // To be imported as initial state of their respective reducers after linkage
 const mockData = {
-    addresses: generate(generator.address, 5, 8),
     certifications: generate(generator.certification, 0, 3),
     companies: generate(generator.company, 1, 6),
     contacts: generate(generator.contact, 3, 8),
@@ -33,19 +32,9 @@ const randomElement = (type, allowUndefined = true) => {
     }
 };
 
-    // Companies must have an address
-mockData.companies.forEach(company => {
-    company.addressId = randomElement('addresses', false);
-});
-
 // Contacts may have companies
 mockData.contacts.forEach(contact => {
     contact.companyId = randomElement('companies');
-});
-
-// Education must have an address
-mockData.education.forEach(education => {
-    education.addressId = randomElement('addresses', false);
 });
 
 // Positions must have a company
