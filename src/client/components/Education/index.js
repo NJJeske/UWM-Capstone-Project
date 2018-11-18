@@ -10,79 +10,57 @@ export const EducationForm = props => {
         name,
         degree,
         fieldOfStudy,
+        address,
         startDate,
         endDate,
-        address,
     } = entityData;
 
     return (
         <Form>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
-                            name='title'
-                            placeholder='Title'
+                            name='name'
+                            placeholder='Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title || ''}
+                            value={name || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
                 </Col>
             </Row>
             <Row form={true}>
-                <Col xs='12'>
-                    <FormGroup disabled={disabled} >
+                <Col sm='6'>
+                    <FormGroup >
                         <Input
-                            tag={TextArea}
-                            name='description'
-                            placeholder='Description'
+                            type='text'
+                            name='degree'
+                            placeholder='Degree'
                             disabled={disabled}
                             className={disabledClass}
-                            value={description || ''}
+                            value={degree || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+                <Col sm='6'>
+                    <FormGroup >
+                        <Input
+                            type='text'
+                            name='fieldOfStudy'
+                            placeholder='Field of Study'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={fieldOfStudy || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
                 </Col>
             </Row>
-            <Row form={true}>
-                <Col lg='6'>
-                    <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Position</Label>
-                        </Col>
-                        <Col sm='10'>
-                            <ReferenceSelector
-                                entityType='positions'
-                                name='positionId'
-                                selectedId={positionId}
-                                disabled={disabled}
-                                className={disabledClass}
-                                onChange={changeField}
-                            />
-                        </Col>
-                    </Row>
-                </Col>
-                <Col lg='6'>
-                    <Row form={true}>
-                        <Col sm='2'>
-                            <Label>Education</Label>
-                        </Col>
-                        <Col sm='10'>
-                            <ReferenceSelector
-                                entityType='education'
-                                name='educationId'
-                                selectedId={educationId}
-                                disabled={disabled}
-                                className={disabledClass}
-                                onChange={changeField}
-                            />
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+            <Address disabled={disabled} address={address} changeField={changeField} />
             <Row form={true}>
                 <Col lg='6'>
                     <Row form={true}>

@@ -3,21 +3,22 @@ import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { fetchEntities, createLocalEntity } from '../../redux/actions/entityActions';
 import { Header, Education, Sidebar, Footer } from '../../components';
+import './styles.scss';
 
 const EducationPage = props => {
     const { education, fetchEntities, createLocalEntity } = props;
-    const alreadyCreating = education.list.some(education => education._local);
+    const alreadyCreating = education.list.some(school => school._local);
 
     const mainBody = education.error ? (
-        <Container className='card entity education'>
+        <Container className='fetchError'>
             <h3>Error fetching data</h3>
-            <Button onClick={fetchEntities('education')}>Retry</Button>
+            <Button onClick={fetchEntities.bind(null, 'education')}>Retry</Button>
         </Container>
     ) : (
-        education.list.map(education => <Education key={education.id} {...education} />)
+        education.list.map(school => <Education key={school.id} {...school} />)
     );
 
-    const createButton = alreadyCreating ? null : (
+    const createButton = alreadyCreating || education.error ? null : (
         <Container className='entity'>
             <Row>
                 <Col
