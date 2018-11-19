@@ -29,6 +29,16 @@
     }
     
     form {
+        .formLabel {
+            text-align: center;
+        }
+        label {
+            padding-top: 7px;
+            white-space: nowrap;
+        }
+        label, input {
+            font-weight: bold;
+        }
         textarea {
             resize: none;
             overflow-y: hidden;

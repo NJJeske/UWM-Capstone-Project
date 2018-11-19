@@ -1,0 +1,35 @@
+
+// Project Theme
+$education-light: #FFAB85;
+$education-medium: #FF6824;
+$education-dark: #FF4F00;
+$education-saving: rgba(109, 62, 138, 0.8);
+$education-error: rgba(195, 98, 120, 0.8);
+
+.education.container {
+    // Main background
+    background-color: $education-medium;
+
+    // Actionbar background
+    .actionBar { background-color: $education-dark; }
+
+    // Overlay colors (semi-transparent)
+    .saving { background-color: $education-saving; }
+    .error { background-color: $education-error; }
+
+    // Disabled form field background
+    input, textarea, select {
+        &.disabled { background-color: $education-light; }
+    }
+    
+    // Overlay text is white
+    .overlay * {
+        color: white;
+    }
+}
+
+// Create Button
+.education.createButton {
+    width: 100%;
+    background-color: $education-dark;
+}

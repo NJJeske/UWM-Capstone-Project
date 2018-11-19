@@ -1,87 +1,70 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
-import TextArea from 'react-textarea-autosize';
-import { Entity, ReferenceSelector } from '../';
+import { Entity, Address } from '../';
 import './styles.scss';
 
-export const ProjectForm = props => {
+export const EducationForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        title,
-        description,
-        positionId,
-        educationId,
+        name,
+        degree,
+        fieldOfStudy,
         startDate,
         endDate,
+        ...address
     } = entityData;
 
     return (
         <Form>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
-                            name='title'
-                            placeholder='Title'
+                            name='name'
+                            placeholder='Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title || ''}
+                            value={name || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
                 </Col>
             </Row>
             <Row form={true}>
-                <Col xs='12'>
-                    <FormGroup disabled={disabled} >
+                <Col sm='6'>
+                    <FormGroup >
                         <Input
-                            tag={TextArea}
-                            name='description'
-                            placeholder='Description'
+                            type='text'
+                            name='degree'
+                            placeholder='Degree'
                             disabled={disabled}
                             className={disabledClass}
-                            value={description || ''}
+                            value={degree || ''}
+                            onChange={changeField}
+                        />
+                    </FormGroup>
+                </Col>
+                <Col sm='6'>
+                    <FormGroup >
+                        <Input
+                            type='text'
+                            name='fieldOfStudy'
+                            placeholder='Field of Study'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={fieldOfStudy || ''}
                             onChange={changeField}
                         />
                     </FormGroup>
                 </Col>
             </Row>
-            <Row form={true}>
-                <Col xs='2' className='formLabel'>
-                    <Label>Position</Label>
-                </Col>
-                <Col xs='10'>
-                    <ReferenceSelector
-                        entityType='positions'
-                        name='positionId'
-                        selectedId={positionId}
-                        disabled={disabled}
-                        className={disabledClass}
-                        onChange={changeField}
-                    />
-                </Col>
-            </Row>
-            <Row form={true}>
-                <Col xs='2' className='formLabel'>
-                    <Label>Education</Label>
-                </Col>
-                <Col xs='10'>
-                    <ReferenceSelector
-                        entityType='education'
-                        name='educationId'
-                        selectedId={educationId}
-                        disabled={disabled}
-                        className={disabledClass}
-                        onChange={changeField}
-                    />
-                </Col>
-            </Row>
+            <Address disabled={disabled} address={address} changeField={changeField} />
             <Row form={true}>
                 <Col lg='6'>
                     <Row form={true}>
-                        <Col xs='2' className='formLabel'>
+                        <Col xs='2'className='formLabel'>
                             <Label>Began</Label>
                         </Col>
                         <Col xs='10'>
@@ -123,7 +106,7 @@ export const ProjectForm = props => {
 };
 
 export default props => (
-    <Entity entityType='projects' entityData={props}>
-        <ProjectForm />
+    <Entity entityType='education' entityData={props}>
+        <EducationForm />
     </Entity>
 );
