@@ -1,11 +1,11 @@
-export { default as ContactsPage } from './ContactsPage';
+export { default as ContactsPage } from './EntityPages/ContactsPage';
 export { default as DocumentsPage } from './DocumentsPage';
-export { default as EducationPage } from './EducationPage';
-export { default as ExperiencePage } from './ExperiencePage';
+export { default as EducationPage } from './EntityPages/EducationPage';
+export { default as ExperiencePage } from './EntityPages/ExperiencePage';
 export { default as HomeScreen } from './HomeScreen';
 export { default as LoginPage } from './LoginPage';
 export { default as ProfilePage } from './ProfilePage';
-export { default as ProjectsPage } from './ProjectsPage';
+export { default as ProjectsPage } from './EntityPages/ProjectsPage';
 export { default as TimelinePage } from './TimelinePage';
 export { default as UnfoundPage } from './UnfoundPage';
 export { default as CallbackPage } from './CallbackPage';
