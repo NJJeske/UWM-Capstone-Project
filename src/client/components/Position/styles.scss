@@ -1,0 +1,35 @@
+
+// Experience Theme
+$experience-light: #FFAB85;
+$experience-medium: #FF6824;
+$experience-dark: #FF4F00;
+$experience-saving: rgba(109, 62, 138, 0.8);
+$experience-error: rgba(195, 98, 120, 0.8);
+
+.experience.container {
+    // Main background
+    background-color: $experience-medium;
+
+    // Actionbar background
+    .actionBar { background-color: $experience-dark; }
+
+    // Overlay colors (semi-transparent)
+    .saving { background-color: $experience-saving; }
+    .error { background-color: $experience-error; }
+
+    // Disabled form field background
+    input, textarea, select {
+        &.disabled { background-color: $experience-light; }
+    }
+    
+    // Overlay text is white
+    .overlay * {
+        color: white;
+    }
+}
+
+// Create Button
+.experience.createButton {
+    width: 100%;
+    background-color: $experience-dark;
+}
