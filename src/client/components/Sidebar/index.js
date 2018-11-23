@@ -10,36 +10,39 @@ import '../../sass/_sidebar.scss';
  * and is retractable.
  */
 export class Sidebar extends Component {
-  render() {
-    return (
-      <Menu>
-        <Link className="menu-item" to="/home">
-          <FontAwesomeIcon icon="home" /> Home
+    render() {
+        return (
+            <Menu>
+                <Link className="menu-item" to="/home">
+                    <FontAwesomeIcon icon="home" /> Home
                 </Link>
-        <Link className="menu-item" to="/profile">
-          <FontAwesomeIcon icon="user" /> Profile
+                <Link className="menu-item" to="/profile">
+                    <FontAwesomeIcon icon="user" /> Profile
                 </Link>
-        <Link className="menu-item" to="/documents">
-          <FontAwesomeIcon icon="file-alt" /> Documents
+                <Link className="menu-item" to="/documents">
+                    <FontAwesomeIcon icon="file-alt" /> Documents
                 </Link>
-        <Link className="menu-item" to="/experience">
-          <FontAwesomeIcon icon="briefcase" /> Experience
+                <Link className="menu-item" to="/experience">
+                    <FontAwesomeIcon icon="briefcase" /> Experience
                 </Link>
-        <Link className="menu-item" to="/education">
-          <FontAwesomeIcon icon="graduation-cap" /> Education
+                <Link className="menu-item" to="/education">
+                    <FontAwesomeIcon icon="graduation-cap" /> Education
                 </Link>
-        <Link className="menu-item" to="/projects">
-          <FontAwesomeIcon icon="project-diagram" /> Projects
+                <Link className="menu-item" to="/certifications">
+                    <FontAwesomeIcon icon="certificate" /> Certifications
                 </Link>
-        <Link className="menu-item" to="/contacts">
-          <FontAwesomeIcon icon="address-book" /> Contacts
+                <Link className="menu-item" to="/projects">
+                    <FontAwesomeIcon icon="project-diagram" /> Projects
                 </Link>
-        <Link className="menu-item" to="/timeline">
-          <FontAwesomeIcon icon="calendar-alt" /> Timeline
+                <Link className="menu-item" to="/contacts">
+                    <FontAwesomeIcon icon="address-book" /> Contacts
                 </Link>
-      </Menu>
-    );
-  }
+                <Link className="menu-item" to="/timeline">
+                    <FontAwesomeIcon icon="calendar-alt" /> Timeline
+                </Link>
+            </Menu>
+        );
+    }
 }
 
 export default Sidebar;

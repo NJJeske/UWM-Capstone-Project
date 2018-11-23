@@ -5,6 +5,7 @@ import {
     ContactsPage,
     DocumentsPage,
     EducationPage,
+    CertificationsPage,
     ExperiencePage,
     ProfilePage,
     ProjectsPage,
@@ -44,6 +45,7 @@ const routes = () => (
             <SecretRoute path="/contacts" component={ContactsPage} />
             <SecretRoute path="/documents" component={DocumentsPage} />
             <SecretRoute path="/education" component={EducationPage} />
+            <SecretRoute path="/certifications" component={CertificationsPage} />
             <SecretRoute path="/experience" component={ExperiencePage} />
             <SecretRoute path="/projects" component={ProjectsPage} />
             <SecretRoute path="/timeline" component={TimelinePage} />
