@@ -1,7 +1,7 @@
 import React from 'react';
-import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
-import { Entity } from '../';
+import { Entity, ReferenceSelector } from '../';
 import './styles.scss';
 
 export const ContactForm = props => {
@@ -10,6 +10,7 @@ export const ContactForm = props => {
     const {
         firstName,
         lastName,
+        companyId,
         position,
         phone,
         email,
@@ -44,6 +45,21 @@ export const ContactForm = props => {
                             onChange={changeField}
                         />
                     </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='2' className='formLabel'>
+                    <Label>Company</Label>
+                </Col>
+                <Col xs='10'>
+                    <ReferenceSelector
+                        entityType='companies'
+                        name='companyId'
+                        selectedId={companyId}
+                        disabled={disabled}
+                        className={disabledClass}
+                        onChange={changeField}
+                    />
                 </Col>
             </Row>
             <Row form={true}>
