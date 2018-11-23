@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import EntityPage from '../';
+import { Position } from '../../../components';
 
-class ExperiencePage extends Component {
-    render() {
-        return <div />;
-    }
-}
+const ExperiencePage = props => (
+    <EntityPage
+        title='Experience'
+        entityType='positions'
+        Component={Position}
+    />
+);
 
-export default connect()(ExperiencePage);
+export default ExperiencePage;

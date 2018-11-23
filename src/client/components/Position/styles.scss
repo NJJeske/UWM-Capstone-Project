@@ -1,25 +1,25 @@
 
 // Experience Theme
-$experience-light: #FFAB85;
-$experience-medium: #FF6824;
-$experience-dark: #FF4F00;
-$experience-saving: rgba(109, 62, 138, 0.8);
-$experience-error: rgba(195, 98, 120, 0.8);
+$positions-light: #FFAB85;
+$positions-medium: #FF6824;
+$positions-dark: #FF4F00;
+$positions-saving: rgba(109, 62, 138, 0.8);
+$positions-error: rgba(195, 98, 120, 0.8);
 
-.experience.container {
+.positions.container {
     // Main background
-    background-color: $experience-medium;
+    background-color: $positions-medium;
 
     // Actionbar background
-    .actionBar { background-color: $experience-dark; }
+    .actionBar { background-color: $positions-dark; }
 
     // Overlay colors (semi-transparent)
-    .saving { background-color: $experience-saving; }
-    .error { background-color: $experience-error; }
+    .saving { background-color: $positions-saving; }
+    .error { background-color: $positions-error; }
 
     // Disabled form field background
     input, textarea, select {
-        &.disabled { background-color: $experience-light; }
+        &.disabled { background-color: $positions-light; }
     }
     
     // Overlay text is white
@@ -29,7 +29,7 @@ $experience-error: rgba(195, 98, 120, 0.8);
 }
 
 // Create Button
-.experience.createButton {
+.positions.createButton {
     width: 100%;
-    background-color: $experience-dark;
+    background-color: $positions-dark;
 }
