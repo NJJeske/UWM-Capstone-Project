@@ -25,7 +25,7 @@ import {
     faProjectDiagram,
     faAddressBook,
     faSpinner,
-    faExclamationCircle
+    faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 library.add(
     faEdit,
