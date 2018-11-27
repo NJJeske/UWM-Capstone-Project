@@ -28,7 +28,7 @@ export class HomepageButtonCluster extends Component {
                     <Col className='buttoncombo'>
                         <Button
                             color='Secondary'
-                            onClick={() => this.routeTo('/certifications')}
+                            onClick={() => this.routeTo('/documents')}
                         >
                             <FontAwesomeIcon icon='file-alt' size='3x' />
                             <br />
@@ -79,7 +79,7 @@ export class HomepageButtonCluster extends Component {
                         </Button>
                     </Col>
                     <Col className='buttoncombo'>
-                        <Button color='Secondary' onClick={() => this.routeTo('/documents')}>
+                        <Button color='Secondary' onClick={() => this.routeTo('/certifications')}>
                             <FontAwesomeIcon icon='certificate' size='3x' />
                             <br />
                             <span className='label'>Certifications</span>
