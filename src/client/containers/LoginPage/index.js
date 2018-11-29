@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { Container } from 'reactstrap';
 import LoginButton from '../../components/LoginButton';
-import '../../sass/_loginpage.scss';
+import './styles.scss';
 
-export class LoginPage extends Component {
-    render() {
-        return (
-            <main className='login-main'>
+export const LoginPage = props => (
+    <Container fluid={true} id='LOGIN_PAGE'>
+        <main >
+            <div className='vertical-center'>
                 <h1>Organize Your Job Hunt - Forever.</h1>
-                <div className='loginButton'>
-                    <LoginButton auth={this.props.auth} />
-                </div>
-            </main>
-        );
-    }
-}
+                <LoginButton auth={props.auth} />
+            </div>
+        </main>
+    </Container>
+);
 
-export default connect()(LoginPage);
+export default LoginPage;

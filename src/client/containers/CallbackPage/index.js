@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
+import { Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../sass/_callbackpage.scss';
+import './styles.scss';
 
 /*
  * Container for callback page that appears after a user logs in
  * and their profile is being loaded.
  */
-export class CallbackPage extends Component {
-    render() {
-        this.props.auth.handleAuthentication().then(() => {
-            this.props.history.push('/home');
-        });
+export const CallbackPage = props => {
+    this.props.auth.handleAuthentication().then(() => {
+        this.props.history.push('/home');
+    });
 
-        return (
-            <div className='callbackPageDiv'>
-                <FontAwesomeIcon icon='spinner' /> Loading user profile...
-            </div>
-        );
-    }
-}
+    return (
+        <Container fluid={true} id='CALLBACK_PAGE'>
+            <FontAwesomeIcon icon='spinner' /> Loading user profile...
+        </Container>
+    );
+};
 
 export default withRouter(CallbackPage);

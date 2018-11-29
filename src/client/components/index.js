@@ -5,7 +5,6 @@ export { default as Education } from './Education';
 export { default as Entity } from './Entity';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';
-export { default as HomepageButtonCluster } from './HomepageButtonCluster';
 export { default as Position } from './Position';
 export { default as ProfileButton } from './ProfileButton';
 export { default as Project } from './Project';

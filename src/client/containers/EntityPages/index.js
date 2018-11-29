@@ -31,17 +31,15 @@ const EntityPage = props => {
     );
 
     return (
-        <div>
+        <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`}>
             <Sidebar />
-            <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`}>
-                <Header title={title} />
-                <main>
-                    {mainBody}
-                    {createButton}
-                </main>
-            </Container>
+            <Header title={title} />
+            <main>
+                {mainBody}
+                {createButton}
+            </main>
             <Footer />
-        </div >
+        </Container>
     );
 };
 

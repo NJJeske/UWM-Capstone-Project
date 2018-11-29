@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../sass/_sidebar.scss';
+import './styles.scss';
 
 /*
  * Sidebar component of the project that will be used on all pages aside from the

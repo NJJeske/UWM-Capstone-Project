@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class ProfilePage extends Component {
     render() {
-        return <div />;
+        return <Container fluid={true} id='PROFILE_PAGE' />;
     }
 }
 

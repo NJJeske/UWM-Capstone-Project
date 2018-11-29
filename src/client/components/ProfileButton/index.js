@@ -7,7 +7,7 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../sass/_profilebutton.scss';
+import './styles.scss';
 
 export class ProfileButton extends Component {
     constructor(props) {
