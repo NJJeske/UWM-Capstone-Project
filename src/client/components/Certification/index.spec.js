@@ -1,31 +1,32 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProjectForm } from '.';
+import { CertificationForm } from '.';
 
 const props = {
     changeField: jest.fn(),
     entityData: {
-        'title': 'TITLE',
-        'description': 'DESCRIPTION',
-        'startDate': '2000-01-01',
-        'endDate': '3000-07-27',
+        'name': 'NAME',
+        'authority': 'AUTHORITY',
+        'licenseNumber': 'LICENSE_NUM',
+        'website': 'WEBSITE',
+        'acquireDate': '2000-01-01',
+        'expireDate': '3000-07-27',
     },
     disabled: true,
 };
 
-describe('ProjectForm', () => {
+describe('CertificationForm', () => {
     let form;
     beforeEach(() => {
-        form = shallow(<ProjectForm {...props} />);
+        form = shallow(<CertificationForm {...props} />);
     });
 
     it('should render the component without crashing', () => {
         expect(form).toHaveLength(1);
     });
     it('should populate its fields with props.entityData', () => {
-        // Ignoring ReferenceSelectors for now since they'd need a mock store
         const inputs = form.find('Input');
-        expect(inputs).toHaveLength(4);
+        expect(inputs).toHaveLength(6);
         Object.entries(props.entityData).forEach(([name, value]) => {
             expect(inputs.findWhere(input => input.prop('name') === name).prop('value')).toEqual(value);
         });
