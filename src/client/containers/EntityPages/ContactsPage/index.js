@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import EntityPage from '../';
+import { Contact } from '../../../components';
 
-class ContactsPage extends Component {
-    render() {
-        return <div />;
-    }
-}
+const ContactsPage = props => (
+    <EntityPage
+        title='Contacts'
+        entityType='contacts'
+        Component={Contact}
+    />
+);
 
-export default connect()(ContactsPage);
+export default ContactsPage;
