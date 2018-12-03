@@ -18,8 +18,10 @@
     "body-parser": "^1.17.1",
     "config": "^2.0.1",
     "eslint-config-standard": "^12.0.0",
+    "event-stream": "^3.3.4",
     "express": "^4.15.2",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "react-notifications": "^1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -42,6 +44,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-node": "^6.0.1",

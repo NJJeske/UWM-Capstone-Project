@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { ProfileForm, Sidebar, Header } from '../../components';
 import '../../sass/_profilepage.scss';
 
-class ProfilePage extends Component {
+export class ProfilePage extends Component {
     render() {
         return (
             <div className='profileBody'>
                 <Header title={'Profile Settings'} />
                 <Sidebar />
-                <ProfileForm />
+                <ProfileForm email={this.props.email} />
             </div>
         );
     }
 }
 
-export default connect()(ProfilePage);
+export default ProfilePage;

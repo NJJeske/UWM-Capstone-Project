@@ -23,14 +23,15 @@ const SecretRoute = ({ component: Component, ...rest }) => (
         render={props =>
             auth.isAuthenticated() === true ? (
                 <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: '/',
-                        state: { from: props.location }
-                    }}
-                />
             )
+                : (
+                    <Redirect
+                        to={{
+                            pathname: '/',
+                            state: { from: props.location }
+                        }}
+                    />
+                )
         }
     />
 );
@@ -40,7 +41,7 @@ const routes = () => (
         <Switch>
             <Route exact path="/" component={() => <LoginPage auth={auth} />} />
             <SecretRoute path="/home" component={() => <HomeScreen auth={auth} />} />
-            <SecretRoute path="/profile" component={ProfilePage} />
+            <SecretRoute path="/profile" component={() => <ProfilePage email={auth.getEmail()} />} />
             <SecretRoute path="/contacts" component={ContactsPage} />
             <SecretRoute path="/documents" component={DocumentsPage} />
             <SecretRoute path="/education" component={EducationPage} />
