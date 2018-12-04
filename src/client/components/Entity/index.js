@@ -189,4 +189,4 @@ const mapDispatchToProps = {
     clearErrorEntity
 };
 
-export default connect(null, mapDispatchToProps)(Entity);;
+export default connect(null, mapDispatchToProps)(Entity);

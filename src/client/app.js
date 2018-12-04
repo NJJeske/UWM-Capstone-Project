@@ -9,6 +9,7 @@ import store from './redux/store.js';
 import Routes from './routes.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import 'react-notifications/lib/notifications.css';
 import {
     faEdit,
     faCheck,

@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import HomepageButtonCluster from '../../components/HomepageButtonCluster';
 import ProfileButton from '../../components/ProfileButton';
 import '../../sass/_homescreen.scss';
 
-export class HomeScreen extends Component {
-  render() {
+export const HomeScreen = props => {
     return (
-      <main className='homescreen-main'>
-        <div className='profileButton'>
-          <ProfileButton auth={this.props.auth} />
-        </div>
-        <h1 className='title'>MyPortfolio</h1>
-        <div className='buttonCluster'>
-          <HomepageButtonCluster />
-        </div>
-      </main>
+        <main className='homescreen-main'>
+            <div className='profileButton'>
+                <ProfileButton auth={props.auth} />
+            </div>
+            <h1 className='title'>MyPortfolio</h1>
+            <div className='buttonCluster'>
+                <HomepageButtonCluster />
+            </div>
+        </main>
     );
-  }
-}
+};
 
-export default connect()(HomeScreen);
+export default HomeScreen;
