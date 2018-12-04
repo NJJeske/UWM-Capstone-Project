@@ -1,8 +1,8 @@
 import auth0 from 'auth0-js';
 import axios from 'axios';
+import config from '../redux/config';
 
-const config = require('config');
-const serviceUrl = config.get('serviceUrl');
+const serverUrl = config.serverURL;
 
 export default class Auth {
     constructor() {
@@ -62,13 +62,15 @@ export default class Auth {
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
         localStorage.setItem('email', authResult.idTokenPayload.email);
-        var email = authResult.idTokenPayload.email;
-        var getLink = serviceUrl + email;
+        var emailString = authResult.idTokenPayload.email;
+        var email = encodeURI(emailString);
+        var baseLink = serverUrl + '/user';
+        var getLink = baseLink + '/' + email;
         axios.get(getLink, {
         }).then(function (response) {
             if (response) {
                 if (response.data === '') {
-                    axios.post(serviceUrl, {
+                    axios.post(baseLink, {
                         email: email
                     });
                 }

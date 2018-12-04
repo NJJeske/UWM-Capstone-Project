@@ -3,9 +3,9 @@ import { FormGroup, Col, Label, Input, Button } from 'reactstrap';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import '../../sass/_profileform.scss';
+import config from '../../redux/config';
 
-const config = require('config');
-const serviceUrl = config.get('serviceUrl');
+const serverUrl = config.serverURL;
 
 export class ProfileForm extends Component {
     constructor(props) {
@@ -41,7 +41,9 @@ export class ProfileForm extends Component {
 
     getProfile() {
         var self = this;
-        var link = serviceUrl + this.email;
+        var emailString = this.email;
+        var email = encodeURI(emailString);
+        var link = serverUrl + '/user/' + email;
         axios.get(link, {
         }).then(function (response) {
             if (response) {
@@ -61,7 +63,8 @@ export class ProfileForm extends Component {
     }
 
     updateProfile() {
-        axios.put(serviceUrl, {
+        var link = serverUrl + '/user';
+        axios.put(link, {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             middleName: this.state.middleName,
