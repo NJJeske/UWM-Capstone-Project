@@ -4,6 +4,9 @@ import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import '../../sass/_profileform.scss';
 
+const config = require('config');
+const serviceUrl = config.get('serviceUrl');
+
 export class ProfileForm extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +41,7 @@ export class ProfileForm extends Component {
 
     getProfile() {
         var self = this;
-        var link = 'http://localhost:4000/api/user/' + this.email;
+        var link = serviceUrl + this.email;
         axios.get(link, {
         }).then(function (response) {
             if (response) {
@@ -58,7 +61,7 @@ export class ProfileForm extends Component {
     }
 
     updateProfile() {
-        axios.put('http://localhost:4000/api/user/', {
+        axios.put(serviceUrl, {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             middleName: this.state.middleName,

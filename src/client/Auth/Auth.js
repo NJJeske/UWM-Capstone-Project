@@ -1,6 +1,9 @@
 import auth0 from 'auth0-js';
 import axios from 'axios';
 
+const config = require('config');
+const serviceUrl = config.get('serviceUrl');
+
 export default class Auth {
     constructor() {
         this.auth0 = new auth0.WebAuth({
@@ -22,7 +25,6 @@ export default class Auth {
         return new Promise((resolve, reject) => {
             this.auth0.parseHash((err, authResult) => {
                 if (err) return reject(err);
-                console.log(authResult);
                 if (!authResult || !authResult.idToken) {
                     return reject(err);
                 }
@@ -33,7 +35,6 @@ export default class Auth {
     }
 
     getEmail() {
-        console.log(localStorage.getItem('email'));
         return localStorage.getItem('email');
     }
 
@@ -62,16 +63,12 @@ export default class Auth {
         localStorage.setItem('expires_at', expiresAt);
         localStorage.setItem('email', authResult.idTokenPayload.email);
         var email = authResult.idTokenPayload.email;
-        var uri = 'http://localhost:4000/api/user/';
-        var getLink = uri + email;
-        console.log(getLink);
+        var getLink = serviceUrl + email;
         axios.get(getLink, {
         }).then(function (response) {
             if (response) {
-                console.log('got here');
-                console.log(response.data);
                 if (response.data === '') {
-                    axios.post(uri, {
+                    axios.post(serviceUrl, {
                         email: email
                     });
                 }
