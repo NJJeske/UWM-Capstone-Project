@@ -23,7 +23,7 @@ describe('Sidebar', () => {
     });
 
     it('menu should contain 8 Link children', () => {
-        expect(sidebar.find('Menu').find('Link')).toHaveLength(8);
+        expect(sidebar.find('Menu').find('Link')).toHaveLength(9);
     });
 
     describe('Links', () => {
@@ -38,6 +38,7 @@ describe('Sidebar', () => {
             'Documents': '/documents',
             'Experience': '/experience',
             'Education': '/education',
+            'Certifications': '/certifications',
             'Projects': '/projects',
             'Contacts': '/contacts',
             'Timeline': '/timeline'

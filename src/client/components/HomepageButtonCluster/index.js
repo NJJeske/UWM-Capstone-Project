@@ -24,7 +24,7 @@ export class HomepageButtonCluster extends Component {
     render() {
         return (
             <div className='ButtonCluster'>
-                <Row className='FirstRow'>
+                <Row className='FirstRow justify-content-md-center'>
                     <Col className='buttoncombo'>
                         <Button
                             color='Secondary'
@@ -56,7 +56,7 @@ export class HomepageButtonCluster extends Component {
                         </Button>
                     </Col>
                 </Row>
-                <Row className='SecondRow'>
+                <Row className='SecondRow justify-content-md-center'>
                     <Col className='buttoncombo'>
                         <Button color='Secondary' onClick={() => this.routeTo('/projects')}>
                             <FontAwesomeIcon icon='project-diagram' size='3x' />
@@ -76,6 +76,13 @@ export class HomepageButtonCluster extends Component {
                             <FontAwesomeIcon icon='calendar-alt' size='3x' />
                             <br />
                             <span className='label'>Timeline</span>
+                        </Button>
+                    </Col>
+                    <Col className='buttoncombo'>
+                        <Button color='Secondary' onClick={() => this.routeTo('/certifications')}>
+                            <FontAwesomeIcon icon='certificate' size='3x' />
+                            <br />
+                            <span className='label'>Certifications</span>
                         </Button>
                     </Col>
                 </Row>

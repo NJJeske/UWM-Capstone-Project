@@ -28,6 +28,9 @@ export class Sidebar extends Component {
                 <Link className="menu-item" to="/education">
                     <FontAwesomeIcon icon="graduation-cap" /> Education
                 </Link>
+                <Link className="menu-item" to="/certifications">
+                    <FontAwesomeIcon icon="certificate" /> Certifications
+                </Link>
                 <Link className="menu-item" to="/projects">
                     <FontAwesomeIcon icon="project-diagram" /> Projects
                 </Link>

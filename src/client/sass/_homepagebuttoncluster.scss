@@ -2,8 +2,47 @@
 .ButtonCluster {
   position: relative;
   margin: auto;
+  align-content: center;
+  align-items: center;
+  align-self: center;
   .FirstRow {
-    padding-bottom: 135px;
+    padding-bottom: 100px;
+    width: 1125px;
+    .buttoncombo {
+      button {
+        height: 150px;
+        width: 150px;
+        color: white;
+        background-color: #393939;
+      }
+
+      button:hover {
+        background-color: black;
+      }
+
+      button {
+        border-radius: 12px;
+      }
+    }
+  }
+  .SecondRow {
+    width: 1000px;
+    .buttoncombo {
+      button {
+        height: 150px;
+        width: 150px;
+        color: white;
+        background-color: #393939;
+      }
+
+      button:hover {
+        background-color: black;
+      }
+
+      button {
+        border-radius: 12px;
+      }
+    }
   }
 }
 
@@ -14,22 +53,4 @@
   font-family: verdana;
   font-size: 11pt;
   font-weight: 600;
-}
-
-// Styling for the row that contains a button
-.buttoncombo {
-  button {
-    height: 125px;
-    width: 125px;
-    color: white;
-    background-color: #393939;
-  }
-
-  button:hover {
-    background-color: black;
-  }
-
-  button {
-    border-radius: 12px;
-  }
 }
