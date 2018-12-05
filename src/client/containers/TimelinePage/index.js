@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-class TimelinePage extends Component {
-    render() {
-        return <div />;
-    }
-}
+const TimelinePage = props => (
+    <div />
+);
 
-export default connect()(TimelinePage);
+export default TimelinePage;
