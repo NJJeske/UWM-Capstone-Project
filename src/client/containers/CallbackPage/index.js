@@ -15,7 +15,9 @@ export const CallbackPage = props => {
 
     return (
         <Container fluid={true} id='CALLBACK_PAGE'>
-            <FontAwesomeIcon icon='spinner' /> Loading user profile...
+            <main>
+                <FontAwesomeIcon icon='spinner' /> Loading user profile...
+            </main>
         </Container>
     );
 };
