@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import { connect } from 'react-redux';
 
 class DocumentsPage extends Component {
     render() {
@@ -8,4 +7,4 @@ class DocumentsPage extends Component {
     }
 }
 
-export default connect()(DocumentsPage);
+export default DocumentsPage;

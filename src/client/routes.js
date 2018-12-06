@@ -24,14 +24,15 @@ const SecretRoute = ({ component: Component, ...rest }) => (
         render={props =>
             auth.isAuthenticated() === true ? (
                 <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: '/',
-                        state: { from: props.location }
-                    }}
-                />
             )
+                : (
+                    <Redirect
+                        to={{
+                            pathname: '/',
+                            state: { from: props.location }
+                        }}
+                    />
+                )
         }
     />
 );

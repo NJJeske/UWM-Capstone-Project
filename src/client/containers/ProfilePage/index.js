@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
-import { connect } from 'react-redux';
+import { ProfileForm, Sidebar, Header } from '../../components';
+import './styles.scss';
 
-class ProfilePage extends Component {
-    render() {
-        return <Container fluid={true} id='PROFILE_PAGE' />;
-    }
-}
+export const ProfilePage = props => {
+    return (
+        <Container fluid={true} id='PROFILE_PAGE'>
+            <Header title={'Profile Settings'} />
+            <Sidebar />
+            <ProfileForm email={props.email} />
+        </Container>
+    );
+};
 
-export default connect()(ProfilePage);
+export default ProfilePage;

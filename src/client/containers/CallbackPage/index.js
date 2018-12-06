@@ -9,8 +9,8 @@ import './styles.scss';
  * and their profile is being loaded.
  */
 export const CallbackPage = props => {
-    this.props.auth.handleAuthentication().then(() => {
-        this.props.history.push('/home');
+    props.auth.handleAuthentication().then(() => {
+        props.history.push('/home');
     });
 
     return (
