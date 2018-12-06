@@ -2,15 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ProfileButton from '../../components/ProfileButton';
+import { Header } from '../../components';
 import './styles.scss';
 
 export const DashboardPage = props => (
     <Container fluid={true} id='DASHBOARD_PAGE'>
-        <header>
-            <ProfileButton auth={props.auth} />
-            <h1 className='title'>My Portfolio</h1>
-        </header>
+        <Header title='My Portfolio' />
         <main >
             <Row>
                 <Col className='buttoncombo'>
@@ -51,7 +48,9 @@ export const DashboardPage = props => (
                         <span className='label'>Certifications</span>
                     </Link>
                 </Col>
-                <Col className='buttoncombo'>
+            </Row>
+            <Row>
+                <Col xs='12' className='buttoncombo'>
                     <Link to='/timeline'>
                         <FontAwesomeIcon icon='calendar-alt' size='3x' />
                         <span className='label'>Timeline</span>

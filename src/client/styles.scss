@@ -1,5 +1,10 @@
-html, body, #origin, div[id$=PAGE], main {
-  height: 100%;
+.container-fluid {
+  padding: 0;
+}
+
+main {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .vertical-center {

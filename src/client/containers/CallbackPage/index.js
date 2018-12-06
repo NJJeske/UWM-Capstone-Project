@@ -10,7 +10,7 @@ import './styles.scss';
  */
 export const CallbackPage = props => {
     props.auth.handleAuthentication().then(() => {
-        props.history.push('/home');
+        props.history.push('/dashboard');
     });
 
     return (

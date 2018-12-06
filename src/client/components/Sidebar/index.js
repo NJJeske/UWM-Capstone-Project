@@ -12,13 +12,14 @@ import './styles.scss';
 export class Sidebar extends Component {
     render() {
         return (
-            <Menu>
-                <Link className="menu-item" to="/home">
-                    <FontAwesomeIcon icon="home" /> Home
+            <Menu width='none'>
+                <Link className="menu-item" to="/dashboard">
+                    <FontAwesomeIcon icon="home" size='md' /> Dashboard
                 </Link>
-                <Link className="menu-item" to="/profile">
-                    <FontAwesomeIcon icon="user" /> Profile
+                <Link className="menu-item" to="/timeline">
+                    <FontAwesomeIcon icon="calendar-alt" /> Timeline
                 </Link>
+                {/* <span className='divider' /> */}
                 <Link className="menu-item" to="/documents">
                     <FontAwesomeIcon icon="file-alt" /> Documents
                 </Link>
@@ -36,9 +37,6 @@ export class Sidebar extends Component {
                 </Link>
                 <Link className="menu-item" to="/contacts">
                     <FontAwesomeIcon icon="address-book" /> Contacts
-                </Link>
-                <Link className="menu-item" to="/timeline">
-                    <FontAwesomeIcon icon="calendar-alt" /> Timeline
                 </Link>
             </Menu>
         );
