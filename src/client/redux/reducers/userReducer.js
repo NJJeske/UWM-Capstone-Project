@@ -14,7 +14,7 @@ export default (state = {}, action) => {
             return state;
         }
         case actions.USER_ERROR: {
-            // If passed an error then bind to entity. Otherwise clear entity of errors.
+            // If passed an error then bind to root, otherwise clear error
             const { error } = action;
             return error ? { ...state, error } : omit(state, ['error']);
         }
