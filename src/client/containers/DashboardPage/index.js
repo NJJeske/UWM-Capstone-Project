@@ -6,7 +6,7 @@ import { Header } from '../../components';
 import './styles.scss';
 
 export const DashboardPage = props => (
-    <Container fluid={true} id='DASHBOARD_PAGE'>
+    <Container fluid={true} id='DASHBOARD_PAGE' className='clearfix'>
         <Header title='Job Hunter' auth={props.auth} />
         <main >
             <Row>

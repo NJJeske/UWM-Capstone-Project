@@ -2,11 +2,12 @@ import React from 'react';
 import EntityPage from '../';
 import { Position } from '../../../components';
 
-const ExperiencePage = props => (
+const ExperiencePage = ({ auth }) => (
     <EntityPage
         title='Experience'
         entityType='positions'
         Component={Position}
+        auth={auth}
     />
 );
 

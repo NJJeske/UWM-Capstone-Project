@@ -1,20 +1,19 @@
-html, body, #origin, .container-fluid, main {
-  width: 100%;
-  height: 100%;
-}
-
 .container-fluid {
   padding: 0;
-  &:not(#LOGIN_PAGE) {
-    background-image: url("./images/homescreen-background.jpg");
-    background-size: cover;
-    background-position: center;
-  }
+  padding-bottom: 7rem;
+  background-image: url("./images/homescreen-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 main {
   padding-left: 5rem;
   padding-right: 5rem;
+  &:not(#LOGIN_PAGE) {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .vertical-center {
@@ -23,10 +22,3 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-// For Mobile make the headers larger
-// h1, h2, h3, h4, h5, h6 {
-//   @media (max-width: 767px) {
-//     font-size: 3rem;
-//   }
-// }

@@ -21,6 +21,7 @@ export const ProfileButton = props => (
                     Settings
                 </DropdownItem>
                 <DropdownItem onClick={() => {
+                    console.log(props);
                     // Clear session data that we set
                     props.auth.logout();
                     // Clear session thru Auth0 as well

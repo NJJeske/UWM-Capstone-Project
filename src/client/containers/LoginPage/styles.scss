@@ -1,7 +1,7 @@
 #LOGIN_PAGE {
-  background-image: url("../../images/login-background.jpg");
-  background-size: cover;
-  background-position: center;
+  background-image: url("../../images/login-background.jpg") !important;
+  width: 100%;
+  height: 100vh;
   main {
     color: white;
     text-align: center;

@@ -6,8 +6,8 @@ import './styles.scss';
 export const ProfilePage = ({ email, auth }) => {
     return (
         <Container fluid={true} id='PROFILE_PAGE'>
-            <Header title={'Profile Settings'} auth={auth} />
             <Sidebar />
+            <Header title={'Profile Settings'} auth={auth} />
             <ProfileForm email={email} />
         </Container>
     );

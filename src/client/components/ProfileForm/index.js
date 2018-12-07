@@ -41,7 +41,7 @@ export class ProfileForm extends Component {
         var self = this;
         var emailString = this.email;
         var email = encodeURI(emailString);
-        var link = serverUrl + '/user/' + email;
+        var link = serverURL + '/user/' + email;
         axios.get(link, {
         }).then(function (response) {
             if (response) {
@@ -61,7 +61,7 @@ export class ProfileForm extends Component {
     }
 
     updateProfile() {
-        var link = serverUrl + '/user';
+        var link = serverURL + '/user';
         axios.put(link, {
             firstName: this.state.firstName,
             lastName: this.state.lastName,

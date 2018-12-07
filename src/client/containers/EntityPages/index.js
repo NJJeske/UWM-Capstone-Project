@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { fetchEntities, createLocalEntity } from '../../redux/actions/entityActions';
-import { Header, Sidebar, Footer } from '../../components';
+import { Header, Sidebar } from '../../components';
 import './styles.scss';
 
 const EntityPage = props => {
@@ -29,14 +29,13 @@ const EntityPage = props => {
     );
 
     return (
-        <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`}>
+        <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`} className='clearfix'>
             <Sidebar />
             <Header title={title} auth={auth} />
-            <main>
+            <main className='clearfix'>
                 {mainBody}
                 {createButton}
             </main>
-            <Footer />
         </Container>
     );
 };
