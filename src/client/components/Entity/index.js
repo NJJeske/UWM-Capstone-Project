@@ -125,26 +125,31 @@ export class Entity extends Component {
         // Set up action bar based on mode
         const actionBar = mode === 'VIEW' ? (
             <React.Fragment>
-                <Button className='edit' onClick={this.edit.bind(this)} >
-                    <FontAwesomeIcon icon='edit' />
-                </Button>
+                <div />
+                <div>
+                    <Button onClick={this.edit.bind(this)} >
+                        <FontAwesomeIcon icon='edit' />
+                    </Button>
+                </div>
             </React.Fragment>
         ) : (
             <React.Fragment>
-                {
+                <div>{
                     // Only show delete button in EDIT mode
                     mode === 'EDIT' ? (
-                        <Button className='delete' onClick={this.remove.bind(this)}>
+                        <Button onClick={this.remove.bind(this)}>
                             <FontAwesomeIcon icon='trash-alt' />
                         </Button>
                     ) : null
-                }
-                <Button className='cancel' onClick={this.cancel.bind(this)}>
-                    <FontAwesomeIcon icon='ban' />
-                </Button>
-                <Button className='save' onClick={this.save.bind(this)}>
-                    <FontAwesomeIcon icon='check' />
-                </Button>
+                }</div>
+                <div>
+                    <Button onClick={this.save.bind(this)}>
+                        <FontAwesomeIcon icon='check' />
+                    </Button>
+                    <Button onClick={this.cancel.bind(this)}>
+                        <FontAwesomeIcon icon='ban' />
+                    </Button>
+                </div>
             </React.Fragment>
         );
 
@@ -157,7 +162,7 @@ export class Entity extends Component {
         });
 
         return (
-            <div className={`card entity ${entityType}`}>
+            <div className={`entity ${entityType}`}>
                 {overlay}
                 <Row className='actionBar'>
                     {actionBar}

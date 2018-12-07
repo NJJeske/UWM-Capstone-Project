@@ -1,17 +1,26 @@
 
 // General Entity Styles
 
-.entity.container {
+.entity {
     z-index: 1;
     margin-bottom: 10px;
 
     .actionBar {
-        height: 30px;
-        flex-flow: row-reverse;
+        height: 40px;
+        justify-content: space-between;
+        margin: 0;
+        padding-left: 5px;
+        padding-right: 5px;
         button {
             background: none;
             border: none;
             padding: 0 5px;
+            height:100%;
+            width: 34px;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 
