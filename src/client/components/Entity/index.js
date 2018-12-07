@@ -157,13 +157,13 @@ export class Entity extends Component {
         });
 
         return (
-            <React.Fragment className={`card entity ${entityType}`}>
+            <div className={`card entity ${entityType}`}>
                 {overlay}
                 <Row className='actionBar'>
                     {actionBar}
                 </Row>
                 {form}
-            </React.Fragment>
+            </div>
         );
     }
 }

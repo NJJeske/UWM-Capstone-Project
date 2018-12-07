@@ -6,7 +6,6 @@
 
 // Individual item
 .bm-item {
-  display: inline-block;
   font-size: 24pt;
   text-decoration: none;
   margin-bottom: 10px;
@@ -22,10 +21,10 @@
 // Position and sizing of burger button
 .bm-burger-button {
   position: fixed;
-  width: 24px;
-  height: 24px;
-  left: 24px;
-  top: 24px;
+  width: 1.75rem;
+  height: 1.75rem;
+  left: 1.75rem;
+  top: 2.2rem;
 }
 
 // Color/shape of burger icon bars

@@ -1,24 +1,27 @@
-.ProfileButtonDropdown {
-  .toggle {
-    color: #393939;
+#profile-dropdown {
+  &:active, &:hover {
+    outline: none;
+    color: #c5c5c5;
+    color: transparent;
     background-color: transparent;
-    border-color: transparent;
+  }
+  float: right;
+  .toggle {
+    outline: none;
+    color: white;
+    background-color: transparent;
     font-size: 36pt;
-    border-radius: 50%;
   }
   .toggle:hover {
-    color: black;
+    outline: none;
+    color: #c5c5c5;
     background-color: transparent;
     border-color: transparent;
   }
   .toggle:active {
+    outline: none;
+    color: #c5c5c5;
     color: transparent;
     background-color: transparent;
   }
-}
-
-.ProfileButtonDropdown:active {
-  float: right;
-  background-color: transparent;
-  border-color: transparent;
 }

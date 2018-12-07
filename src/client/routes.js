@@ -23,7 +23,7 @@ const SecretRoute = ({ component: Component, ...rest }) => (
         {...rest}
         render={props =>
             auth.isAuthenticated() === true ? (
-                <Component {...props} />
+                <Component {...props} auth={auth}/>
             )
                 : (
                     <Redirect

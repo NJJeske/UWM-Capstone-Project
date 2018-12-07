@@ -30,8 +30,8 @@ const EntityPage = props => {
 
     return (
         <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`}>
-            <Header title={title} />
             <Sidebar />
+            <Header title={title} />
             <main>
                 {mainBody}
                 {createButton}

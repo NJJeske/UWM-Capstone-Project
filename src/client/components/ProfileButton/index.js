@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    UncontrolledButtonDropdown,
+    UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem
@@ -28,10 +28,10 @@ export class ProfileButton extends Component {
 
     render() {
         return (
-            <div className='ProfileButtonDropdown'>
-                <UncontrolledButtonDropdown direction='left'>
+            <div id='profile-dropdown'>
+                <UncontrolledDropdown direction='left'>
                     <DropdownToggle className='toggle'>
-                        <FontAwesomeIcon icon='user-cog' />{' '}
+                        <FontAwesomeIcon icon='user-cog'/>
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem onClick={() => this.routeTo('/profile')}>
@@ -39,7 +39,7 @@ export class ProfileButton extends Component {
                         </DropdownItem>
                         <DropdownItem onClick={() => this.logout()}>Logout</DropdownItem>
                     </DropdownMenu>
-                </UncontrolledButtonDropdown>
+                </UncontrolledDropdown>
             </div>
         );
     }

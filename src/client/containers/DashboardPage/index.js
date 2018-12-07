@@ -7,22 +7,22 @@ import './styles.scss';
 
 export const DashboardPage = props => (
     <Container fluid={true} id='DASHBOARD_PAGE'>
-        <Header title='My Portfolio' />
+        <Header title='Job Hunter' />
         <main >
             <Row>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/documents'>
                         <FontAwesomeIcon icon='file-alt' size='3x' />
                         <span className='label'>Documents</span>
                     </Link>
                 </Col>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/experience'>
                         <FontAwesomeIcon icon='briefcase' size='3x' />
                         <span className='label'>Experience</span>
                     </Link>
                 </Col>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/education'>
                         <FontAwesomeIcon icon='graduation-cap' size='3x' />
                         <span className='label'>Education</span>
@@ -30,19 +30,19 @@ export const DashboardPage = props => (
                 </Col>
             </Row>
             <Row>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/projects'>
                         <FontAwesomeIcon icon='file-alt' size='3x' />
                         <span className='label'>Projects</span>
                     </Link>
                 </Col>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/contacts'>
                         <FontAwesomeIcon icon='address-book' size='3x' />
                         <span className='label'>Contacts</span>
                     </Link>
                 </Col>
-                <Col className='buttoncombo'>
+                <Col>
                     <Link to='/certifications'>
                         <FontAwesomeIcon icon='certificate' size='3x' />
                         <span className='label'>Certifications</span>
@@ -50,7 +50,7 @@ export const DashboardPage = props => (
                 </Col>
             </Row>
             <Row>
-                <Col xs='12' className='buttoncombo'>
+                <Col xs='12'>
                     <Link to='/timeline'>
                         <FontAwesomeIcon icon='calendar-alt' size='3x' />
                         <span className='label'>Timeline</span>

@@ -1,8 +1,14 @@
 header {
+  display: flex !important;
+  align-items: center;
   padding: 10px;
   min-height: 100px;
+  z-index: 1;
   h1 {
     margin: 0 auto;
     text-align: center;
+  }
+  * {
+    z-index: 2;
   }
 }
