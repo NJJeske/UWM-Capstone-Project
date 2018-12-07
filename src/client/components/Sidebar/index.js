@@ -12,14 +12,15 @@ export class Sidebar extends Component {
         return (
             <Menu width='none'>
                 <Link className="menu-item" to="/dashboard">Dashboard</Link>
-                <Link className="menu-item" to="/timeline">Timeline</Link>
-                {/* <span className='divider' /> */}
-                <Link className="menu-item" to="/documents">Documents</Link>
+                <hr className='divider'/>
                 <Link className="menu-item" to="/experience">Experience</Link>
                 <Link className="menu-item" to="/education">Education</Link>
-                <Link className="menu-item" to="/certifications">Certifications</Link>
                 <Link className="menu-item" to="/projects">Projects</Link>
+                <Link className="menu-item" to="/certifications">Certifications</Link>
                 <Link className="menu-item" to="/contacts">Contacts</Link>
+                <Link className="menu-item" to="/documents">Documents</Link>
+                <hr className='divider'/>
+                <Link className="menu-item" to="/timeline">Timeline</Link>
             </Menu>
         );
     }

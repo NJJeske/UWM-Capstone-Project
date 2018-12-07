@@ -2,10 +2,27 @@
   main {
     position: absolute;
     top: 0;
-    z-index: -1;
     background-image: url("../../images/homescreen-background.jpg");
     background-size: cover;
     background-position: center;
+    padding: 100px;
+    padding-top: 200px;
+    display: grid;
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      svg {
+        width: 8rem;
+        height: 8rem;
+      }
+      span.label {
+        font-size: 1.8rem;
+        color: white;
+      }
+    }
   }
   h1 {
     color: white;

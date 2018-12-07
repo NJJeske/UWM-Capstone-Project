@@ -1,11 +1,13 @@
 #profile-dropdown {
+  z-index: 2;
+  position: absolute;
+  right: 2rem;
   &:active, &:hover {
     outline: none;
     color: #c5c5c5;
     color: transparent;
     background-color: transparent;
   }
-  float: right;
   .toggle {
     outline: none;
     color: white;
