@@ -1,8 +1,5 @@
 import auth0 from 'auth0-js';
-import axios from 'axios';
-import config from '../redux/config';
-
-const serverUrl = config.serverURL;
+import { fetchUser } from '../redux/actions/userActions';
 
 export default class Auth {
     constructor() {
@@ -14,7 +11,6 @@ export default class Auth {
             scope: 'openid email profile'
         });
         this.handleAuthentication = this.handleAuthentication.bind(this);
-        this.getEmail = this.getEmail.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -34,10 +30,6 @@ export default class Auth {
         });
     }
 
-    getEmail() {
-        return localStorage.getItem('email');
-    }
-
     isAuthenticated() {
         let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
         return new Date().getTime() < expiresAt;
@@ -51,7 +43,6 @@ export default class Auth {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
-        localStorage.removeItem('email');
     }
 
     setSession(authResult) {
@@ -61,22 +52,6 @@ export default class Auth {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
-        localStorage.setItem('email', authResult.idTokenPayload.email);
-        var emailString = authResult.idTokenPayload.email;
-        var email = encodeURI(emailString);
-        var baseLink = serverUrl + '/user';
-        var getLink = baseLink + '/' + email;
-        axios.get(getLink, {
-        }).then(function (response) {
-            if (response) {
-                if (response.data === '') {
-                    axios.post(baseLink, {
-                        email: email
-                    });
-                }
-            }
-        }).catch(function (error) {
-            console.log('error is ', error);
-        });
+        fetchUser();
     }
 }
