@@ -6,7 +6,7 @@ import { Header, Sidebar, Footer } from '../../components';
 import './styles.scss';
 
 const EntityPage = props => {
-    const { title, entityType, entities, fetchEntities, createLocalEntity, Component } = props;
+    const { title, entityType, entities, fetchEntities, createLocalEntity, auth, Component } = props;
     const alreadyCreating = entities.list.some(entity => entity._local);
 
     const mainBody = entities.error ? (
@@ -31,7 +31,7 @@ const EntityPage = props => {
     return (
         <Container fluid={true} id={`${entityType.toUpperCase()}_PAGE`}>
             <Sidebar />
-            <Header title={title} />
+            <Header title={title} auth={auth} />
             <main>
                 {mainBody}
                 {createButton}

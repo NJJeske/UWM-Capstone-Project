@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Header, ProfileButton } from '../../components';
+import { Header } from '../../components';
 import './styles.scss';
 
 export const DashboardPage = props => (
     <Container fluid={true} id='DASHBOARD_PAGE'>
-        <Header title='Job Hunter' />
-        <ProfileButton auth={props.auth} />
+        <Header title='Job Hunter' auth={props.auth} />
         <main >
             <Row>
                 <Col sm='4'>

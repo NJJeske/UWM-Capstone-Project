@@ -5,6 +5,11 @@ html, body, #origin, .container-fluid, main {
 
 .container-fluid {
   padding: 0;
+  &:not(#LOGIN_PAGE) {
+    background-image: url("./images/homescreen-background.jpg");
+    background-size: cover;
+    background-position: center;
+  }
 }
 
 main {
