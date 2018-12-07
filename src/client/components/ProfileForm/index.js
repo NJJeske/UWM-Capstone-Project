@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { FormGroup, Col, Label, Input, Button } from 'reactstrap';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import config from '../../redux/config';
+import { serverURL } from '../../redux/config';
 import './styles.scss';
-
-const serverUrl = config.serverURL;
 
 export class ProfileForm extends Component {
     constructor(props) {

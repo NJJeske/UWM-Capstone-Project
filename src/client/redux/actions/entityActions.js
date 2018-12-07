@@ -1,7 +1,6 @@
 import axios from 'axios';
 import uuid from 'uuid';
-import config from '../config';
-const { serverURL, headers } = config;
+import { serverURL, headers } from '../config';
 
 export const actions = {
     ENTITY_CREATE: 'ENTITY_CREATE',

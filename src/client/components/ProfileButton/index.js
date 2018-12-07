@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     UncontrolledDropdown,
     DropdownToggle,
@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { logoutReturnURL } from '../../redux/config';
 import './styles.scss';
 
 export const ProfileButton = props => (
@@ -20,8 +21,10 @@ export const ProfileButton = props => (
                     Settings
                 </DropdownItem>
                 <DropdownItem onClick={() => {
+                    // Clear session data that we set
                     props.auth.logout();
-                    props.history.push('/login');
+                    // Clear session thru Auth0 as well
+                    window.location = `https://uwm-capstone.auth0.com/v2/logout?returnTo=${encodeURIComponent(logoutReturnURL)}`;
                 }}>Logout</DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
