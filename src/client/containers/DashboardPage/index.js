@@ -13,19 +13,19 @@ export const DashboardPage = props => (
             <Row>
                 <Col sm='4'>
                     <Link to='/experience'>
-                        <FontAwesomeIcon icon='briefcase' size='3x' />
+                        <FontAwesomeIcon icon='briefcase'/>
                         <span className='label'>Experience</span>
                     </Link>
                 </Col>
                 <Col sm='4'>
                     <Link to='/education'>
-                        <FontAwesomeIcon icon='graduation-cap' size='3x' />
+                        <FontAwesomeIcon icon='graduation-cap'/>
                         <span className='label'>Education</span>
                     </Link>
                 </Col>
                 <Col sm='4'>
                     <Link to='/projects'>
-                        <FontAwesomeIcon icon='file-alt' size='3x' />
+                        <FontAwesomeIcon icon='file-alt'/>
                         <span className='label'>Projects</span>
                     </Link>
                 </Col>
@@ -33,19 +33,19 @@ export const DashboardPage = props => (
             <Row>
                 <Col sm='4'>
                     <Link to='/certifications'>
-                        <FontAwesomeIcon icon='certificate' size='3x' />
+                        <FontAwesomeIcon icon='certificate'/>
                         <span className='label'>Certifications</span>
                     </Link>
                 </Col>
                 <Col sm='4'>
                     <Link to='/contacts'>
-                        <FontAwesomeIcon icon='address-book' size='3x' />
+                        <FontAwesomeIcon icon='address-book'/>
                         <span className='label'>Contacts</span>
                     </Link>
                 </Col>
                 <Col sm='4'>
                     <Link to='/documents'>
-                        <FontAwesomeIcon icon='file-alt' size='3x' />
+                        <FontAwesomeIcon icon='file-alt'/>
                         <span className='label'>Documents</span>
                     </Link>
                 </Col>
@@ -53,7 +53,7 @@ export const DashboardPage = props => (
             <Row>
                 <Col xs='12'>
                     <Link to='/timeline'>
-                        <FontAwesomeIcon icon='calendar-alt' size='3x' />
+                        <FontAwesomeIcon icon='calendar-alt'/>
                         <span className='label'>Timeline</span>
                     </Link>
                 </Col>
