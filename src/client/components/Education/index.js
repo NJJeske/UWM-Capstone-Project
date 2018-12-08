@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, Address } from '../';
-import './styles.scss';
 
 export const EducationForm = props => {
     const { changeField, entityData, disabled } = props;

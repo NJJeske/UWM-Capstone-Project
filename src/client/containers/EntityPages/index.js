@@ -19,7 +19,7 @@ const EntityPage = props => {
     );
 
     const createButton = alreadyCreating || entities.error ? null : (
-        <Row className='entity'>
+        <Row>
             <Col xs={{ size: 8, offset: 2 }} sm={{ size: 6, offset: 3 }}>
                 <Button className={`${entityType} createButton`} onClick={createLocalEntity.bind(null, entityType)}>
                     Create

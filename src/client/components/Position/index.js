@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, ReferenceSelector } from '../';
-import './styles.scss';
 
 export const PositionForm = props => {
     const { changeField, entityData, disabled } = props;
