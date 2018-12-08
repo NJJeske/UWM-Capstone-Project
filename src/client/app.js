@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { fetchUser } from './redux/actions/userActions';
 import { fetchEntities } from './redux/actions/entityActions';
 import store from './redux/store.js';
 import Routes from './routes.js';
@@ -24,6 +25,7 @@ library.add(faEdit, faCheck, faBan, faTrashAlt, faHome, faUserCog, faFileAlt, fa
 
 class App extends Component {
     componentDidMount() {
+        store.dispatch(fetchUser());
         [
             'addresses',
             'certifications',

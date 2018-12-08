@@ -56,7 +56,7 @@ export class Entity extends Component {
         } else if (!isEqual(entityData, newEntityData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
-            // updateEntity(entityType, newEntityData);
+            updateEntity(entityType, newEntityData);
         } else {
             this.cancel();
         }
