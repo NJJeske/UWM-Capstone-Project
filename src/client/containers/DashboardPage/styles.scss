@@ -3,22 +3,25 @@
   main {
     position: absolute;
     top: 0;
-    padding: 100px;
+    padding: 150px;
     padding-top: 200px;
     display: grid;
     a {
+      color: #b5d3e0;
       text-decoration: none;
-      width: 100%;
-      height: 100%;
       display: flex;
       flex-flow: column;
       align-items: center;
+      height: 100%;
       svg {
-        width: 8rem;
-        height: 8rem;
+        width: 6rem;
+        height: 6rem;
+      }
+      &:hover {
+        color: #68b1d1;
       }
       span.label {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         color: white;
       }
     }

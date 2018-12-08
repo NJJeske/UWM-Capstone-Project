@@ -24,7 +24,7 @@ export const DashboardPage = props => (
                 </Col>
                 <Col sm='4'>
                     <Link to='/projects'>
-                        <FontAwesomeIcon icon='file-alt'/>
+                        <FontAwesomeIcon icon='project-diagram'/>
                         <span className='label'>Projects</span>
                     </Link>
                 </Col>

@@ -56,7 +56,7 @@ export class Entity extends Component {
         } else if (!isEqual(entityData, newEntityData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
-            updateEntity(entityType, newEntityData);
+            // updateEntity(entityType, newEntityData);
         } else {
             this.cancel();
         }
@@ -122,36 +122,40 @@ export class Entity extends Component {
             );
         }
 
-        // Set up action bar based on mode
-        const actionBar = mode === 'VIEW' ? (
-            <React.Fragment>
-                <div />
-                <div>
-                    <Button onClick={this.edit.bind(this)} >
-                        <FontAwesomeIcon icon='edit' />
-                    </Button>
-                </div>
-            </React.Fragment>
-        ) : (
-            <React.Fragment>
-                <div>{
-                    // Only show delete button in EDIT mode
-                    mode === 'EDIT' ? (
-                        <Button onClick={this.remove.bind(this)}>
-                            <FontAwesomeIcon icon='trash-alt' />
+        // Set up action bar based on mode (only show in VIEW/EDIT)
+        let actionBar = <div />;
+        if (mode === VIEW) {
+            actionBar = (
+                <React.Fragment>
+                    <div />
+                    <div>
+                        <Button onClick={this.edit.bind(this)}>
+                            <FontAwesomeIcon icon='edit' />
                         </Button>
-                    ) : null
-                }</div>
-                <div>
-                    <Button onClick={this.save.bind(this)}>
-                        <FontAwesomeIcon icon='check' />
-                    </Button>
-                    <Button onClick={this.cancel.bind(this)}>
-                        <FontAwesomeIcon icon='ban' />
-                    </Button>
-                </div>
-            </React.Fragment>
-        );
+                    </div>
+                </React.Fragment>
+            );
+        } else if ([CREATING, EDIT].includes(mode)) {
+            actionBar = (
+                <React.Fragment>
+                    <div>{
+                        mode === EDIT ? (
+                            <Button onClick={this.remove.bind(this)}>
+                                <FontAwesomeIcon icon='trash-alt' />
+                            </Button>
+                        ) : null
+                    }</div>
+                    <div>
+                        <Button onClick={this.save.bind(this)}>
+                            <FontAwesomeIcon icon='check' />
+                        </Button>
+                        <Button onClick={this.cancel.bind(this)}>
+                            <FontAwesomeIcon icon='ban' />
+                        </Button>
+                    </div>
+                </React.Fragment>
+            );
+        }
 
         // Clone form child (passed through props) to pass additional props to it
         const form = React.cloneElement(this.props.children, {

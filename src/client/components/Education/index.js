@@ -83,7 +83,7 @@ export const EducationForm = props => {
                 <Col lg='6'>
                     <Row form={true}>
                         <Col xs='2' className='formLabel'>
-                            <Label>End</Label>
+                            <Label>Ended</Label>
                         </Col>
                         <Col xs='10'>
                             <FormGroup>
