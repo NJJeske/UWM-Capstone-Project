@@ -25,7 +25,7 @@ it('should render a dropdown button with the user settings fontawesome icon', ()
             .dive()
             .dive()
             .text()
-    ).toEqual('<FontAwesomeIcon /> ');
+    ).toEqual('<FontAwesomeIcon />');
 });
 
 it('should render a link for profile settings in first option of two in dropdown', () => {

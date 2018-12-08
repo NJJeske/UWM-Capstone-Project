@@ -23,7 +23,7 @@ describe('Sidebar', () => {
     });
 
     it('menu should contain 8 Link children', () => {
-        expect(sidebar.find('Menu').find('Link')).toHaveLength(9);
+        expect(sidebar.find('Menu').find('Link')).toHaveLength(8);
     });
 
     describe('Links', () => {
@@ -33,14 +33,13 @@ describe('Sidebar', () => {
         });
 
         const expectedLinks = {
-            'Home': '/home',
-            'Profile': '/profile',
-            'Documents': '/documents',
+            'Dashboard': '/dashboard',
             'Experience': '/experience',
             'Education': '/education',
-            'Certifications': '/certifications',
             'Projects': '/projects',
+            'Certifications': '/certifications',
             'Contacts': '/contacts',
+            'Documents': '/documents',
             'Timeline': '/timeline'
         };
 

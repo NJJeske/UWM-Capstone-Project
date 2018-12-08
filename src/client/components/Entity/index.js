@@ -129,7 +129,7 @@ export class Entity extends Component {
                 <React.Fragment>
                     <div />
                     <div>
-                        <Button onClick={this.edit.bind(this)}>
+                        <Button onClick={this.edit.bind(this)} className='edit'>
                             <FontAwesomeIcon icon='edit' />
                         </Button>
                     </div>
@@ -140,16 +140,16 @@ export class Entity extends Component {
                 <React.Fragment>
                     <div>{
                         mode === EDIT ? (
-                            <Button onClick={this.remove.bind(this)}>
+                            <Button onClick={this.remove.bind(this)} className='delete'>
                                 <FontAwesomeIcon icon='trash-alt' />
                             </Button>
                         ) : null
                     }</div>
                     <div>
-                        <Button onClick={this.save.bind(this)}>
+                        <Button onClick={this.save.bind(this)} className='save'>
                             <FontAwesomeIcon icon='check' />
                         </Button>
-                        <Button onClick={this.cancel.bind(this)}>
+                        <Button onClick={this.cancel.bind(this)} className='cancel'>
                             <FontAwesomeIcon icon='ban' />
                         </Button>
                     </div>
