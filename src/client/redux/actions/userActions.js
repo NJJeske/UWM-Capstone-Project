@@ -12,12 +12,14 @@ const serviceURL = `${serverURL}/user`;
 
 export const fetchUser = () => async dispatch => {
     try {
+        const getUrl = serviceURL + '/' + 'matthewflejter@aol.com';
         // Try to get the user data
-        let result = await axios.get(serviceURL, headers());
+        let result = await axios.get(getUrl, headers());
         if (result && result.data === '') {
             // If it doesn't exist then make a call to create it
-            result = await axios.post(serviceURL, headers());
+            result = await axios.post(serviceURL, { 'email': 'matthewflejter@aol.com' }, headers());
         }
+        console.log(result.data);
         dispatch({
             type: actions.USER_FETCH,
             userData: result.data,

@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import { FormGroup, Col, Label, Input, Button } from 'reactstrap';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import store from '../../redux/store';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { fetchUser, updateUser } from '../../redux/actions/userActions';
 import '../../sass/_profileform.scss';
-import config from '../../redux/config';
-
-const serverUrl = config.serverURL;
 
 export class ProfileForm extends Component {
     constructor(props) {
         super(props);
         this.email = props.email;
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleMiddleNameChange = this.handleMiddleNameChange.bind(this);
-        this.handleTitleChange = this.handleTitleChange.bind(this);
-        this.handleHomePhoneChange = this.handleHomePhoneChange.bind(this);
-        this.handleMobilePhoneChange = this.handleMobilePhoneChange.bind(this);
-        this.handleWebsiteChange = this.handleWebsiteChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
-        this.getProfile = this.getProfile.bind(this);
         this.state = {
             values: {
                 firstName: '',
@@ -36,79 +29,36 @@ export class ProfileForm extends Component {
     }
 
     componentDidMount() {
-        this.getProfile();
-    }
-
-    getProfile() {
-        var self = this;
-        var emailString = this.email;
-        var email = encodeURI(emailString);
-        var link = serverUrl + '/user/' + email;
-        axios.get(link, {
-        }).then(function (response) {
-            if (response) {
-                self.setState({ firstName: response.data.firstName });
-                self.setState({ middleName: response.data.middleName });
-                self.setState({ lastName: response.data.lastName });
-                self.setState({ title: response.data.title });
-                self.setState({ email: response.data.email });
-                self.setState({ homePhone: response.data.homePhone });
-                self.setState({ homePhone: response.data.mobilePhone });
-                self.setState({ website: response.data.website });
-                self.setState({ id: response.data.id });
-            }
-        }).catch(function (error) {
-            console.log('error is ', error);
-        });
+        try {
+            const data = fetchUser();
+            console.log(data);
+            this.setState({ firstName: data.firstName });
+            this.setState({ middleName: data.middleName });
+            this.setState({ lastName: data.lastName });
+            this.setState({ title: data.title });
+            this.setState({ email: data.email });
+            this.setState({ homePhone: data.homePhone });
+            this.setState({ homePhone: data.mobilePhone });
+            this.setState({ website: data.website });
+            this.setState({ id: data.id });
+        } catch (error) {
+            console.log(error);
+            NotificationManager.error('Failed to Fetch Profile Data');
+        }
     }
 
     updateProfile() {
-        var link = serverUrl + '/user';
-        axios.put(link, {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            middleName: this.state.middleName,
-            title: this.state.title,
-            email: this.state.email,
-            homePhone: this.state.homePhone,
-            mobilePhone: this.state.mobilePhone,
-            website: this.state.website,
-            id: this.state.id
-        }).then(function (response) {
+        try {
+            updateUser(this.state);
             NotificationManager.success('Profile Successfully Updated');
-            console.log(response);
-        }).catch(function (error) {
+        } catch (error) {
             NotificationManager.error('Profile Failed to Update');
-            console.log('error is ', error);
-        });
+        }
     }
 
-    handleFirstNameChange(e) {
-        this.setState({ firstName: e.target.value });
-    }
-
-    handleLastNameChange(e) {
-        this.setState({ lastName: e.target.value });
-    }
-
-    handleMiddleNameChange(e) {
-        this.setState({ middleName: e.target.value });
-    }
-
-    handleTitleChange(e) {
-        this.setState({ title: e.target.value });
-    }
-
-    handleHomePhoneChange(e) {
-        this.setState({ homePhone: e.target.value });
-    }
-
-    handleMobilePhoneChange(e) {
-        this.setState({ mobilePhone: e.target.value });
-    }
-
-    handleWebsiteChange(e) {
-        this.setState({ website: e.target.value });
+    handleChange(event) {
+        const { target: { name, value } } = event;
+        this.setState({ [name]: value });
     }
 
     render() {
@@ -118,49 +68,49 @@ export class ProfileForm extends Component {
                     <FormGroup row>
                         <Label>First Name</Label>
                         <Col>
-                            <Input value={this.state.firstName} type='text' onChange={this.handleFirstNameChange} className="form-control" placeholder="First Name" required />
+                            <Input value={this.state.firstName} name='firstName' type='text' onChange={this.handleChange} className="form-control" placeholder="First Name" required />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Middle Name</Label>
                         <Col>
-                            <Input value={this.state.middleName} type="text" onChange={this.handleMiddleNameChange} className="form-control" placeholder="Middle Name" required />
+                            <Input value={this.state.middleName} name='middleName' type="text" onChange={this.handleChange} className="form-control" placeholder="Middle Name" required />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Last Name</Label>
                         <Col>
-                            <Input value={this.state.lastName} type='text' onChange={this.handleLastNameChange} className='form-control' placeholder='Last Name' required />
+                            <Input value={this.state.lastName} name='lastName' type='text' onChange={this.handleChange} className='form-control' placeholder='Last Name' required />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Title</Label>
                         <Col>
-                            <Input value={this.state.title} type='text' onChange={this.handleTitleChange} className='form-control' placeholder='Title' />
+                            <Input value={this.state.title} name='title' type='text' onChange={this.handleChange} className='form-control' placeholder='Title' />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Email Address</Label>
                         <Col>
-                            <Input value={this.state.email} type='text' className='form-control' disabled />
+                            <Input value={this.state.email} name='email' type='text' className='form-control' disabled />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Home Phone Number</Label>
                         <Col>
-                            <Input value={this.state.homePhone} type='text' onChange={this.handleHomePhoneChange} className='form-control' placeholder='Home Phone Number' />
+                            <Input value={this.state.homePhone} name='homePhone' type='text' onChange={this.handleChange} className='form-control' placeholder='Home Phone Number' />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Mobile Phone Number</Label>
                         <Col>
-                            <Input value={this.state.mobilePhone} type='text' onChange={this.handleMobilePhoneChange} className='form-control' placeholder='Mobile Phone Number' />
+                            <Input value={this.state.mobilePhone} name='mobilePhone' type='text' onChange={this.handleChange} className='form-control' placeholder='Mobile Phone Number' />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Website</Label>
                         <Col>
-                            <Input value={this.state.website} type='text' onChange={this.handleWebsiteChange} className='form-control' placeholder='Website' />
+                            <Input value={this.state.website} name='website' type='text' onChange={this.handleChange} className='form-control' placeholder='Website' />
                         </Col>
                     </FormGroup>
                     <Button className='updateButton' color='secondary' onClick={this.updateProfile} >Update</Button>
@@ -171,4 +121,14 @@ export class ProfileForm extends Component {
     }
 }
 
-export default ProfileForm;
+ProfileForm.propTypes = {
+    fetchUser: PropTypes.func.isRequired,
+    updateUser: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = {
+    fetchUser,
+    updateUser
+};
+
+export default connect(null, mapDispatchToProps)(ProfileForm);

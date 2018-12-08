@@ -42,7 +42,7 @@ const routes = () => (
         <Switch>
             <Route exact path="/" component={() => <LoginPage auth={auth} />} />
             <SecretRoute path="/home" component={() => <HomeScreen auth={auth} />} />
-            <SecretRoute path="/profile" component={() => <ProfilePage email={auth.getEmail()} />} />
+            <SecretRoute path="/profile" component={() => <ProfilePage />} />
             <SecretRoute path="/contacts" component={ContactsPage} />
             <SecretRoute path="/documents" component={DocumentsPage} />
             <SecretRoute path="/education" component={EducationPage} />
