@@ -4,10 +4,10 @@ import { omit } from 'lodash';
 export default (state = {}, action) => {
     switch (action.type) {
         case actions.USER_FETCH: {
-            return { userData: action.userData };
+            return action.userData;
         }
         case actions.USER_UPDATE: {
-            return { userData: action.updatedUserData };
+            return action.updatedUserData;
         }
         case actions.USER_DELETE: {
             // TODO

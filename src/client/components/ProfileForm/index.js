@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Form, FormGroup, Col, Label, Input, Button } from 'reactstrap';
+import { Container, Form, FormGroup, Row, Col, Label, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
-import { updateUser, deleteUser } from '../../redux/actions/userActions';
+import { updateUser, deleteUser, clearErrorUser } from '../../redux/actions/userActions';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
@@ -94,13 +94,13 @@ export class ProfileForm extends Component {
         let overlay = null;
         if (mode === SAVING || mode === DELETING) {
             overlay = (
-                <div className={`overlay saving ${entityType}`}>
+                <div className={`overlay saving`}>
                     <h3>Saving...</h3>
                 </div>
             );
         } else if (mode === ERROR) {
             overlay = (
-                <div className={`overlay error ${entityType}`}>
+                <div className={`overlay error`}>
                     <h3>Error</h3>
                     <p>{error.message}</p>
                     <Button onClick={this.acknowledgeError.bind(this)}>Ok</Button>
@@ -110,87 +110,76 @@ export class ProfileForm extends Component {
 
         // Set up buttons based on mode
         const buttonControls = mode === VIEW ? (
-            <React.Fragment>
-                <Button className='edit' onClick={this.edit.bind(this)} >
-                    <FontAwesomeIcon icon='edit' />
-                </Button>
+            <Row className='profile-buttons'>
+                <Button className='edit' onClick={this.edit.bind(this)} >Edit</Button>
                 {/* <Button className='delete' onClick={this.remove.bind(this)}>
                     <FontAwesomeIcon icon='trash-alt' />
                 </Button> */}
-            </React.Fragment>
+            </Row>
         ) : (
-                <React.Fragment>
-                    <Button className='save' onClick={this.save.bind(this)}>
-                        <FontAwesomeIcon icon='check' />
-                    </Button>
-                    <Button className='cancel' onClick={this.cancel.bind(this)}>
-                        <FontAwesomeIcon icon='ban' />
-                    </Button>
-                </React.Fragment>
-            );
+            <Row className='profile-buttons'>
+                <div>
+                    <Button className='save' onClick={this.save.bind(this)}>Save</Button>
+                    <Button className='cancel' onClick={this.cancel.bind(this)}>Cancel</Button>
+                </div>
+            </Row>
+        );
 
         return (
             <Container className={`entity`}>
                 {overlay}
                 <Form>
                     <FormGroup row>
-                        <Label>First Name</Label>
-                        <Col>
-                            <Input
-                                type='text'
-                                name='firstName'
-                                placeholder="First Name"
-                                disabled={disabled}
-                                className={disabledClass}
-                                value={firstName || ''}
-                                onChange={this.changeField}
-                            />
+                        <Col xs='1'>
+                            <Label>Name</Label>
                         </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label>Middle Name</Label>
-                        <Col>
-                            <Input
-                                type="text"
-                                name='middleName'
-                                placeholder="Middle Name"
-                                disabled={disabled}
-                                className={disabledClass}
-                                value={middleName}
-                                onChange={this.changeField}
-                            />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label>Last Name</Label>
-                        <Col>
-                            <Input
-                                type='text'
-                                name='lastName'
-                                placeholder='Last Name'
-                                disabled={disabled}
-                                className={disabledClass}
-                                value={lastName}
-                                onChange={this.changeField}
-                            />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label>Title</Label>
-                        <Col>
+                        <Col xs='2'>
                             <Input
                                 type='text'
                                 name='title'
                                 placeholder='Title'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={title}
+                                value={title || ''}
+                                onChange={this.changeField}
+                            />
+                        </Col>
+                        <Col xs='3'>
+                            <Input
+                                type='text'
+                                name='firstName'
+                                placeholder="First"
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={firstName || ''}
+                                onChange={this.changeField}
+                            />
+                        </Col>
+                        <Col xs='3'>
+                            <Input
+                                type="text"
+                                name='middleName'
+                                placeholder="Middle"
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={middleName || ''}
+                                onChange={this.changeField}
+                            />
+                        </Col>
+                        <Col xs='3'>
+                            <Input
+                                type='text'
+                                name='lastName'
+                                placeholder='Last'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={lastName || ''}
                                 onChange={this.changeField}
                             />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label>Email Address</Label>
+                        <Label>Email</Label>
                         <Col>
                             <Input
                                 type='text'
@@ -198,7 +187,7 @@ export class ProfileForm extends Component {
                                 placeholder='Email'
                                 disabled={true}
                                 className='disabled'
-                                value={email}
+                                value={email || ''}
                             />
                         </Col>
                     </FormGroup>
@@ -211,7 +200,7 @@ export class ProfileForm extends Component {
                                 placeholder='Home Phone'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={homePhone}
+                                value={homePhone || ''}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -225,7 +214,7 @@ export class ProfileForm extends Component {
                                 placeholder='Mobile Phone'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={mobilePhone}
+                                value={mobilePhone || ''}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -239,7 +228,7 @@ export class ProfileForm extends Component {
                                 placeholder='Website'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={website}
+                                value={website || ''}
                                 onChange={this.changeField}
                             />
                         </Col>

@@ -18,7 +18,6 @@ export const fetchUser = () => async dispatch => {
             // If it doesn't exist then make a call to create it
             result = await axios.post(serviceURL, headers());
         }
-        console.log(result.data);
         dispatch({
             type: actions.USER_FETCH,
             userData: result.data,
