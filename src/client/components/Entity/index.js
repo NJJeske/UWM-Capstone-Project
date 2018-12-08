@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, deleteLocalEntity, clearErrorEntity } from '../../redux/actions/entityActions';
-import { Container, Row, Button } from 'reactstrap';
+import { Row, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 
