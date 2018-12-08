@@ -1,134 +1,270 @@
 import React, { Component } from 'react';
-import { FormGroup, Col, Label, Input, Button } from 'reactstrap';
+import { Container, Form, FormGroup, Col, Label, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
+import { isEqual } from 'lodash';
+import { updateUser, deleteUser } from '../../redux/actions/userActions';
 import PropTypes from 'prop-types';
-import store from '../../redux/store';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import { fetchUser, updateUser } from '../../redux/actions/userActions';
-import '../../sass/_profileform.scss';
+import './styles.scss';
+
+// Local States
+const [VIEW, EDIT, SAVING, DELETING, ERROR] = ['VIEW', 'EDIT', 'SAVING', 'DELETING', 'ERROR'];
 
 export class ProfileForm extends Component {
     constructor(props) {
         super(props);
-        this.email = props.email;
-        this.handleChange = this.handleChange.bind(this);
-        this.updateProfile = this.updateProfile.bind(this);
-        this.state = {
-            values: {
-                firstName: '',
-                lastName: '',
-                middleName: '',
-                title: '',
-                email: '',
-                homePhone: '',
-                mobilePhone: '',
-                website: '',
-                id: ''
+        this.changeField = this.changeField.bind(this);
+        this.state = { mode: VIEW };
+    }
+
+    edit() {
+        // Load user data from props into local state
+        const { userData } = this.props;
+        this.setState({ mode: EDIT, userData });
+    }
+
+    cancel() {
+        // Clear form data from local state
+        this.setState({ mode: VIEW, userData: null });
+    }
+
+    save() {
+        const { userData, updateUser } = this.props;
+        const newUserData = this.state.userData;
+        if (!isEqual(userData, newUserData)) {
+            // Don't make save call if nothing changed
+            this.setState({ mode: SAVING });
+            updateUser(newUserData);
+        } else {
+            this.cancel();
+        }
+    }
+
+    remove() {
+        const { deleteUser } = this.props;
+        this.setState({ mode: DELETING });
+        deleteUser();
+    }
+
+    acknowledgeError() {
+        const { clearErrorUser } = this.props;
+        this.setState({ mode: VIEW, userData: null, error: null });
+        clearErrorUser();
+    }
+
+    static getDerivedStateFromProps(nextProps, nextState) {
+        if (nextState.mode === SAVING || nextState.mode === DELETING) {
+            // If an error exists in store but not locally then it's new -> enter error state
+            if (nextProps.userData.error && !nextState.error) {
+                return { mode: ERROR, error: nextProps.userData.error };
             }
+            // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
+            if (nextState.mode === SAVING && isEqual(nextProps.userData, nextState.userData)) {
+                return { mode: VIEW, userData: null };
+            }
+        }
+        return null;
+    }
+
+    changeField(event) {
+        const { name, value } = event.target;
+        const newUserData = {
+            ...this.state.userData,
+            [name]: value,
         };
-    }
-
-    componentDidMount() {
-        try {
-            const data = fetchUser();
-            console.log(data);
-            this.setState({ firstName: data.firstName });
-            this.setState({ middleName: data.middleName });
-            this.setState({ lastName: data.lastName });
-            this.setState({ title: data.title });
-            this.setState({ email: data.email });
-            this.setState({ homePhone: data.homePhone });
-            this.setState({ homePhone: data.mobilePhone });
-            this.setState({ website: data.website });
-            this.setState({ id: data.id });
-        } catch (error) {
-            console.log(error);
-            NotificationManager.error('Failed to Fetch Profile Data');
-        }
-    }
-
-    updateProfile() {
-        try {
-            updateUser(this.state);
-            NotificationManager.success('Profile Successfully Updated');
-        } catch (error) {
-            NotificationManager.error('Profile Failed to Update');
-        }
-    }
-
-    handleChange(event) {
-        const { target: { name, value } } = event;
-        this.setState({ [name]: value });
+        this.setState({ userData: newUserData });
     }
 
     render() {
+        const { mode, error } = this.state;
+        const { userData } = mode === VIEW ? this.props : this.state;
+        const {
+            title,
+            firstName,
+            middleName,
+            lastName,
+            mobilePhone,
+            homePhone,
+            email,
+            website,
+        } = userData;
+        const disabled = mode !== EDIT;
+        const disabledClass = disabled ? 'disabled' : '';
+
+        // Set up overlay for SAVING/ERROR modes
+        let overlay = null;
+        if (mode === SAVING || mode === DELETING) {
+            overlay = (
+                <div className={`overlay saving ${entityType}`}>
+                    <h3>Saving...</h3>
+                </div>
+            );
+        } else if (mode === ERROR) {
+            overlay = (
+                <div className={`overlay error ${entityType}`}>
+                    <h3>Error</h3>
+                    <p>{error.message}</p>
+                    <Button onClick={this.acknowledgeError.bind(this)}>Ok</Button>
+                </div>
+            );
+        }
+
+        // Set up buttons based on mode
+        const buttonControls = mode === VIEW ? (
+            <React.Fragment>
+                <Button className='edit' onClick={this.edit.bind(this)} >
+                    <FontAwesomeIcon icon='edit' />
+                </Button>
+                {/* <Button className='delete' onClick={this.remove.bind(this)}>
+                    <FontAwesomeIcon icon='trash-alt' />
+                </Button> */}
+            </React.Fragment>
+        ) : (
+                <React.Fragment>
+                    <Button className='save' onClick={this.save.bind(this)}>
+                        <FontAwesomeIcon icon='check' />
+                    </Button>
+                    <Button className='cancel' onClick={this.cancel.bind(this)}>
+                        <FontAwesomeIcon icon='ban' />
+                    </Button>
+                </React.Fragment>
+            );
+
         return (
-            <div className='formBody'>
-                <form className='col-md-8' role='form'>
+            <Container className={`entity`}>
+                {overlay}
+                <Form>
                     <FormGroup row>
                         <Label>First Name</Label>
                         <Col>
-                            <Input value={this.state.firstName} name='firstName' type='text' onChange={this.handleChange} className="form-control" placeholder="First Name" required />
+                            <Input
+                                type='text'
+                                name='firstName'
+                                placeholder="First Name"
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={firstName || ''}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Middle Name</Label>
                         <Col>
-                            <Input value={this.state.middleName} name='middleName' type="text" onChange={this.handleChange} className="form-control" placeholder="Middle Name" required />
+                            <Input
+                                type="text"
+                                name='middleName'
+                                placeholder="Middle Name"
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={middleName}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Last Name</Label>
                         <Col>
-                            <Input value={this.state.lastName} name='lastName' type='text' onChange={this.handleChange} className='form-control' placeholder='Last Name' required />
+                            <Input
+                                type='text'
+                                name='lastName'
+                                placeholder='Last Name'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={lastName}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Title</Label>
                         <Col>
-                            <Input value={this.state.title} name='title' type='text' onChange={this.handleChange} className='form-control' placeholder='Title' />
+                            <Input
+                                type='text'
+                                name='title'
+                                placeholder='Title'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={title}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Email Address</Label>
                         <Col>
-                            <Input value={this.state.email} name='email' type='text' className='form-control' disabled />
+                            <Input
+                                type='text'
+                                name='email'
+                                placeholder='Email'
+                                disabled={true}
+                                className='disabled'
+                                value={email}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Home Phone Number</Label>
                         <Col>
-                            <Input value={this.state.homePhone} name='homePhone' type='text' onChange={this.handleChange} className='form-control' placeholder='Home Phone Number' />
+                            <Input
+                                type='text'
+                                name='homePhone'
+                                placeholder='Home Phone'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={homePhone}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Mobile Phone Number</Label>
                         <Col>
-                            <Input value={this.state.mobilePhone} name='mobilePhone' type='text' onChange={this.handleChange} className='form-control' placeholder='Mobile Phone Number' />
+                            <Input
+                                type='text'
+                                name='mobilePhone'
+                                placeholder='Mobile Phone'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={mobilePhone}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label>Website</Label>
                         <Col>
-                            <Input value={this.state.website} name='website' type='text' onChange={this.handleChange} className='form-control' placeholder='Website' />
+                            <Input
+                                type='text'
+                                name='website'
+                                placeholder='Website'
+                                disabled={disabled}
+                                className={disabledClass}
+                                value={website}
+                                onChange={this.changeField}
+                            />
                         </Col>
                     </FormGroup>
-                    <Button className='updateButton' color='secondary' onClick={this.updateProfile} >Update</Button>
-                </form>
-                <NotificationContainer />
-            </div>
+                    {buttonControls}
+                </Form>
+            </Container>
         );
     }
 }
 
 ProfileForm.propTypes = {
-    fetchUser: PropTypes.func.isRequired,
-    updateUser: PropTypes.func.isRequired
+    updateUser: PropTypes.func.isRequired,
+    deleteUser: PropTypes.func.isRequired,
+    clearErrorUser: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+    userData: state.user,
+});
 
 const mapDispatchToProps = {
-    fetchUser,
-    updateUser
+    updateUser,
+    deleteUser,
+    clearErrorUser,
 };
 
-export default connect(null, mapDispatchToProps)(ProfileForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
