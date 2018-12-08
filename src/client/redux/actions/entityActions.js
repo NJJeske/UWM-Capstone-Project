@@ -1,7 +1,7 @@
 import axios from 'axios';
 import uuid from 'uuid';
 import config from '../config';
-const { serverURL } = config;
+const { serverURL, headers } = config;
 
 export const actions = {
     ENTITY_CREATE: 'ENTITY_CREATE',
@@ -14,7 +14,7 @@ export const actions = {
 
 export const fetchEntities = entityType => async dispatch => {
     try {
-        const result = await axios.get(`${serverURL}/${entityType}`);
+        const result = await axios.get(`${serverURL}/${entityType}`, headers());
         dispatch({
             type: actions.ENTITY_FETCH,
             entityType,
@@ -44,7 +44,7 @@ export const createLocalEntity = entityType => ({
 export const createEntity = (entityType, localEntityData) => async dispatch => {
     const { _local, id, ...entityData } = localEntityData;
     try {
-        const result = await axios.post(`${serverURL}/${entityType}`, { entityData });
+        const result = await axios.post(`${serverURL}/${entityType}`, { entityData }, headers());
         dispatch({
             type: actions.ENTITY_CREATE,
             entityType,
@@ -64,7 +64,7 @@ export const createEntity = (entityType, localEntityData) => async dispatch => {
 // Update entity in backend and use response to replace it in store
 export const updateEntity = (entityType, entityData) => async dispatch => {
     try {
-        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, { entityData });
+        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, { entityData }, headers());
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,
@@ -91,7 +91,7 @@ export const deleteLocalEntity = (entityType, entityId) => ({
 // Delete entity in backend and use response to delete it in store
 export const deleteEntity = (entityType, entityId) => async dispatch => {
     try {
-        await axios.delete(`${serverURL}/${entityType}/${entityId}`);
+        await axios.delete(`${serverURL}/${entityType}/${entityId}`, headers());
         dispatch({
             type: actions.ENTITY_DELETE,
             entityType,
