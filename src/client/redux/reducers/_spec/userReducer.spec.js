@@ -16,7 +16,7 @@ describe('User Reducer', () => {
                 type: actions.USER_FETCH,
                 userData,
             };
-            const nextState = { userData };
+            const nextState = userData;
             expect(userReducer(state, action)).toEqual(nextState);
         });
         it('should clear any error from root on success', () => {
@@ -25,19 +25,19 @@ describe('User Reducer', () => {
                 type: actions.USER_FETCH,
                 userData
             };
-            const nextState = { userData };
+            const nextState = userData;
             expect(userReducer(state, action)).toEqual(nextState);
         });
     });
     describe('update', () => {
         it('should replace the user data in store', () => {
-            const state = { userData };
+            const state = userData;
             const updatedUserData = { email: 'carl@yahoo.com' };
             const action = {
                 type: actions.USER_UPDATE,
                 updatedUserData
             };
-            const nextState = { userData: updatedUserData };
+            const nextState = updatedUserData;
             expect(userReducer(state, action)).toEqual(nextState);
         });
     });
@@ -49,19 +49,19 @@ describe('User Reducer', () => {
     describe('error', () => {
         it('should bind an error to root', () => {
             const error = new Error('everything broke');
-            const state = { userData };
+            const state = userData;
             const action = {
                 type: actions.USER_ERROR,
                 error
             };
-            const nextState = { userData, error };
+            const nextState = { ...userData, error };
             expect(userReducer(state, action)).toEqual(nextState);
         });
         it('should clear an error from root if no error passed', () => {
             const error = new Error('everything broke');
-            const state = { userData, error };
+            const state = { ...userData, error };
             const action = { type: actions.USER_ERROR };
-            const nextState = { userData };
+            const nextState = userData;
             expect(userReducer(state, action)).toEqual(nextState);
         });
     });
