@@ -9,8 +9,7 @@ import {
     // deleteUser, // TODO
     clearErrorUser,
 } from '../userActions';
-import config from '../../config';
-const { serverURL } = config;
+import { serverURL } from '../../config';
 
 describe('Entity Action Creators', () => {
     const mock = new MockAdapter(axios);
