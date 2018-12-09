@@ -27,8 +27,8 @@ router.get('/', (req, res, next) => {
             return res.status(200).send('');
         }
     } else {
-        // TODO - Wire this up to make calls to real Spring backend
-        return axios.get(serviceURI)
+        var headers = { headers: { Authorization: req.headers.authorization } };
+        return axios.get(serviceURI, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
@@ -46,8 +46,8 @@ router.post('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to create.") });
         }
     } else {
-        // TODO - Wire this up to make calls to real Spring backend
-        return axios.post(serviceURI, userData)
+        var headers = { headers: { Authorization: req.headers.authorization } };
+        return axios.post(serviceURI, null, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
@@ -56,7 +56,7 @@ router.post('/', (req, res, next) => {
 // Update an entity
 router.put('/', (req, res, next) => {
     const { userData } = req.body;
-
+    console.log(userData);
     if (useMock) {
         if (mockConfig.responses.update) {
             mock = userData;
@@ -65,8 +65,8 @@ router.put('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
         }
     } else {
-        // TODO - Wire this up to make calls to real Spring backend
-        return axios.put(serviceURI, userData)
+        var headers = { headers: { Authorization: req.headers.authorization } };
+        return axios.put(serviceURI, userData, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
@@ -84,8 +84,8 @@ router.delete('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
         }
     } else {
-        // TODO - Wire this up to make calls to real Spring backend
-        return axios.delete(serviceURI, userData)
+        var headers = { headers: { Authorization: req.headers.authorization, 'Content-Type': req.headers['content-type'] } };
+        return axios.delete(serviceURI, userData, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
