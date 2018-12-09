@@ -8,6 +8,7 @@ export default class Auth {
             clientID: 'UhJh8oO1lZ41WeP52AihFavNxSkkEK3c',
             redirectUri: 'http://localhost:8080/callback',
             responseType: 'token id_token',
+            audience: 'https://uwm-capstone.auth0/',
             scope: 'openid email profile'
         });
         this.handleAuthentication = this.handleAuthentication.bind(this);
