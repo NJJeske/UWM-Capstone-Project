@@ -15,7 +15,7 @@ export const fetchUser = () => async dispatch => {
         let result = await axios.get(serviceURL, headers());
         if (result && result.data === '') {
             // If it doesn't exist then make a call to create it
-            result = await axios.post(serviceURL, headers());
+            result = await axios.post(serviceURL, null, headers());
         }
         dispatch({
             type: actions.USER_FETCH,
@@ -32,6 +32,8 @@ export const fetchUser = () => async dispatch => {
 
 export const updateUser = userData => async dispatch => {
     try {
+        delete userData['createdDate']; // This and the below line may be a backend issue,
+        delete userData['updatedDate']; // this gets us by given time constraints
         await axios.put(serviceURL, { userData }, headers());
         dispatch({
             type: actions.USER_UPDATE,
@@ -46,10 +48,10 @@ export const updateUser = userData => async dispatch => {
     }
 };
 
-export const deleteUser = () => async dispatch => {
+export const deleteUser = userData => async dispatch => {
     try {
         // TODO - need this to log them out of the app
-        await axios.delete(serviceURL, headers());
+        await axios.delete(serviceURL, { userData }, headers());
         dispatch({
             type: actions.USER_DELETE,
         });
