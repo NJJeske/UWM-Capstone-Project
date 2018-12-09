@@ -29,9 +29,7 @@ export class ProfileForm extends Component {
 
     save() {
         const { userData, updateUser } = this.props;
-        var newUserData = this.state.userData;
-        delete newUserData['createdDate']; // This and the below line may be a backend issue,
-        delete newUserData['updatedDate']; // this gets us by given time constraints
+        const newUserData = this.state.userData;
         if (!isEqual(userData, newUserData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
