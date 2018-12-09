@@ -1,9 +1,9 @@
 export { default as CertificationsPage } from './EntityPages/CertificationsPage';
 export { default as ContactsPage } from './EntityPages/ContactsPage';
+export { default as DashboardPage } from './DashboardPage';
 export { default as DocumentsPage } from './DocumentsPage';
 export { default as EducationPage } from './EntityPages/EducationPage';
 export { default as ExperiencePage } from './EntityPages/ExperiencePage';
-export { default as HomeScreen } from './HomeScreen';
 export { default as LoginPage } from './LoginPage';
 export { default as ProfilePage } from './ProfilePage';
 export { default as ProjectsPage } from './EntityPages/ProjectsPage';

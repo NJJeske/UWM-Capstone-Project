@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
-import './styles.scss';
 
 export const CertificationForm = props => {
     const { changeField, entityData, disabled } = props;
@@ -81,7 +80,7 @@ export const CertificationForm = props => {
                 <Col lg='6'>
                     <Row form={true}>
                         <Col xs='2' className='formLabel'>
-                            <Label>Began</Label>
+                            <Label>Since</Label>
                         </Col>
                         <Col xs='10'>
                             <FormGroup>
@@ -100,7 +99,7 @@ export const CertificationForm = props => {
                 <Col lg='6'>
                     <Row form={true}>
                         <Col xs='2' className='formLabel'>
-                            <Label>End</Label>
+                            <Label>Expire</Label>
                         </Col>
                         <Col xs='10'>
                             <FormGroup>

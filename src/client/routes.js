@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import {
-    HomeScreen,
     ContactsPage,
+    DashboardPage,
     DocumentsPage,
     EducationPage,
     CertificationsPage,
@@ -23,7 +23,7 @@ const SecretRoute = ({ component: Component, ...rest }) => (
         {...rest}
         render={props =>
             auth.isAuthenticated() === true ? (
-                <Component {...props} />
+                <Component {...props} auth={auth}/>
             )
                 : (
                     <Redirect
@@ -41,8 +41,8 @@ const routes = () => (
     <React.Fragment>
         <Switch>
             <Route exact path="/" component={() => <LoginPage auth={auth} />} />
-            <SecretRoute path="/home" component={() => <HomeScreen auth={auth} />} />
-            <SecretRoute path="/profile" component={() => <ProfilePage />} />
+            <SecretRoute path="/dashboard" component={() => <DashboardPage auth={auth} />} />
+            <SecretRoute path="/profile" component={ProfilePage} />
             <SecretRoute path="/contacts" component={ContactsPage} />
             <SecretRoute path="/documents" component={DocumentsPage} />
             <SecretRoute path="/education" component={EducationPage} />

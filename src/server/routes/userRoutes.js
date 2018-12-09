@@ -10,7 +10,7 @@ const mockConfig = {
     responses: {
         get: true,
         create: true,
-        update: true,
+        update: false,
         delete: true
     }
 };

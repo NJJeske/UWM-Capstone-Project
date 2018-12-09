@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import { Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../sass/_callbackpage.scss';
+import './styles.scss';
 
 /*
  * Container for callback page that appears after a user logs in
@@ -9,13 +10,17 @@ import '../../sass/_callbackpage.scss';
  */
 export const CallbackPage = props => {
     props.auth.handleAuthentication().then(() => {
-        props.history.push('/home');
+        props.history.push('/dashboard');
     });
 
     return (
-        <div className='callbackPageDiv'>
-            <FontAwesomeIcon icon='spinner' /> Loading user profile...
-        </div>
+        <Container fluid={true} id='CALLBACK_PAGE'>
+            <main>
+                <div className='vertical-center'>
+                    <FontAwesomeIcon icon='spinner' /> Loading user profile...
+                </div>
+            </main>
+        </Container>
     );
 };
 

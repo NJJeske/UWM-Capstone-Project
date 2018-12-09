@@ -20,6 +20,7 @@ module.exports = entityConfig => {
 
     // Get all entities of this type
     router.get('/', (req, res, next) => {
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.getAll) {
                 return res.status(200).send(mock);
@@ -37,6 +38,7 @@ module.exports = entityConfig => {
     // Create a new entity
     router.post('/', (req, res, next) => {
         const { entityData } = req.body;
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.create) {
                 const createdEntity = { id: uuid.v4(), ...entityData };
@@ -58,6 +60,7 @@ module.exports = entityConfig => {
         const { entityID } = req.params;
         const { entityData } = req.body;
 
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.update) {
                 mock = mock.map(entity => entity.id === entityID ? entityData : entity);
@@ -77,6 +80,7 @@ module.exports = entityConfig => {
     router.delete('/:entityID', (req, res, next) => {
         const { entityID } = req.params;
 
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.delete) {
                 mock = mock.filter(entity => entity.id !== entityID);

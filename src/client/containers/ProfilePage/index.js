@@ -1,14 +1,15 @@
 import React from 'react';
+import { Container } from 'reactstrap';
 import { ProfileForm, Sidebar, Header } from '../../components';
-import '../../sass/_profilepage.scss';
+import './styles.scss';
 
-export const ProfilePage = props => {
+export const ProfilePage = ({ email, auth }) => {
     return (
-        <div className='profileBody'>
-            <Header title={'Profile Settings'} />
+        <Container fluid={true} id='PROFILE_PAGE'>
             <Sidebar />
-            <ProfileForm email={props.email} />
-        </div>
+            <Header title={'Profile Settings'} auth={auth} />
+            <ProfileForm email={email} />
+        </Container>
     );
 };
 

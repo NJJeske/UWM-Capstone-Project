@@ -1,10 +1,10 @@
 import React from 'react';
-import { UnfoundPage } from '.';
+import DashboardPage from '.';
 import { shallow } from 'enzyme';
 
-var wrapper = shallow(<UnfoundPage />);
+var wrapper = shallow(<DashboardPage />);
 
-describe('Unfound Page', () => {
+describe('Dashboard Page', () => {
     it('should render without crashing', () => {
         expect(wrapper).toHaveLength(1);
     });

@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import '../../sass/_loginbutton.scss';
+import './styles.scss';
 
 /*
  * Button that will be used on the landing page of the application

@@ -126,9 +126,22 @@ export class ProfileForm extends Component {
         );
 
         return (
-            <Container className={`entity`}>
+            <Container className='entity profile'>
                 {overlay}
                 <Form>
+                    <FormGroup row>
+                        <Label>Email</Label>
+                        <Col>
+                            <Input
+                                type='text'
+                                name='email'
+                                placeholder='Email'
+                                disabled={true}
+                                className='disabled'
+                                value={email || ''}
+                            />
+                        </Col>
+                    </FormGroup>
                     <FormGroup row>
                         <Col xs='1'>
                             <Label>Name</Label>
@@ -175,19 +188,6 @@ export class ProfileForm extends Component {
                                 className={disabledClass}
                                 value={lastName || ''}
                                 onChange={this.changeField}
-                            />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label>Email</Label>
-                        <Col>
-                            <Input
-                                type='text'
-                                name='email'
-                                placeholder='Email'
-                                disabled={true}
-                                className='disabled'
-                                value={email || ''}
                             />
                         </Col>
                     </FormGroup>

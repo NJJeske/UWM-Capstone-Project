@@ -1,6 +1,5 @@
 import axios from 'axios';
-import config from '../config';
-const { serverURL, headers } = config;
+import { serverURL, headers } from '../config';
 
 export const actions = {
     USER_FETCH: 'USER_FETCH',
