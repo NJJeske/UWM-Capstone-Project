@@ -9,7 +9,7 @@
 
 module.exports = {
     proxyRoute: '/certifications',
-    serviceRoute: '/certifications',
+    serviceRoute: '/certification',
     mockConfig: {
         root: 'certifications',
         responses: {
