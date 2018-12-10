@@ -11,9 +11,9 @@ export const actions = {
     ENTITY_FETCH_ERROR: 'ENTITY_FETCH_ERROR',
 };
 
-export const fetchEntities = entityType => async dispatch => {
+export const fetchEntities = (entityType, userID) => async dispatch => {
     try {
-        const result = await axios.get(`${serverURL}/${entityType}`, headers());
+        const result = await axios.get(`${serverURL}/${entityType}/${userID}`, headers());
         dispatch({
             type: actions.ENTITY_FETCH,
             entityType,
