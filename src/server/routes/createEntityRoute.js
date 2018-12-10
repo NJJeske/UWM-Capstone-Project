@@ -49,8 +49,8 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
-                .then(response => res.send(transform.springToClient.create(response.data)))
+            return axios.post(serviceURI, transform.clientToSpring.create(entityData), headers)
+                .then(response => { console.log('RESPONSE'); return res.send(transform.springToClient.create(response.data)); })
                 .catch(err => next(err));
         }
     });
