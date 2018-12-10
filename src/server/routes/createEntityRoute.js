@@ -49,7 +49,7 @@ module.exports = entityConfig => {
             }
         } else {
             // TODO - Wire this up to make calls to real Spring backend
-            return axios.post(serviceURI, transform.clientToSpring.create({ userID, entityData }))
+            return axios.post(serviceURI, transform.clientToSpring.create({ entityData: { userID, ...entityData } }))
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -70,7 +70,7 @@ module.exports = entityConfig => {
             }
         } else {
             // TODO - Wire this up to make calls to real Spring backend
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ userID, entityData }))
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData: { userID, ...entityData } }))
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
