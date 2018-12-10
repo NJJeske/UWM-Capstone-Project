@@ -32,7 +32,6 @@ export const fetchUser = () => async dispatch => {
             'positions',
             'projects'
         ].forEach(entityType => fetchEntities(entityType, userData.id)(dispatch));
-
     } catch (error) {
         error.message = `Error loading or creating profile information through API`;
         dispatch({
