@@ -24,9 +24,9 @@ export class Entity extends Component {
         super(props);
         this.changeField = this.changeField.bind(this);
         if (props.entityData._local) {
-            this.state = { mode: CREATING, userID: props.userID, entityData: props.entityData };
+            this.state = { mode: CREATING, entityData: props.entityData };
         } else {
-            this.state = { mode: VIEW, userID: props.userID };
+            this.state = { mode: VIEW };
         }
     }
 
@@ -48,15 +48,15 @@ export class Entity extends Component {
     }
 
     save() {
-        const { createEntity, updateEntity, entityType, entityData } = this.props;
+        const { userID, createEntity, updateEntity, entityType, entityData } = this.props;
         const newEntityData = this.state.entityData;
         if (this.state.mode === CREATING) {
             this.setState({ mode: SAVING });
-            createEntity(entityType, newEntityData, this.state.userID);
+            createEntity(entityType, newEntityData, userID);
         } else if (!isEqual(entityData, newEntityData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
-            updateEntity(entityType, newEntityData, this.state.userID);
+            updateEntity(entityType, newEntityData, userID);
         } else {
             this.cancel();
         }
@@ -190,6 +190,10 @@ Entity.propTypes = {
     clearErrorEntity: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+    userID: state.user.id,
+});
+
 const mapDispatchToProps = {
     createEntity,
     updateEntity,
@@ -198,4 +202,4 @@ const mapDispatchToProps = {
     clearErrorEntity
 };
 
-export default connect(null, mapDispatchToProps)(Entity);
+export default connect(mapStateToProps, mapDispatchToProps)(Entity);
