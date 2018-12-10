@@ -28,7 +28,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            var headers = { headers: { Authorization: req.headers.authorization } };
+            const headers = { headers: { Authorization: req.headers.authorization } };
             return axios.get(serviceURI, headers)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
@@ -48,7 +48,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            var headers = { headers: { Authorization: req.headers.authorization } };
+            const headers = { headers: { Authorization: req.headers.authorization } };
             return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
@@ -69,7 +69,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
             }
         } else {
-            var headers = { headers: { Authorization: req.headers.authorization } };
+            const headers = { headers: { Authorization: req.headers.authorization } };
             return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
@@ -89,7 +89,7 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
             }
         } else {
-            var headers = { headers: { Authorization: req.headers.authorization } };
+            const headers = { headers: { Authorization: req.headers.authorization } };
             return axios.delete(`${serviceURI}/${entityID}`, null, headers)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));

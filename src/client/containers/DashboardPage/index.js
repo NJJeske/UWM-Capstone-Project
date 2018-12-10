@@ -10,15 +10,15 @@ import './styles.scss';
 
 export class DashboardPage extends Component {
     componentDidMount() {
-        // [
-        //     'addresses',
-        //     'certifications',
-        //     'companies',
-        //     'contacts',
-        //     'education',
-        //     'positions',
-        //     'projects'
-        // ].forEach(this.props.fetchEntities);
+        [
+            'addresses',
+            'certifications',
+            'companies',
+            'contacts',
+            'education',
+            'positions',
+            'projects'
+        ].forEach(this.props.fetchEntities);
     }
     render() {
         return (

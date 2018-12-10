@@ -55,6 +55,6 @@ const routes = ({ store }) => {
             </Switch>
         </React.Fragment>
     );
-}
+};
 
 export default withRouter(routes);
