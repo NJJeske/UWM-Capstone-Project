@@ -10,19 +10,19 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 export class DashboardPage extends Component {
-    componentDidMount() {
-        const { fetchEntities, userData } = this.props;
-        console.log(userData);
-        [
-            'addresses',
-            'certifications',
-            'companies',
-            'contacts',
-            'education',
-            'positions',
-            'projects'
-        ].forEach(entityType => fetchEntities(entityType, userData.id));
-    }
+    // componentDidMount() {
+    //     const { fetchEntities, userData } = this.props;
+    //     console.log(userData);
+    //     [
+    //         'addresses',
+    //         'certifications',
+    //         'companies',
+    //         'contacts',
+    //         'education',
+    //         'positions',
+    //         'projects'
+    //     ].forEach(entityType => fetchEntities(entityType, userData.id));
+    // }
 
     render() {
         return (
