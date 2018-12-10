@@ -19,7 +19,7 @@ module.exports = entityConfig => {
     const router = express.Router();
 
     // Get all entities of this type
-    router.get('/', (req, res, next) => {
+    router.get('/:userID', (req, res, next) => {
         /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.getAll) {
@@ -29,7 +29,8 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.get(serviceURI, headers)
+            const getLink = serviceURI + '/retrievemany/' + req.params.userID;
+            return axios.get(getLink, headers)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
         }

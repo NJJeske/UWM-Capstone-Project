@@ -6,6 +6,7 @@ import { fetchUser } from '../../redux/actions/userActions';
 import { fetchEntities } from '../../redux/actions/entityActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Header } from '../../components';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 export class DashboardPage extends Component {
@@ -20,6 +21,7 @@ export class DashboardPage extends Component {
             'projects'
         ].forEach(this.props.fetchEntities);
     }
+
     render() {
         return (
             <Container fluid={true} id='DASHBOARD_PAGE' className='clearfix'>
@@ -79,9 +81,18 @@ export class DashboardPage extends Component {
     }
 }
 
+DashboardPage.propTypes = {
+    fetchUser: PropTypes.func.isRequired,
+    fetchEntities: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+    userData: state.user,
+});
+
 const mapDispatchToProps = {
     fetchUser,
     fetchEntities
 };
 
-export default connect(null, mapDispatchToProps)(DashboardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
