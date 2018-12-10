@@ -49,7 +49,7 @@ module.exports = entityConfig => {
             }
         } else {
             var headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.post(serviceURI, transform.clientToSpring.create({ userID, entityData }), headers)
+            return axios.post(serviceURI, transform.clientToSpring.create({ entityData: { userID, ...entityData } }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -70,7 +70,7 @@ module.exports = entityConfig => {
             }
         } else {
             var headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ userID, entityData }), headers)
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData: { userID, ...entityData } }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
