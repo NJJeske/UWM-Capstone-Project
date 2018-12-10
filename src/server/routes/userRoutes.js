@@ -27,7 +27,6 @@ router.get('/', (req, res, next) => {
             return res.status(200).send('');
         }
     } else {
-        console.log(req.headers);
         const config = { headers: {
             Authorization: req.headers.authorization
         } };
@@ -59,7 +58,6 @@ router.post('/', (req, res, next) => {
 // Update an entity
 router.put('/', (req, res, next) => {
     const { userData } = req.body;
-    console.log(userData);
     if (useMock) {
         if (mockConfig.responses.update) {
             mock = userData;
