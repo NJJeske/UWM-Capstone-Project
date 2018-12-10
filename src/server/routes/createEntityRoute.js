@@ -37,7 +37,7 @@ module.exports = entityConfig => {
 
     // Create a new entity
     router.post('/', (req, res, next) => {
-        const { userID, entityData } = req.body;
+        const { entityData } = req.body;
         /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.create) {
@@ -49,7 +49,7 @@ module.exports = entityConfig => {
             }
         } else {
             var headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.post(serviceURI, transform.clientToSpring.create({ entityData: { userID, ...entityData } }), headers)
+            return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -58,7 +58,7 @@ module.exports = entityConfig => {
     // Update an entity
     router.put('/:entityID', (req, res, next) => {
         const { entityID } = req.params;
-        const { userID, entityData } = req.body;
+        const { entityData } = req.body;
 
         /* istanbul ignore next */
         if (useMock) {
@@ -70,7 +70,7 @@ module.exports = entityConfig => {
             }
         } else {
             var headers = { headers: { Authorization: req.headers.authorization } };
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData: { userID, ...entityData } }), headers)
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
@@ -90,7 +90,6 @@ module.exports = entityConfig => {
             }
         } else {
             var headers = { headers: { Authorization: req.headers.authorization } };
-            console.log(headers);
             return axios.delete(`${serviceURI}/${entityID}`, null, headers)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));
