@@ -40,10 +40,10 @@ export const createLocalEntity = entityType => ({
 });
 
 // Create entity in backend and use response to replace it in store
-export const createEntity = (entityType, localEntityData) => async dispatch => {
+export const createEntity = (entityType, localEntityData, userId) => async dispatch => {
     const { _local, id, ...entityData } = localEntityData;
     try {
-        const result = await axios.post(`${serverURL}/${entityType}`, { entityData }, headers());
+        const result = await axios.post(`${serverURL}/${entityType}`, { userId, entityData }, headers());
         dispatch({
             type: actions.ENTITY_CREATE,
             entityType,
@@ -61,9 +61,9 @@ export const createEntity = (entityType, localEntityData) => async dispatch => {
 };
 
 // Update entity in backend and use response to replace it in store
-export const updateEntity = (entityType, entityData) => async dispatch => {
+export const updateEntity = (entityType, entityData, userId) => async dispatch => {
     try {
-        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, { entityData }, headers());
+        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, { userId, entityData }, headers());
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,

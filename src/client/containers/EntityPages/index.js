@@ -6,7 +6,7 @@ import { Header, Sidebar } from '../../components';
 import './styles.scss';
 
 const EntityPage = props => {
-    const { title, entityType, entities, fetchEntities, createLocalEntity, auth, Component } = props;
+    const { user, title, entityType, entities, fetchEntities, createLocalEntity, auth, Component } = props;
     const alreadyCreating = entities.list.some(entity => entity._local);
 
     const mainBody = entities.error ? (
@@ -15,7 +15,7 @@ const EntityPage = props => {
             <Button onClick={fetchEntities.bind(null, entityType)}>Retry</Button>
         </Row>
     ) : (
-        entities.list.map(entity => <Component key={entity.id} {...entity} />)
+        entities.list.map(entity => <Component key={entity.id} userID={user.id} {...entity} />)
     );
 
     const createButton = alreadyCreating || entities.error ? null : (

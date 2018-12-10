@@ -24,9 +24,9 @@ export class Entity extends Component {
         super(props);
         this.changeField = this.changeField.bind(this);
         if (props.entityData._local) {
-            this.state = { mode: CREATING, entityData: props.entityData };
+            this.state = { mode: CREATING, userID: props.userID, entityData: props.entityData };
         } else {
-            this.state = { mode: VIEW };
+            this.state = { mode: VIEW, userID: props.userID };
         }
     }
 
@@ -52,11 +52,11 @@ export class Entity extends Component {
         const newEntityData = this.state.entityData;
         if (this.state.mode === CREATING) {
             this.setState({ mode: SAVING });
-            createEntity(entityType, newEntityData);
+            createEntity(entityType, newEntityData, this.state.userID);
         } else if (!isEqual(entityData, newEntityData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
-            updateEntity(entityType, newEntityData);
+            updateEntity(entityType, newEntityData, this.state.userID);
         } else {
             this.cancel();
         }
