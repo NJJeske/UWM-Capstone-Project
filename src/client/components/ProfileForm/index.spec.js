@@ -8,7 +8,7 @@ const props = {
     clearErrorUser: jest.fn(),
 };
 
-var form = shallow(<ProfileForm {...props} />);
+const form = shallow(<ProfileForm {...props} />);
 it('should render the component without crashing', () => {
     expect(form).toHaveLength(1);
 });

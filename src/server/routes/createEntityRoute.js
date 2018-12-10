@@ -28,8 +28,8 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.get(serviceURI)
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            return axios.get(serviceURI, headers)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
         }
@@ -48,8 +48,8 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.post(serviceURI, transform.clientToSpring.create(entityData))
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -69,8 +69,8 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update(entityData))
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
@@ -89,8 +89,8 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.delete(`${serviceURI}/${entityID}`)
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            return axios.delete(`${serviceURI}/${entityID}`, null, headers)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));
         }

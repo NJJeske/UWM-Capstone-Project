@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Auth from '../../Auth/Auth';
 
 const auth = new Auth();
-var wrapper = shallow(<CallbackPage auth={auth} />);
+const wrapper = shallow(<CallbackPage auth={auth} />);
 
 describe('Callback Page', () => {
     it('should render without crashing', () => {

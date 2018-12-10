@@ -34,7 +34,7 @@ export const updateUser = userData => async dispatch => {
     try {
         delete userData['createdDate']; // This and the below line may be a backend issue,
         delete userData['updatedDate']; // this gets us by given time constraints
-        await axios.put(serviceURL, { userData }, headers());
+        await axios.put(serviceURL, { userID: userData.userID, userData }, headers());
         dispatch({
             type: actions.USER_UPDATE,
             updatedUserData: userData

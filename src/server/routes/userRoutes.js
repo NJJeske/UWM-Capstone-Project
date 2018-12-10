@@ -27,8 +27,10 @@ router.get('/', (req, res, next) => {
             return res.status(200).send('');
         }
     } else {
-        var headers = { headers: { Authorization: req.headers.authorization } };
-        return axios.get(serviceURI, headers)
+        const config = { headers: {
+            Authorization: req.headers.authorization
+        } };
+        return axios.get(serviceURI, config)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
@@ -46,7 +48,7 @@ router.post('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to create.") });
         }
     } else {
-        var headers = { headers: { Authorization: req.headers.authorization } };
+        const headers = { headers: { Authorization: req.headers.authorization } };
         return axios.post(serviceURI, null, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
@@ -56,7 +58,6 @@ router.post('/', (req, res, next) => {
 // Update an entity
 router.put('/', (req, res, next) => {
     const { userData } = req.body;
-    console.log(userData);
     if (useMock) {
         if (mockConfig.responses.update) {
             mock = userData;
@@ -65,7 +66,7 @@ router.put('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
         }
     } else {
-        var headers = { headers: { Authorization: req.headers.authorization } };
+        const headers = { headers: { Authorization: req.headers.authorization } };
         return axios.put(serviceURI, userData, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));
@@ -84,7 +85,7 @@ router.delete('/', (req, res, next) => {
             return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
         }
     } else {
-        var headers = { headers: { Authorization: req.headers.authorization, 'Content-Type': req.headers['content-type'] } };
+        const headers = { headers: { Authorization: req.headers.authorization, 'Content-Type': req.headers['content-type'] } };
         return axios.delete(serviceURI, userData, headers)
             .then(response => res.send(response.data))
             .catch(err => next(err));

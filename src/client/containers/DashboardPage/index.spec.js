@@ -1,8 +1,12 @@
 import React from 'react';
-import DashboardPage from '.';
+import { DashboardPage } from '.';
 import { shallow } from 'enzyme';
 
-var wrapper = shallow(<DashboardPage />);
+const props = {
+    fetchEntities: jest.fn(),
+};
+
+const wrapper = shallow(<DashboardPage {...props} />);
 
 describe('Dashboard Page', () => {
     it('should render without crashing', () => {

@@ -21,11 +21,10 @@ export const ProfileButton = props => (
                     Settings
                 </DropdownItem>
                 <DropdownItem onClick={() => {
-                    console.log(props);
                     // Clear session data that we set
                     props.auth.logout();
                     // Clear session thru Auth0 as well
-                    window.location = `https://uwm-capstone.auth0.com/v2/logout?returnTo=${encodeURIComponent(logoutReturnURL)}`;
+                    window.location = `https://uwm-capstone.auth0.com/v2/logout?returnTo=${encodeURIComponent(logoutReturnURL)}&client_id=UhJh8oO1lZ41WeP52AihFavNxSkkEK3c`;
                 }}>Logout</DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
