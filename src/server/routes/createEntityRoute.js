@@ -37,7 +37,7 @@ module.exports = entityConfig => {
 
     // Create a new entity
     router.post('/', (req, res, next) => {
-        const { entityData } = req.body;
+        const { userID, entityData } = req.body;
         /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.create) {
@@ -49,7 +49,7 @@ module.exports = entityConfig => {
             }
         } else {
             // TODO - Wire this up to make calls to real Spring backend
-            return axios.post(serviceURI, transform.clientToSpring.create(entityData))
+            return axios.post(serviceURI, transform.clientToSpring.create({ userID, entityData }))
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -58,7 +58,7 @@ module.exports = entityConfig => {
     // Update an entity
     router.put('/:entityID', (req, res, next) => {
         const { entityID } = req.params;
-        const { entityData } = req.body;
+        const { userID, entityData } = req.body;
 
         /* istanbul ignore next */
         if (useMock) {
@@ -70,7 +70,7 @@ module.exports = entityConfig => {
             }
         } else {
             // TODO - Wire this up to make calls to real Spring backend
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update(entityData))
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ userID, entityData }))
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
