@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { serverURL, headers } from '../config';
+import { fetchEntities } from './entityActions';
 
 export const actions = {
     USER_FETCH: 'USER_FETCH',
@@ -17,10 +18,20 @@ export const fetchUser = () => async dispatch => {
             // If it doesn't exist then make a call to create it
             result = await axios.post(serviceURL, null, headers());
         }
+        const userData = result.data;
         dispatch({
             type: actions.USER_FETCH,
-            userData: result.data,
+            userData
         });
+        [
+            'addresses',
+            'certifications',
+            'companies',
+            'contacts',
+            'education',
+            'positions',
+            'projects'
+        ].forEach(entityType => fetchEntities(entityType, userData.id)(dispatch));
     } catch (error) {
         error.message = `Error loading or creating profile information through API`;
         dispatch({

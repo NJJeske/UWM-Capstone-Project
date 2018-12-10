@@ -34,24 +34,24 @@ describe('Entity Routes', () => {
 
     describe('get all', () => {
         it('should return backend response', () => {
-            mock.onGet(`${serviceUrl}/applesBackend`).reply(200, [1, 2, 3]);
+            mock.onGet(`${serviceUrl}/applesBackend/retrievemany/user1`).reply(200, [1, 2, 3]);
             return request(app)
-                .get('/apples')
+                .get('/apples/user1')
                 .expect(200)
                 .then(response => expect(response.body).toEqual([1, 2, 3]));
         });
 
         it('should forward errors as 500', () => {
-            mock.onGet(`${serviceUrl}/applesBackend`).reply(404);
+            mock.onGet(`${serviceUrl}/applesBackend/retrievemany/user1`).reply(404);
             return request(app)
-                .get('/apples')
+                .get('/apples/user1')
                 .expect(500);
         });
 
         it('should map for frontend/backend if needed', () => {
-            mock.onGet(`${serviceUrl}/orangesBackend`).reply(200, [1, 2, 3]);
+            mock.onGet(`${serviceUrl}/orangesBackend/retrievemany/user1`).reply(200, [1, 2, 3]);
             return request(app)
-                .get('/oranges')
+                .get('/oranges/user1')
                 .expect(200)
                 .then(response => expect(response.body).toEqual([2, 3, 4]));
         });
