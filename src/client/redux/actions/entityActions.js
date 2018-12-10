@@ -13,7 +13,6 @@ export const actions = {
 
 export const fetchEntities = entityType => async dispatch => {
     try {
-        console.log(`${serverURL}/${entityType}`);
         const result = await axios.get(`${serverURL}/${entityType}`, headers());
         dispatch({
             type: actions.ENTITY_FETCH,

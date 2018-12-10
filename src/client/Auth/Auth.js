@@ -4,7 +4,6 @@ import { fetchUser } from '../redux/actions/userActions';
 
 export default class Auth {
     constructor(store) {
-        console.log(store);
         this.redux = { store };
         this.auth0 = new auth0.WebAuth({
             domain: 'uwm-capstone.auth0.com',
@@ -50,7 +49,6 @@ export default class Auth {
     }
 
     setSession(authResult) {
-        console.log('ideally');
         let expiresAt = JSON.stringify(
             authResult.expiresIn * 1000 + new Date().getTime()
         );
