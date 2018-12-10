@@ -30,6 +30,7 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/retrievemany/${userID}'`);
             return axios.get(`${serviceURI}/retrievemany/${userID}`, headers)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
@@ -50,6 +51,7 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}'`);
             return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
@@ -71,6 +73,7 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/${entityID}'`);
             return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
@@ -91,6 +94,7 @@ module.exports = entityConfig => {
             }
         } else {
             const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/${entityID}'`);
             return axios.delete(`${serviceURI}/${entityID}`, null, headers)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));
