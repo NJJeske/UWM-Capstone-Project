@@ -44,29 +44,29 @@ app.use(express.static(resolve(__dirname, '..', '..', 'dist')));
 // request any page and receive index.html
 app.get('*', (req, res) => res.sendFile(resolve(__dirname, '..', '..', 'dist/index.html')));
 
-if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production') {
-    try {
-        var certs = {
-            cert: fs.readFileSync(process.env.SSL_CERT_FILE, 'utf8'),
-            key: fs.readFileSync(process.env.SSL_KEY_FILE, 'utf8'),
-        };
-    } catch (error) {
-        if (error.code === 'ENOENT') {
-            const parsedError = new Error('Service is running inside kube cluster, but certificates are not found.');
-            parsedError.code = 'ENOENT';
-            throw (parsedError);
-        } else {
-            const parsedError = new Error('Service is running inside kube cluster, but an unknown error occured');
-            parsedError.code = 'UNKNOWN_ERR';
-            throw (parsedError);
-        }
-    }
-    httpsServer = https.createServer(certs, app).listen(config.get('httpsListenerPort'), () => {
-        const host = httpsServer.address().address;
-        const port = httpsServer.address().port;
-        console.log(`server listening at ${host}:${port}`);
-    });
-}
+// if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production') {
+//     try {
+//         var certs = {
+//             cert: fs.readFileSync(process.env.SSL_CERT_FILE, 'utf8'),
+//             key: fs.readFileSync(process.env.SSL_KEY_FILE, 'utf8'),
+//         };
+//     } catch (error) {
+//         if (error.code === 'ENOENT') {
+//             const parsedError = new Error('Service is running inside kube cluster, but certificates are not found.');
+//             parsedError.code = 'ENOENT';
+//             throw (parsedError);
+//         } else {
+//             const parsedError = new Error('Service is running inside kube cluster, but an unknown error occured');
+//             parsedError.code = 'UNKNOWN_ERR';
+//             throw (parsedError);
+//         }
+//     }
+//     httpsServer = https.createServer(certs, app).listen(config.get('httpsListenerPort'), () => {
+//         const host = httpsServer.address().address;
+//         const port = httpsServer.address().port;
+//         console.log(`server listening at ${host}:${port}`);
+//     });
+// }
 
 httpServer = http.createServer(app).listen(config.get('httpListenerPort'), () => {
     const host = httpServer.address().address;

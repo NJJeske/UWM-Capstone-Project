@@ -1,12 +1,15 @@
 import auth0 from 'auth0-js';
+import { logoutReturnURL } from '../redux/config';
 import { fetchUser } from '../redux/actions/userActions';
 
 export default class Auth {
-    constructor() {
+    constructor(store) {
+        console.log(store);
+        this.redux = { store };
         this.auth0 = new auth0.WebAuth({
             domain: 'uwm-capstone.auth0.com',
             clientID: 'UhJh8oO1lZ41WeP52AihFavNxSkkEK3c',
-            redirectUri: 'http://localhost:8080/callback',
+            redirectUri: `${logoutReturnURL}callback`,
             responseType: 'token id_token',
             audience: 'https://uwm-capstone.auth0/',
             scope: 'openid email profile'
@@ -47,12 +50,13 @@ export default class Auth {
     }
 
     setSession(authResult) {
+        console.log('ideally');
         let expiresAt = JSON.stringify(
             authResult.expiresIn * 1000 + new Date().getTime()
         );
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
-        fetchUser();
+        this.redux.store.dispatch(fetchUser());
     }
 }

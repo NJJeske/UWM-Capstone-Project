@@ -27,8 +27,11 @@ router.get('/', (req, res, next) => {
             return res.status(200).send('');
         }
     } else {
-        var headers = { headers: { Authorization: req.headers.authorization } };
-        return axios.get(serviceURI, headers)
+        console.log(req.headers);
+        const config = { headers: {
+            Authorization: req.headers.authorization
+        } };
+        return axios.get(serviceURI, config)
             .then(response => res.send(response.data))
             .catch(err => next(err));
     }
