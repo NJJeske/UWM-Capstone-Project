@@ -11,6 +11,8 @@ import './styles.scss';
 
 export class DashboardPage extends Component {
     componentDidMount() {
+        const { fetchEntities, userData } = this.props;
+        console.log(userData);
         [
             'addresses',
             'certifications',
@@ -19,7 +21,7 @@ export class DashboardPage extends Component {
             'education',
             'positions',
             'projects'
-        ].forEach(this.props.fetchEntities);
+        ].forEach(entityType => fetchEntities(entityType, userData.id));
     }
 
     render() {
