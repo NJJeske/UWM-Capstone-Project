@@ -13,8 +13,7 @@ export const actions = {
 
 export const fetchEntities = (entityType, userID) => async dispatch => {
     try {
-        const getLink = `${serverURL}/${entityType}/` + userID;
-        const result = await axios.get(getLink, headers());
+        const result = await axios.get(`${serverURL}/${entityType}/${userID}`, headers());
         dispatch({
             type: actions.ENTITY_FETCH,
             entityType,
