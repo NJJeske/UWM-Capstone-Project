@@ -58,7 +58,7 @@ describe('Entity Action Creators', () => {
     describe('updateEntity', () => {
         const entityData = { id: 2, rating: 8 };
         it('should handle success', async () => {
-            mock.onPut(`${serverURL}/apples/2`, { entityData }).reply(200);
+            mock.onPut(`${serverURL}/apples`, { entityData }).reply(200);
 
             const expectedActions = [
                 {
@@ -72,7 +72,7 @@ describe('Entity Action Creators', () => {
         });
 
         it('should handle failure', async () => {
-            mock.onPost(`${serverURL}/apples/2`, entityData).reply(400, new Error());
+            mock.onPost(`${serverURL}/apples`, entityData).reply(400, new Error());
 
             const expectedActions = [
                 {

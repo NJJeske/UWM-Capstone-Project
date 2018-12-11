@@ -5,10 +5,50 @@
 // description: string
 // startDate: string (YYYY-MM-DD)
 // endDate: string (YYYY-MM-DD)
+// TODO: Add payperiod (not present on backend)
+
+function mapSpringToClient(springData) {
+    return { id: springData.ID,
+        userID: springData.USER_ID,
+        companyId: springData.COMPANY_ID,
+        title: springData.NAME,
+        startPay: springData.START_PAY,
+        endPay: springData.END_PAY,
+        startDate: springData.START_DATE,
+        endDate: springData.END_DATE
+    };
+}
+
+function mapClientToSpring(clientData) {
+    return { id: clientData.id,
+        userID: clientData.userID,
+        company_id: clientData.companyId,
+        name: clientData.title,
+        start_pay: clientData.startPay,
+        end_pay: clientData.endPay,
+        start_date: clientData.startDate,
+        end_date: clientData.endDate
+    };
+}
+
+const transform = {
+    springToClient: {
+        getAll: springData => springData.map(x => mapSpringToClient(x)),
+        create: x => mapSpringToClient(x),
+        update: x => mapSpringToClient(x),
+        delete: x => mapSpringToClient(x)
+    },
+    clientToSpring: {
+        create: x => mapClientToSpring(x),
+        update: x => mapClientToSpring(x),
+        delete: x => mapClientToSpring(x)
+    }
+};
 
 module.exports = {
     proxyRoute: '/positions',
     serviceRoute: '/position',
+    transform,
     mockConfig: {
         root: 'positions',
         responses: {

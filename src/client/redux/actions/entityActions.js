@@ -65,7 +65,7 @@ export const createEntity = (entityType, localEntityData, userID) => async dispa
 export const updateEntity = (entityType, entityData, userID) => async dispatch => {
     try {
         const postBody = { entityData: { userID, ...entityData } };
-        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, postBody, headers());
+        await axios.put(`${serverURL}/${entityType}`, postBody, headers());
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,
