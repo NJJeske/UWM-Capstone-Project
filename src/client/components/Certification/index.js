@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
+import { alwaysTrue } from '../validators';
 
 export const CertificationForm = props => {
     const { changeField, entityData, disabled } = props;
@@ -26,7 +27,7 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -41,7 +42,7 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={authority || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -56,7 +57,7 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={licenseNumber || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -71,7 +72,7 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={website || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -90,7 +91,7 @@ export const CertificationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={acquireDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -109,7 +110,7 @@ export const CertificationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={expireDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

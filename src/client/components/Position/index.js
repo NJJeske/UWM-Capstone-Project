@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, ReferenceSelector } from '../';
+import { alwaysTrue } from '../validators';
 
 export const PositionForm = props => {
     const { changeField, entityData, disabled } = props;
@@ -28,7 +29,7 @@ export const PositionForm = props => {
                         selectedId={companyId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -42,7 +43,7 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={title || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -57,7 +58,7 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={payPeriod || 'Hourly'}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         >
                             <option value='Hourly'>Hourly</option>
                             <option value='Salary'>Salary</option>
@@ -73,7 +74,7 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={startPay || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -86,7 +87,7 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={endPay || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -105,7 +106,7 @@ export const PositionForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={startDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -124,7 +125,7 @@ export const PositionForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={endDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

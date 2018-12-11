@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, Address } from '../';
+import { alwaysTrue } from '../validators';
 
 export const EducationForm = props => {
     const { changeField, entityData, disabled } = props;
@@ -26,7 +27,7 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -41,7 +42,7 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={degree || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -54,7 +55,7 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={fieldOfStudy || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -74,7 +75,7 @@ export const EducationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={startDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -93,7 +94,7 @@ export const EducationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={endDate || ''}
-                                    onChange={changeField}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

@@ -2,9 +2,10 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
+import { alwaysTrue, lengthLessThan } from '../validators';
 
 export const ProjectForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, invalidFields, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         title,
@@ -27,7 +28,11 @@ export const ProjectForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={title || ''}
-                            onChange={changeField}
+                            valid={!invalidFields.title}
+                            invalid={invalidFields.title}
+                            onChange={changeField.bind(null, lengthLessThan.bind(null, 20))}
+                            // above line is same as saying...
+                            // onChange={event => changeField(arg => lengthLessThan(20, arg), event)}
                         />
                     </FormGroup>
                 </Col>
@@ -42,7 +47,9 @@ export const ProjectForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={description || ''}
-                            onChange={changeField}
+                            valid={!invalidFields.description}
+                            invalid={invalidFields.description}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -58,7 +65,7 @@ export const ProjectForm = props => {
                         selectedId={positionId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -73,7 +80,7 @@ export const ProjectForm = props => {
                         selectedId={educationId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -91,7 +98,9 @@ export const ProjectForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={startDate || ''}
-                                    onChange={changeField}
+                                    valid={!invalidFields.startDate}
+                                    invalid={invalidFields.startDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -110,7 +119,9 @@ export const ProjectForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={endDate || ''}
-                                    onChange={changeField}
+                                    valid={!invalidFields.endDate}
+                                    invalid={invalidFields.endDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

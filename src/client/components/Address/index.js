@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
+import { alwaysTrue } from '../validators';
 
 const Address = props => {
     const { changeField, disabled, address } = props;
@@ -18,7 +19,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={street1 || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -33,7 +34,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={street2 || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -48,7 +49,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={city || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -61,7 +62,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={state || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -74,7 +75,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={zip || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>

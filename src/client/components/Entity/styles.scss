@@ -62,16 +62,22 @@
             white-space: nowrap;
         }
         textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, select:focus, select:active, select:hover, label:focus, .btn:active, .btn.active {
-            border-color: #cccccc;
-            box-shadow: none;
-            -webkit-box-shadow: none;
+            box-shadow: none !important;
+            -webkit-box-shadow: none !important;
         }
         input, textarea, select {
             font-weight: 450;
             color: #0D2846;
             background-color: #66808c !important;
+            border: none;
             &:not(.disabled) {
                 background-color: #8ba4af !important;
+            }
+        }
+        .form-control {
+            border: none !important;
+            &.is-invalid {
+                background-color: #c48b9d !important;
             }
         }
         ::placeholder {
@@ -84,9 +90,6 @@
             overflow-y: hidden;
             width: 100%;
         }
-        .form-control {
-            border: none;
-        } 
     }
 }
 

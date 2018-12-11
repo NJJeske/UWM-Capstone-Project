@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
+import { alwaysTrue } from '../validators';
 
 export const ContactForm = props => {
     const { changeField, entityData, disabled } = props;
@@ -28,7 +29,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={firstName || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -41,7 +42,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={lastName || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -57,7 +58,7 @@ export const ContactForm = props => {
                         selectedId={companyId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -71,7 +72,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={position || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -86,7 +87,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={phone || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -99,7 +100,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={email || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -114,7 +115,7 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={notes || ''}
-                            onChange={changeField}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
