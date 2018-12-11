@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 
 class DocumentsPage extends Component {
     render() {
-        return <div />;
+        return <Container fluid={true} id='DOCUMENTS_PAGE' />;
     }
 }
 

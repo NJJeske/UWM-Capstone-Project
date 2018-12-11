@@ -19,7 +19,9 @@ module.exports = entityConfig => {
     const router = express.Router();
 
     // Get all entities of this type
-    router.get('/', (req, res, next) => {
+    router.get('/:userID', (req, res, next) => {
+        const { userID } = req.params;
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.getAll) {
                 return res.status(200).send(mock);
@@ -27,8 +29,9 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.get(serviceURI)
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/retrievemany/${userID}'`);
+            return axios.get(`${serviceURI}/retrievemany/${userID}`, headers)
                 .then(response => res.send(transform.springToClient.getAll(response.data)))
                 .catch(err => next(err));
         }
@@ -37,6 +40,7 @@ module.exports = entityConfig => {
     // Create a new entity
     router.post('/', (req, res, next) => {
         const { entityData } = req.body;
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.create) {
                 const createdEntity = { id: uuid.v4(), ...entityData };
@@ -46,8 +50,9 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to fetch.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.post(serviceURI, transform.clientToSpring.create(entityData))
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}'`);
+            return axios.post(serviceURI, transform.clientToSpring.create({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.create(response.data)))
                 .catch(err => next(err));
         }
@@ -58,6 +63,7 @@ module.exports = entityConfig => {
         const { entityID } = req.params;
         const { entityData } = req.body;
 
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.update) {
                 mock = mock.map(entity => entity.id === entityID ? entityData : entity);
@@ -66,8 +72,9 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to update.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update(entityData))
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/${entityID}'`);
+            return axios.put(`${serviceURI}/${entityID}`, transform.clientToSpring.update({ entityData }), headers)
                 .then(response => res.send(transform.springToClient.update(response.data)))
                 .catch(err => next(err));
         }
@@ -77,6 +84,7 @@ module.exports = entityConfig => {
     router.delete('/:entityID', (req, res, next) => {
         const { entityID } = req.params;
 
+        /* istanbul ignore next */
         if (useMock) {
             if (mockConfig.responses.delete) {
                 mock = mock.filter(entity => entity.id !== entityID);
@@ -85,8 +93,9 @@ module.exports = entityConfig => {
                 return res.status(401).send({ error: new Error("Uhhhh you're not authorized to delete.") });
             }
         } else {
-            // TODO - Wire this up to make calls to real Spring backend
-            return axios.delete(`${serviceURI}/${entityID}`)
+            const headers = { headers: { Authorization: req.headers.authorization } };
+            console.log(`Hitting backend at '${serviceURI}/${entityID}'`);
+            return axios.delete(`${serviceURI}/${entityID}`, null, headers)
                 .then(response => res.send(transform.springToClient.delete(response.data)))
                 .catch(err => next(err));
         }

@@ -4,6 +4,7 @@ import { Entity } from '.';
 
 const Child = () => <div />;
 const props = {
+    userID: 1,
     entityType: 'apples',
     entityData: { id: '1', rating: '1' },
     children: <Child />,
@@ -126,7 +127,7 @@ describe('Existing Entity', () => {
         it('should call save action creator once, with state data if different from props', () => {
             expect(props.updateEntity).toBeCalled();
             expect(props.updateEntity.mock.calls).toHaveLength(1);
-            expect(props.updateEntity).toBeCalledWith(props.entityType, nextEntityData);
+            expect(props.updateEntity).toBeCalledWith(props.entityType, nextEntityData, props.userID);
         });
 
         it('should enter view mode when state entityData matches props entityData', () => {
@@ -274,7 +275,7 @@ describe('Local Entity', () => {
         it('should call create action creator once with state data', () => {
             expect(props.createEntity).toBeCalled();
             expect(props.createEntity.mock.calls).toHaveLength(1);
-            expect(props.createEntity).toBeCalledWith(localProps.entityType, localNextEntityData);
+            expect(props.createEntity).toBeCalledWith(localProps.entityType, localNextEntityData, props.userID);
         });
     });
 

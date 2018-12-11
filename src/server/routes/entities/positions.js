@@ -8,7 +8,7 @@
 
 module.exports = {
     proxyRoute: '/positions',
-    serviceRoute: '/positions',
+    serviceRoute: '/position',
     mockConfig: {
         root: 'positions',
         responses: {

@@ -7,7 +7,7 @@
 
 module.exports = {
     proxyRoute: '/companies',
-    serviceRoute: '/companies',
+    serviceRoute: '/company',
     mockConfig: {
         root: 'companies',
         responses: {

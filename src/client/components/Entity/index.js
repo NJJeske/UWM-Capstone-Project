@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, deleteLocalEntity, clearErrorEntity } from '../../redux/actions/entityActions';
-import { Container, Row, Button } from 'reactstrap';
+import { Row, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 
@@ -24,9 +24,9 @@ export class Entity extends Component {
         super(props);
         this.changeField = this.changeField.bind(this);
         if (props.entityData._local) {
-            this.state = { mode: CREATING, entityData: props.entityData };
+            this.state = { mode: CREATING, userID: props.userID, entityData: props.entityData };
         } else {
-            this.state = { mode: VIEW };
+            this.state = { mode: VIEW, userID: props.userID };
         }
     }
 
@@ -52,11 +52,11 @@ export class Entity extends Component {
         const newEntityData = this.state.entityData;
         if (this.state.mode === CREATING) {
             this.setState({ mode: SAVING });
-            createEntity(entityType, newEntityData);
+            createEntity(entityType, newEntityData, this.state.userID);
         } else if (!isEqual(entityData, newEntityData)) {
             // Don't make save call if nothing changed
             this.setState({ mode: SAVING });
-            updateEntity(entityType, newEntityData);
+            updateEntity(entityType, newEntityData, this.state.userID);
         } else {
             this.cancel();
         }
@@ -122,31 +122,40 @@ export class Entity extends Component {
             );
         }
 
-        // Set up action bar based on mode
-        const actionBar = mode === 'VIEW' ? (
-            <React.Fragment>
-                <Button className='edit' onClick={this.edit.bind(this)} >
-                    <FontAwesomeIcon icon='edit' />
-                </Button>
-            </React.Fragment>
-        ) : (
-            <React.Fragment>
-                {
-                    // Only show delete button in EDIT mode
-                    mode === 'EDIT' ? (
-                        <Button className='delete' onClick={this.remove.bind(this)}>
-                            <FontAwesomeIcon icon='trash-alt' />
+        // Set up action bar based on mode (only show in VIEW/EDIT)
+        let actionBar = <div />;
+        if (mode === VIEW) {
+            actionBar = (
+                <React.Fragment>
+                    <div />
+                    <div>
+                        <Button onClick={this.edit.bind(this)} className='edit'>
+                            <FontAwesomeIcon icon='edit' />
                         </Button>
-                    ) : null
-                }
-                <Button className='cancel' onClick={this.cancel.bind(this)}>
-                    <FontAwesomeIcon icon='ban' />
-                </Button>
-                <Button className='save' onClick={this.save.bind(this)}>
-                    <FontAwesomeIcon icon='check' />
-                </Button>
-            </React.Fragment>
-        );
+                    </div>
+                </React.Fragment>
+            );
+        } else if ([CREATING, EDIT].includes(mode)) {
+            actionBar = (
+                <React.Fragment>
+                    <div>{
+                        mode === EDIT ? (
+                            <Button onClick={this.remove.bind(this)} className='delete'>
+                                <FontAwesomeIcon icon='trash-alt' />
+                            </Button>
+                        ) : null
+                    }</div>
+                    <div>
+                        <Button onClick={this.save.bind(this)} className='save'>
+                            <FontAwesomeIcon icon='check' />
+                        </Button>
+                        <Button onClick={this.cancel.bind(this)} className='cancel'>
+                            <FontAwesomeIcon icon='ban' />
+                        </Button>
+                    </div>
+                </React.Fragment>
+            );
+        }
 
         // Clone form child (passed through props) to pass additional props to it
         const form = React.cloneElement(this.props.children, {
@@ -157,13 +166,13 @@ export class Entity extends Component {
         });
 
         return (
-            <Container className={`card entity ${entityType}`}>
+            <div className={`entity ${entityType}`}>
                 {overlay}
                 <Row className='actionBar'>
                     {actionBar}
                 </Row>
                 {form}
-            </Container>
+            </div>
         );
     }
 }

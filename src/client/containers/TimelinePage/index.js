@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 
-const TimelinePage = props => (
-    <div />
-);
+class TimelinePage extends Component {
+    render() {
+        return <Container fluid={true} id='TIMELINE_PAGE' />;
+    }
+}
 
 export default TimelinePage;

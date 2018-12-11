@@ -15,7 +15,7 @@
 
 module.exports = {
     proxyRoute: '/contacts',
-    serviceRoute: '/contacts',
+    serviceRoute: '/contact',
     mockConfig: {
         root: 'contacts',
         responses: {

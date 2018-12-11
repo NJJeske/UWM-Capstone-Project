@@ -1,7 +1,6 @@
 import axios from 'axios';
 import uuid from 'uuid';
-import config from '../config';
-const { serverURL } = config;
+import { serverURL, headers } from '../config';
 
 export const actions = {
     ENTITY_CREATE: 'ENTITY_CREATE',
@@ -12,9 +11,9 @@ export const actions = {
     ENTITY_FETCH_ERROR: 'ENTITY_FETCH_ERROR',
 };
 
-export const fetchEntities = entityType => async dispatch => {
+export const fetchEntities = (entityType, userID) => async dispatch => {
     try {
-        const result = await axios.get(`${serverURL}/${entityType}`);
+        const result = await axios.get(`${serverURL}/${entityType}/${userID}`, headers());
         dispatch({
             type: actions.ENTITY_FETCH,
             entityType,
@@ -41,10 +40,11 @@ export const createLocalEntity = entityType => ({
 });
 
 // Create entity in backend and use response to replace it in store
-export const createEntity = (entityType, localEntityData) => async dispatch => {
+export const createEntity = (entityType, localEntityData, userID) => async dispatch => {
     const { _local, id, ...entityData } = localEntityData;
     try {
-        const result = await axios.post(`${serverURL}/${entityType}`, { entityData });
+        const postBody = { entityData: { userID, ...entityData } };
+        const result = await axios.post(`${serverURL}/${entityType}`, postBody, headers());
         dispatch({
             type: actions.ENTITY_CREATE,
             entityType,
@@ -62,9 +62,10 @@ export const createEntity = (entityType, localEntityData) => async dispatch => {
 };
 
 // Update entity in backend and use response to replace it in store
-export const updateEntity = (entityType, entityData) => async dispatch => {
+export const updateEntity = (entityType, entityData, userID) => async dispatch => {
     try {
-        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, { entityData });
+        const postBody = { entityData: { userID, ...entityData } };
+        await axios.put(`${serverURL}/${entityType}/${entityData.id}`, postBody, headers());
         dispatch({
             type: actions.ENTITY_UPDATE,
             entityType,
@@ -91,7 +92,7 @@ export const deleteLocalEntity = (entityType, entityId) => ({
 // Delete entity in backend and use response to delete it in store
 export const deleteEntity = (entityType, entityId) => async dispatch => {
     try {
-        await axios.delete(`${serverURL}/${entityType}/${entityId}`);
+        await axios.delete(`${serverURL}/${entityType}/${entityId}`, headers());
         dispatch({
             type: actions.ENTITY_DELETE,
             entityType,

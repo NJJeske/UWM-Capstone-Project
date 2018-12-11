@@ -11,7 +11,7 @@
 
 module.exports = {
     proxyRoute: '/projects',
-    serviceRoute: '/projects',
+    serviceRoute: '/project',
     mockConfig: {
         root: 'projects',
         responses: {

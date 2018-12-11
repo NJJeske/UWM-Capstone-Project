@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
-import './styles.scss';
 
 const Address = props => {
     const { changeField, disabled, address } = props;

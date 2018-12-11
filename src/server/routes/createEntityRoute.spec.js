@@ -34,24 +34,24 @@ describe('Entity Routes', () => {
 
     describe('get all', () => {
         it('should return backend response', () => {
-            mock.onGet(`${serviceUrl}/applesBackend`).reply(200, [1, 2, 3]);
+            mock.onGet(`${serviceUrl}/applesBackend/retrievemany/user1`).reply(200, [1, 2, 3]);
             return request(app)
-                .get('/apples')
+                .get('/apples/user1')
                 .expect(200)
                 .then(response => expect(response.body).toEqual([1, 2, 3]));
         });
 
         it('should forward errors as 500', () => {
-            mock.onGet(`${serviceUrl}/applesBackend`).reply(404);
+            mock.onGet(`${serviceUrl}/applesBackend/retrievemany/user1`).reply(404);
             return request(app)
-                .get('/apples')
+                .get('/apples/user1')
                 .expect(500);
         });
 
         it('should map for frontend/backend if needed', () => {
-            mock.onGet(`${serviceUrl}/orangesBackend`).reply(200, [1, 2, 3]);
+            mock.onGet(`${serviceUrl}/orangesBackend/retrievemany/user1`).reply(200, [1, 2, 3]);
             return request(app)
-                .get('/oranges')
+                .get('/oranges/user1')
                 .expect(200)
                 .then(response => expect(response.body).toEqual([2, 3, 4]));
         });
@@ -59,31 +59,37 @@ describe('Entity Routes', () => {
 
     describe('create', () => {
         it('should return backend response', () => {
-            const entityData = { rating: 5 };
-            mock.onPost(`${serviceUrl}/applesBackend`, entityData).reply(200, { id: 1, ...entityData });
+            const entityData = { userID: 1, rating: 5 };
+            const postBody = { entityData };
+            mock.onPost(`${serviceUrl}/applesBackend`, postBody).reply(200, { id: 1, ...entityData });
             return request(app)
                 .post('/apples')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(200)
                 .then(response => expect(response.body).toEqual({ id: 1, ...entityData }));
         });
 
         it('should forward errors as 500', () => {
-            const entityData = { rating: 5 };
-            mock.onPost(`${serviceUrl}/applesBackend`, entityData).reply(401);
+            const entityData = { userID: 1, rating: 5 };
+            const postBody = { entityData };
+            mock.onPost(`${serviceUrl}/applesBackend`, postBody).reply(401);
             return request(app)
                 .post('/apples')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(500);
         });
 
         it('should map for frontend/backend if needed', () => {
-            const entityData = { rating: 5 };
-            mock.onPost(`${serviceUrl}/orangesBackend`, { ...entityData, mappedForSpring: true })
+            const entityData = { userID: 1, rating: 5 };
+            const postBody = { entityData };
+            mock.onPost(`${serviceUrl}/orangesBackend`, { ...postBody, mappedForSpring: true })
                 .reply(200, { id: 1, ...entityData });
             return request(app)
                 .post('/oranges')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(200)
                 .then(response => expect(response.body).toEqual({ id: 1, ...entityData, mappedForClient: true }));
         });
@@ -93,27 +99,33 @@ describe('Entity Routes', () => {
         const entityData = { id: 1, rating: 5 };
 
         it('should return backend response', () => {
-            mock.onPut(`${serviceUrl}/applesBackend/1`, entityData).reply(200, entityData);
+            const postBody = { entityData };
+            mock.onPut(`${serviceUrl}/applesBackend/1`, postBody).reply(200, entityData);
             return request(app)
                 .put('/apples/1')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(200)
                 .then(response => expect(response.body).toEqual(entityData));
         });
 
         it('should forward errors as 500', () => {
-            mock.onPut(`${serviceUrl}/applesBackend/1`, entityData).reply(401);
+            const postBody = { entityData };
+            mock.onPut(`${serviceUrl}/applesBackend/1`, postBody).reply(401);
             return request(app)
                 .put('/apples/1')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(500);
         });
 
         it('should map for frontend/backend if needed', () => {
-            mock.onPut(`${serviceUrl}/orangesBackend/1`, { ...entityData, mappedForSpring: true }).reply(200, entityData);
+            const postBody = { entityData };
+            mock.onPut(`${serviceUrl}/orangesBackend/1`, { ...postBody, mappedForSpring: true }).reply(200, entityData);
             return request(app)
                 .put('/oranges/1')
-                .send({ entityData })
+                .set('Authorization', 'Bearer blah')
+                .send(postBody)
                 .expect(200)
                 .then(response => expect(response.body).toEqual({ ...entityData, mappedForClient: true }));
         });

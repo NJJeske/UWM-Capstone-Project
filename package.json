@@ -4,6 +4,7 @@
   "scripts": {
     "start": "npm run server",
     "server": "node ./src/server/app.js",
+    "preserver:dev": "npm run build",
     "server:dev": "nodemon ./src/server/app.js",
     "client": "webpack-dev-server --hot",
     "dev": "concurrently --kill-others \"npm run server:dev\" \"npm run client\"",
@@ -13,12 +14,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-debug": "0.0.4",
     "body-parser": "^1.17.1",
     "config": "^2.0.1",
     "event-stream": "^3.3.4",
     "express": "^4.15.2",
-    "lodash": "^4.17.11",
-    "react-notifications": "^1.4.3"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -91,6 +92,7 @@
   "nodemonConfig": {
     "watch": [
       "config/",
+      "src/client",
       "src/server/"
     ],
     "ignore": [

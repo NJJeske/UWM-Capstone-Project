@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Auth from '../../Auth/Auth';
 
 const auth = new Auth();
-var wrapper = shallow(<LoginButton auth={auth} />);
+const wrapper = shallow(<LoginButton auth={auth} />);
 
 it('should render the component without crashing', () => {
     expect(LoginButton).toHaveLength(1);
