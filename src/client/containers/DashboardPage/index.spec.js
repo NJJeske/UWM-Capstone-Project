@@ -3,6 +3,7 @@ import { DashboardPage } from '.';
 import { shallow } from 'enzyme';
 
 const props = {
+    fetchUser: jest.fn(),
     fetchEntities: jest.fn(),
 };
 
