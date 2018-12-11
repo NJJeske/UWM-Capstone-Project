@@ -1,34 +1,38 @@
 
-//
-// Project schema:
-//
-// id: 'abcdefghijklmnop',
-// title: faker.commerce.productName(),
-// description: faker.lorem.paragraphs(rand.intBetween(1, 5), '\n'),
-// startDate,
-// endDate
-//
-
-function projectMapSpringToClient(springProject) {
-    return { id: springProject.id, positionId: springProject.positionID, educationId: springProject.educationID, title: springProject.title, description: springProject.description, startDate: springProject.startDate, endDate: springProject.endDate };
+function mapSpringToClient(springProject) {
+    return { id: springProject.ID,
+        positionId: springProject.POSITION_ID,
+        educationId: springProject.EDUCATION_ID,
+        title: springProject.TITLE,
+        description: springProject.DESCRIPTION,
+        startDate: springProject.START_DATE,
+        endDate: springProject.END_DATE
+    };
 }
 
-function projectMapClientToSpring(clientProject) {
-    return { id: clientProject.id, userID: clientProject.userID, positionID: clientProject.positionId, educationID: clientProject.educationId, title: clientProject.title, description: clientProject.description, startDate: clientProject.startDate, endDate: clientProject.endDate };
+function mapClientToSpring(clientProject) {
+    return { id: clientProject.id,
+        userID: clientProject.userID,
+        positionID: clientProject.positionId,
+        educationID: clientProject.educationId,
+        title: clientProject.title,
+        description: clientProject.description,
+        startDate: clientProject.startDate,
+        endDate: clientProject.endDate
+    };
 }
 
 const transform = {
     springToClient: {
-        getAll: springData => springData.map(x => projectMapSpringToClient(x)),
-        create: x => projectMapSpringToClient(x),
-        update: x => projectMapSpringToClient(x),
-        delete: x => projectMapSpringToClient(x)
+        getAll: springData => springData.map(x => mapSpringToClient(x)),
+        create: x => mapSpringToClient(x),
+        update: x => mapSpringToClient(x),
+        delete: x => mapSpringToClient(x)
     },
     clientToSpring: {
-        getAll: clientData => clientData.map(x => projectMapClientToSpring(x)),
-        create: x => projectMapClientToSpring(x),
-        update: x => projectMapClientToSpring(x),
-        delete: x => projectMapClientToSpring(x)
+        create: x => mapClientToSpring(x),
+        update: x => mapClientToSpring(x),
+        delete: x => mapClientToSpring(x)
     }
 };
 
