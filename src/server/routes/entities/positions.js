@@ -22,12 +22,12 @@ function mapSpringToClient(springData) {
 function mapClientToSpring(clientData) {
     return { id: clientData.id,
         userID: clientData.userID,
-        company_id: clientData.companyId,
+        companyID: clientData.companyId,
         name: clientData.title,
-        start_pay: clientData.startPay,
-        end_pay: clientData.endPay,
-        start_date: clientData.startDate,
-        end_date: clientData.endDate
+        startPay: clientData.startPay,
+        endPay: clientData.endPay,
+        startDate: clientData.startDate,
+        endDate: clientData.endDate
     };
 }
 
