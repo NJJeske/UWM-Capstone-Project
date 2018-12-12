@@ -8,14 +8,14 @@
 // TODO: Add payperiod (not present on backend)
 
 function mapSpringToClient(springData) {
-    return { id: springData.ID,
-        userID: springData.USER_ID,
-        companyId: springData.COMPANY_ID,
-        title: springData.NAME,
-        startPay: springData.START_PAY,
-        endPay: springData.END_PAY,
-        startDate: springData.START_DATE,
-        endDate: springData.END_DATE
+    return { id: springData.id || springData.ID,
+        userID: springData.userID || springData.USER_ID,
+        companyId: springData.companyID || springData.COMPANY_ID,
+        title: springData.name || springData.NAME,
+        startPay: springData.startPay || springData.START_PAY,
+        endPay: springData.endPay || springData.END_PAY,
+        startDate: springData.startDate || springData.START_DATE,
+        endDate: springData.endDate || springData.END_DATE
     };
 }
 

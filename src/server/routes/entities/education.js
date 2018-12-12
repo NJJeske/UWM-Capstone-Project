@@ -9,13 +9,13 @@
 // TODO: address data
 
 function mapSpringToClient(springData) {
-    return { id: springData.ID,
-        userID: springData.USER_ID,
-        name: springData.SCHOOL_NAME,
-        degree: springData.DEGREE,
-        fieldOfStudy: springData.FIELD_OF_STUDY,
-        startDate: springData.START_DATE,
-        endDate: springData.END_DATE
+    return { id: springData.id || springData.ID,
+        userID: springData.userID || springData.USER_ID,
+        name: springData.schoolName || springData.SCHOOL_NAME,
+        degree: springData.degree || springData.DEGREE,
+        fieldOfStudy: springData.fieldOfStudy || springData.FIELD_OF_STUDY,
+        startDate: springData.startDate || springData.START_DATE,
+        endDate: springData.endDate || springData.END_DATE
     };
 }
 

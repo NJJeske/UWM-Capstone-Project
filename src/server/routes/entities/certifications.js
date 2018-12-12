@@ -14,14 +14,14 @@
  */
 
 function mapSpringToClient(springData) {
-    return { id: springData.ID,
-        userID: springData.USER_ID,
-        name: springData.NAME,
-        authority: springData.AUTHORITY,
-        licenseNumber: springData.LICENSE_NUMBER,
-        acquireDate: springData.ACQUIRED_DATE,
-        expireDate: springData.EXPIRED_DATE,
-        website: springData.WEBSITE
+    return { id: springData.id || springData.ID,
+        userID: springData.userID || springData.USER_ID,
+        name: springData.name || springData.NAME,
+        authority: springData.authority || springData.AUTHORITY,
+        licenseNumber: springData.licenseNumber || springData.LICENSE_NUMBER,
+        acquireDate: springData.acquiredDate || springData.ACQUIRED_DATE,
+        expireDate: springData.expiredDate || springData.EXPIRED_DATE,
+        website: springData.website || springData.WEBSITE
     };
 }
 

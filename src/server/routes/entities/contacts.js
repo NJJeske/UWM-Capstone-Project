@@ -1,14 +1,14 @@
 
 function mapSpringToClient(springData) {
-    return { id: springData.ID,
-        userID: springData.USER_ID,
-        companyId: springData.COMPANY_ID,
-        firstName: springData.FIRST_NAME,
-        lastName: springData.LAST_NAME,
-        position: springData.POSITION,
-        email: springData.EMAIL,
-        phone: springData.PHONE_NUMBER,
-        notes: springData.NOTES
+    return { id: springData.id || springData.ID,
+        userID: springData.userID || springData.USER_ID,
+        companyId: springData.companyID || springData.COMPANY_ID,
+        firstName: springData.firstName || springData.FIRST_NAME,
+        lastName: springData.lastName || springData.LAST_NAME,
+        position: springData.position || springData.POSITION,
+        email: springData.email || springData.EMAIL,
+        phone: springData.phoneNumber || springData.PHONE_NUMBER,
+        notes: springData.notes || springData.NOTES
     };
 }
 
