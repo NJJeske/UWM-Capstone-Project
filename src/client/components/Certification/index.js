@@ -1,10 +1,15 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, notEmpty } from '../validators';
+
+const validate = {
+    name: notEmpty.bind(null) // title can be [1,20] chars, inclusive
+};
 
 export const CertificationForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         name = '',
@@ -14,6 +19,10 @@ export const CertificationForm = props => {
         acquireDate = '',
         expireDate = '',
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.name = !validate.name(name);
+    }
 
     return (
         <Form>
@@ -27,7 +36,9 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.name}
+                            invalid={invalidFields.name}
+                            onChange={changeField.bind(null, validate.name)}
                         />
                     </FormGroup>
                 </Col>
@@ -42,6 +53,8 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={authority}
+                            valid={!invalidFields.authority}
+                            invalid={invalidFields.authority}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -57,6 +70,8 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={licenseNumber}
+                            valid={!invalidFields.licenseNumber}
+                            invalid={invalidFields.licenseNumber}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -72,6 +87,8 @@ export const CertificationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={website}
+                            valid={!invalidFields.website}
+                            invalid={invalidFields.website}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -91,6 +108,8 @@ export const CertificationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={acquireDate}
+                                    valid={!invalidFields.date}
+                                    invalid={invalidFields.date}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
@@ -110,6 +129,8 @@ export const CertificationForm = props => {
                                     disabled={disabled}
                                     className={disabledClass}
                                     value={expireDate}
+                                    valid={!invalidFields.date}
+                                    invalid={invalidFields.date}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
