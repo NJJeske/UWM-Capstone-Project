@@ -6,11 +6,11 @@
 // website: string
 
 function mapSpringToClient(springData) {
-    return { id: springData.ID,
-        userID: springData.USER_ID,
-        name: springData.NAME,
-        phone: springData.PHONE_NUMBER,
-        website: springData.WEBSITE
+    return { id: springData.id || springData.ID,
+        userID: springData.userID || springData.USER_ID,
+        name: springData.name || springData.NAME,
+        phone: springData.phoneNumber || springData.PHONE_NUMBER,
+        website: springData.website || springData.WEBSITE
     };
 }
 
