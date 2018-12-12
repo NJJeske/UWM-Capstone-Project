@@ -1,12 +1,12 @@
 
 function mapSpringToClient(springProject) {
-    return { id: springProject.ID,
-        positionId: springProject.POSITION_ID,
-        educationId: springProject.EDUCATION_ID,
-        title: springProject.TITLE,
-        description: springProject.DESCRIPTION,
-        startDate: springProject.START_DATE,
-        endDate: springProject.END_DATE
+    return { id: springProject.id || springProject.ID,
+        positionId: springProject.positionID || springProject.POSITION_ID,
+        educationId: springProject.educationID || springProject.EDUCATION_ID,
+        title: springProject.title || springProject.TITLE,
+        description: springProject.description || springProject.DESCRIPTION,
+        startDate: springProject.startDate || springProject.START_DATE,
+        endDate: springProject.endDate || springProject.END_DATE
     };
 }
 
