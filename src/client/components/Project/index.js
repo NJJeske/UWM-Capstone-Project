@@ -2,10 +2,15 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
-import { alwaysTrue, lengthLessThan } from '../validators';
+import { alwaysTrue, lengthBetween } from '../validators';
+
+const validate = {
+    title: lengthBetween.bind(null, 1, 20), // title can be [1,20] chars, inclusive
+};
 
 export const ProjectForm = props => {
-    const { changeField, entityData, invalidFields, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         title = '',
@@ -15,6 +20,10 @@ export const ProjectForm = props => {
         startDate = '',
         endDate = '',
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.title = !validate.title(title);
+    }
 
     return (
         <Form>
@@ -30,9 +39,7 @@ export const ProjectForm = props => {
                             value={title}
                             valid={!invalidFields.title}
                             invalid={invalidFields.title}
-                            onChange={changeField.bind(null, lengthLessThan.bind(null, 20))}
-                            // above line is same as saying...
-                            // onChange={event => changeField(arg => lengthLessThan(20, arg), event)}
+                            onChange={changeField.bind(null, validate.title)}
                         />
                     </FormGroup>
                 </Col>
