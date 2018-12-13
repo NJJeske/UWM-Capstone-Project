@@ -1,6 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { find } from 'lodash';
+import moment from 'moment';
 import { Row } from 'reactstrap';
 import './styles.scss';
+
+const dateStyle = date => moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
 const views = {
     'certifications': ({
@@ -11,33 +16,14 @@ const views = {
         acquireDate = '',
         expireDate = ''
     }) => (
-        <div className='certificationsView'>
-            <Row>{name}</Row>
+        <React.Fragment>
+            <Row className='detailsHeader'>{name}</Row>
             <Row>{authority}</Row>
             <Row>{licenseNumber}</Row>
             <Row>{website}</Row>
             <Row>{acquireDate}</Row>
             <Row>{expireDate}</Row>
-        </div>
-    ),
-    'companies': ({
-        name = '',
-        phone = '',
-        website = '',
-        street1 = '',
-        street2 = '',
-        city = '',
-        state = '',
-        zip = ''
-    }) => (
-        <div className='companiesView'>
-            <Row>{name}</Row>
-            <Row>{phone}</Row>
-            <Row>{website}</Row>
-            <Row>{street1}</Row>
-            <Row>{street2}</Row>
-            <Row>{`${city} ${state} ${zip}`}</Row>
-        </div>
+        </React.Fragment>
     ),
     'education': ({
         name = '',
@@ -51,8 +37,8 @@ const views = {
         state = '',
         zip = ''
     }) => (
-        <div className='educationView'>
-            <Row>{name}</Row>
+        <React.Fragment>
+            <Row className='detailsHeader'>{name}</Row>
             <Row>{degree}</Row>
             <Row>{fieldOfStudy}</Row>
             <Row>{startDate}</Row>
@@ -60,10 +46,10 @@ const views = {
             <Row>{street1}</Row>
             <Row>{street2}</Row>
             <Row>{`${city} ${state} ${zip}`}</Row>
-        </div>
+        </React.Fragment>
     ),
     'positions': ({
-        companyId,
+        companyName,
         title = '',
         startPay = '',
         endPay = '',
@@ -71,32 +57,34 @@ const views = {
         startDate = '',
         endDate = ''
     }) => (
-        <div className='positionsView'>
-            <Row>{companyId}</Row>
-            <Row>{title}</Row>
-            <Row>{startPay}</Row>
-            <Row>{endPay}</Row>
-            <Row>{payPeriod}</Row>
-            <Row>{startDate}</Row>
-            <Row>{endDate}</Row>
-        </div>
+        <React.Fragment>
+            <Row className='detailsHeader'>
+                <span>{`${title} at ${companyName}`}</span>
+                <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
+            </Row>
+            <Row>
+                <span>{`${startPay}-${endPay} ${payPeriod}`}</span>
+            </Row>
+        </React.Fragment>
     ),
     'projects': ({
         title = '',
         description = '',
-        positionId,
-        educationId,
+        positionTitle,
+        companyName,
+        educationName,
         startDate = '',
         endDate = '',
     }) => (
-        <div className='projectsView'>
-            <Row>{title}</Row>
+        <React.Fragment>
+            <Row className='detailsHeader'>{title}</Row>
             <Row>{description}</Row>
-            <Row>{positionId}</Row>
-            <Row>{educationId}</Row>
+            <Row>{positionTitle}</Row>
+            <Row>{companyName}</Row>
+            <Row>{educationName}</Row>
             <Row>{startDate}</Row>
             <Row>{endDate}</Row>
-        </div>
+        </React.Fragment>
     ),
 };
 
@@ -109,4 +97,28 @@ const Details = ({ entityType, entityData }) => {
     );
 };
 
-export default Details;
+const mapStateToProps = (state, ownProps) => {
+    const { entityType, entityData } = ownProps;
+    switch (entityType) {
+        case 'positions': {
+            // For positions grab the company name and forward in entityData
+            const { companies } = state.data;
+            const { companyId } = entityData;
+            const { name: companyName } = companyId ? find(companies.list, { id: parseInt(companyId) }) || {} : {};
+            return { entityType, entityData: { ...entityData, companyName } };
+        }
+        case 'projects': {
+            // For projects grab the position name, company name, and education name and forward in entityData
+            const { positions, companies, education } = state.data;
+            const { positionId, educationId } = entityData;
+            const position = positionId ? find(positions.list, { id: parseInt(positionId) }) || {} : {};
+            const { title: positionTitle, companyId } = position;
+            const { name: companyName } = companyId ? find(companies.list, { id: parseInt(companyId) }) || {} : {};
+            const { name: educationName } = educationId ? find(education.list, { id: parseInt(educationId) }) || {} : {};
+            return { entityType, entityData: { ...entityData, positionTitle, companyName, educationName } };
+        }
+        default: return ownProps;
+    }
+};
+
+export default connect(mapStateToProps)(Details);
