@@ -23,8 +23,8 @@ export const getNonCollidingSubsets = entities => {
     return chunk(entities);
 };
 
-const startDate = entity => entity.startDate || entity.acquireDate;
-const endDate = entity => entity.endDate || entity.expireDate;
+const startDate = entity => entity.startDate || entity.acquireDate || entity.endDate || entity.expireDate;
+const endDate = entity => entity.endDate || entity.expireDate || entity.startDate || entity.acquireDate;
 
 export const getMaximumDate = (entities, findEarliest = true) => {
     const lists = Object.values(entities).map(entityType => entityType.list);
@@ -63,7 +63,7 @@ export const buildTimebar = (startYear, endYear) => {
     return [
         {
             id: 'years',
-            title: 'Years',
+            title: '',
             cells: yearRange.map(year => ({
                 id: `timeline-year-${year}`,
                 title: String(year),
@@ -92,14 +92,14 @@ export const buildTimebar = (startYear, endYear) => {
     ];
 };
 
-export const buildElement = (entityType, entity) => {
+export const buildElement = (entityType, startYear, endYear, entity) => {
     const bgColor = nextColor();
     const color = colourIsLight(...hexToRgb(bgColor)) ? '#000000' : '#ffffff';
     return {
         id: `${entityType}-track-element-${entity.id}`,
         title: entity.name || entity.title,
-        start: new Date(entity.startDate || entity.acquireDate || -8640000000000000),
-        end: new Date(entity.endDate || entity.expireDate || 8640000000000000),
+        start: new Date(entity.startDate || entity.acquireDate || `${startYear}-01-01`),
+        end: new Date(entity.endDate || entity.expireDate || `${endYear}-12-31`),
         style: {
             backgroundColor: `#${bgColor}`,
             color,
@@ -110,12 +110,12 @@ export const buildElement = (entityType, entity) => {
     };
 };
 
-export const buildTrack = (entityType, entities, index) => {
+export const buildTrack = (entityType, entities, index, startYear, endYear) => {
     return (
         {
             id: `${entityType}-track-${index}`,
             title: titleCase(entityType),
-            elements: entities.map(buildElement.bind(null, entityType)),
+            elements: entities.map(buildElement.bind(null, entityType, startYear, endYear)),
             hasButton: false,
             isOpen: true,
         }
