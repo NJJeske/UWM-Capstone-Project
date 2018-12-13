@@ -1,17 +1,18 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
+import { alwaysTrue } from '../validators';
 
 export const CertificationForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        name,
-        authority,
-        licenseNumber,
-        website,
-        acquireDate,
-        expireDate,
+        name = '',
+        authority = '',
+        licenseNumber = '',
+        website = '',
+        acquireDate = '',
+        expireDate = '',
     } = entityData;
 
     return (
@@ -25,8 +26,8 @@ export const CertificationForm = props => {
                             placeholder='Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={name || ''}
-                            onChange={changeField}
+                            value={name}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -40,8 +41,8 @@ export const CertificationForm = props => {
                             placeholder='Authority'
                             disabled={disabled}
                             className={disabledClass}
-                            value={authority || ''}
-                            onChange={changeField}
+                            value={authority}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -55,8 +56,8 @@ export const CertificationForm = props => {
                             placeholder='License #'
                             disabled={disabled}
                             className={disabledClass}
-                            value={licenseNumber || ''}
-                            onChange={changeField}
+                            value={licenseNumber}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -70,8 +71,8 @@ export const CertificationForm = props => {
                             placeholder='Website'
                             disabled={disabled}
                             className={disabledClass}
-                            value={website || ''}
-                            onChange={changeField}
+                            value={website}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -89,8 +90,8 @@ export const CertificationForm = props => {
                                     name="acquireDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={acquireDate || ''}
-                                    onChange={changeField}
+                                    value={acquireDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -108,8 +109,8 @@ export const CertificationForm = props => {
                                     name="expireDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={expireDate || ''}
-                                    onChange={changeField}
+                                    value={expireDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

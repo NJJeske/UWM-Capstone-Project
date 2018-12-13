@@ -78,14 +78,14 @@ export class ProfileForm extends Component {
         const { mode, error } = this.state;
         const { userData } = mode === VIEW ? this.props : this.state;
         const {
-            title,
-            firstName,
-            middleName,
-            lastName,
-            mobilePhone,
-            homePhone,
-            email,
-            website,
+            title = '',
+            firstName = '',
+            middleName = '',
+            lastName = '',
+            mobilePhone = '',
+            homePhone = '',
+            email = '',
+            website = '',
         } = userData;
         const disabled = mode !== EDIT;
         const disabledClass = disabled ? 'disabled' : '';
@@ -138,7 +138,7 @@ export class ProfileForm extends Component {
                                 placeholder='Email'
                                 disabled={true}
                                 className='disabled'
-                                value={email || ''}
+                                value={email}
                             />
                         </Col>
                     </FormGroup>
@@ -153,7 +153,7 @@ export class ProfileForm extends Component {
                                 placeholder='Title'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={title || ''}
+                                value={title}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -164,7 +164,7 @@ export class ProfileForm extends Component {
                                 placeholder="First"
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={firstName || ''}
+                                value={firstName}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -175,7 +175,7 @@ export class ProfileForm extends Component {
                                 placeholder="Middle"
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={middleName || ''}
+                                value={middleName}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -186,7 +186,7 @@ export class ProfileForm extends Component {
                                 placeholder='Last'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={lastName || ''}
+                                value={lastName}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -200,7 +200,7 @@ export class ProfileForm extends Component {
                                 placeholder='Home Phone'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={homePhone || ''}
+                                value={homePhone}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -214,7 +214,7 @@ export class ProfileForm extends Component {
                                 placeholder='Mobile Phone'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={mobilePhone || ''}
+                                value={mobilePhone}
                                 onChange={this.changeField}
                             />
                         </Col>
@@ -228,7 +228,7 @@ export class ProfileForm extends Component {
                                 placeholder='Website'
                                 disabled={disabled}
                                 className={disabledClass}
-                                value={website || ''}
+                                value={website}
                                 onChange={this.changeField}
                             />
                         </Col>

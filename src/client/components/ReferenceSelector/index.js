@@ -14,7 +14,7 @@ export const ReferenceSelector = props => {
         name,
         className,
         onChange,
-        selectedId,
+        selectedId = 'none',
         disabled,
         ...entities
     } = props;
@@ -49,7 +49,7 @@ export const ReferenceSelector = props => {
                 name={name}
                 className={className}
                 onChange={onChangeWrapper}
-                value={selectedId || 'none'}
+                value={selectedId}
                 disabled={disabled}
             >
                 <option key='none' value='none'>-</option>

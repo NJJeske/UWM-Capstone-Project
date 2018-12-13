@@ -1,4 +1,5 @@
 export { default as CertificationsPage } from './EntityPages/CertificationsPage';
+export { default as CompaniesPage } from './EntityPages/CompaniesPage';
 export { default as ContactsPage } from './EntityPages/ContactsPage';
 export { default as DashboardPage } from './DashboardPage';
 export { default as DocumentsPage } from './DocumentsPage';

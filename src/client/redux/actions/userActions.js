@@ -24,7 +24,6 @@ export const fetchUser = () => async dispatch => {
             userData
         });
         [
-            'addresses',
             'certifications',
             'companies',
             'contacts',

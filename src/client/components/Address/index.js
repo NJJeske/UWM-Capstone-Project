@@ -1,9 +1,16 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
+import { alwaysTrue } from '../validators';
 
 const Address = props => {
     const { changeField, disabled, address } = props;
-    const { street1, street2, city, state, zip } = address;
+    const {
+        street1 = '',
+        street2 = '',
+        city = '',
+        state = '',
+        zip = ''
+    } = address;
     const disabledClass = disabled ? 'disabled' : '';
 
     return (
@@ -17,8 +24,8 @@ const Address = props => {
                             placeholder='Street 1'
                             disabled={disabled}
                             className={disabledClass}
-                            value={street1 || ''}
-                            onChange={changeField}
+                            value={street1}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -32,8 +39,8 @@ const Address = props => {
                             placeholder='Street 2'
                             disabled={disabled}
                             className={disabledClass}
-                            value={street2 || ''}
-                            onChange={changeField}
+                            value={street2}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -47,8 +54,8 @@ const Address = props => {
                             placeholder='City'
                             disabled={disabled}
                             className={disabledClass}
-                            value={city || ''}
-                            onChange={changeField}
+                            value={city}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -60,8 +67,8 @@ const Address = props => {
                             placeholder='State'
                             disabled={disabled}
                             className={disabledClass}
-                            value={state || ''}
-                            onChange={changeField}
+                            value={state}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -73,8 +80,8 @@ const Address = props => {
                             placeholder='Zip'
                             disabled={disabled}
                             className={disabledClass}
-                            value={zip || ''}
-                            onChange={changeField}
+                            value={zip}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>

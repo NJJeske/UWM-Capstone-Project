@@ -6,6 +6,7 @@ import {
     DocumentsPage,
     EducationPage,
     CertificationsPage,
+    CompaniesPage,
     ExperiencePage,
     ProfilePage,
     ProjectsPage,
@@ -46,6 +47,7 @@ const routes = ({ store }) => {
                 <SecretRoute path="/contacts" component={ContactsPage} />
                 <SecretRoute path="/documents" component={DocumentsPage} />
                 <SecretRoute path="/education" component={EducationPage} />
+                <SecretRoute path="/companies" component={CompaniesPage} />
                 <SecretRoute path="/certifications" component={CertificationsPage} />
                 <SecretRoute path="/experience" component={ExperiencePage} />
                 <SecretRoute path="/projects" component={ProjectsPage} />

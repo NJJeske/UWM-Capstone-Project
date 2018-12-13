@@ -12,6 +12,7 @@ const props = {
         'startDate': '2000-01-01',
         'endDate': '3000-07-27',
     },
+    invalidFields: {},
     disabled: true,
 };
 
@@ -44,7 +45,7 @@ describe('PositionForm', () => {
             input.simulate('change', event);
             expect(props.changeField).toBeCalled();
             expect(props.changeField.mock.calls).toHaveLength(1);
-            expect(props.changeField).toBeCalledWith(event);
+            expect(props.changeField).toBeCalledWith(expect.anything(), event);
             props.changeField.mockReset();
         });
     });

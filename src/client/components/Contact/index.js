@@ -2,18 +2,19 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
+import { alwaysTrue } from '../validators';
 
 export const ContactForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        firstName,
-        lastName,
+        firstName = '',
+        lastName = '',
         companyId,
-        position,
-        phone,
-        email,
-        notes,
+        position = '',
+        phone = '',
+        email = '',
+        notes = '',
     } = entityData;
 
     return (
@@ -27,8 +28,8 @@ export const ContactForm = props => {
                             placeholder='First Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={firstName || ''}
-                            onChange={changeField}
+                            value={firstName}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -40,8 +41,8 @@ export const ContactForm = props => {
                             placeholder='Last Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={lastName || ''}
-                            onChange={changeField}
+                            value={lastName}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -57,7 +58,7 @@ export const ContactForm = props => {
                         selectedId={companyId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -70,8 +71,8 @@ export const ContactForm = props => {
                             placeholder='Position'
                             disabled={disabled}
                             className={disabledClass}
-                            value={position || ''}
-                            onChange={changeField}
+                            value={position}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -85,8 +86,8 @@ export const ContactForm = props => {
                             placeholder='Phone'
                             disabled={disabled}
                             className={disabledClass}
-                            value={phone || ''}
-                            onChange={changeField}
+                            value={phone}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -98,8 +99,8 @@ export const ContactForm = props => {
                             placeholder='Email'
                             disabled={disabled}
                             className={disabledClass}
-                            value={email || ''}
-                            onChange={changeField}
+                            value={email}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -113,8 +114,8 @@ export const ContactForm = props => {
                             placeholder='Notes'
                             disabled={disabled}
                             className={disabledClass}
-                            value={notes || ''}
-                            onChange={changeField}
+                            value={notes}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>

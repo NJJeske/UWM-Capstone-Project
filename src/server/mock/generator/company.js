@@ -5,5 +5,5 @@ module.exports = (faker, rand) => ({
     name: faker.company.companyName(),
     phone: faker.phone.phoneNumber('###-###-####'),
     website: rand.maybe(faker.internet.url(), 0.4),
-    address: addressGenerator(faker, rand)
+    ...addressGenerator(faker, rand)
 });
