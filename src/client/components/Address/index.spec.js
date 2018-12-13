@@ -10,6 +10,7 @@ const props = {
         state: '',
         zip: ''
     },
+    invalidFields: {},
     changeField: jest.fn(),
     disabled: false,
 };
@@ -43,7 +44,7 @@ describe('Address Form Fragment', () => {
             input.simulate('change', event);
             expect(props.changeField).toBeCalled();
             expect(props.changeField.mock.calls).toHaveLength(1);
-            expect(props.changeField).toBeCalledWith(event);
+            expect(props.changeField).toBeCalledWith(expect.anything(), event);
             props.changeField.mockReset();
         });
     });

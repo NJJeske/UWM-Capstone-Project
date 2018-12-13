@@ -2,17 +2,18 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
+import { alwaysTrue, lengthLessThan } from '../validators';
 
 export const ProjectForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, invalidFields, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        title,
-        description,
+        title = '',
+        description = '',
         positionId,
         educationId,
-        startDate,
-        endDate,
+        startDate = '',
+        endDate = '',
     } = entityData;
 
     return (
@@ -26,8 +27,12 @@ export const ProjectForm = props => {
                             placeholder='Title'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title || ''}
-                            onChange={changeField}
+                            value={title}
+                            valid={!invalidFields.title}
+                            invalid={invalidFields.title}
+                            onChange={changeField.bind(null, lengthLessThan.bind(null, 20))}
+                            // above line is same as saying...
+                            // onChange={event => changeField(arg => lengthLessThan(20, arg), event)}
                         />
                     </FormGroup>
                 </Col>
@@ -41,8 +46,10 @@ export const ProjectForm = props => {
                             placeholder='Description'
                             disabled={disabled}
                             className={disabledClass}
-                            value={description || ''}
-                            onChange={changeField}
+                            value={description}
+                            valid={!invalidFields.description}
+                            invalid={invalidFields.description}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -58,7 +65,7 @@ export const ProjectForm = props => {
                         selectedId={positionId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -73,7 +80,7 @@ export const ProjectForm = props => {
                         selectedId={educationId}
                         disabled={disabled}
                         className={disabledClass}
-                        onChange={changeField}
+                        onChange={changeField.bind(null, alwaysTrue)}
                     />
                 </Col>
             </Row>
@@ -90,8 +97,10 @@ export const ProjectForm = props => {
                                     name="startDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={startDate || ''}
-                                    onChange={changeField}
+                                    value={startDate}
+                                    valid={!invalidFields.startDate}
+                                    invalid={invalidFields.startDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>
@@ -109,8 +118,10 @@ export const ProjectForm = props => {
                                     name="endDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={endDate || ''}
-                                    onChange={changeField}
+                                    value={endDate}
+                                    valid={!invalidFields.endDate}
+                                    invalid={invalidFields.endDate}
+                                    onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
                         </Col>

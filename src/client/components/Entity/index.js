@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { isEqual } from 'lodash';
+import { omit, isEqual } from 'lodash';
 import { createEntity, updateEntity, deleteEntity, deleteLocalEntity, clearErrorEntity } from '../../redux/actions/entityActions';
 import { Row, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,9 +24,9 @@ export class Entity extends Component {
         super(props);
         this.changeField = this.changeField.bind(this);
         if (props.entityData._local) {
-            this.state = { mode: CREATING, entityData: props.entityData };
+            this.state = { mode: CREATING, entityData: props.entityData, invalidFields: {} };
         } else {
-            this.state = { mode: VIEW };
+            this.state = { mode: VIEW, invalidFields: {} };
         }
     }
 
@@ -40,14 +40,15 @@ export class Entity extends Component {
         if (this.state.mode === CREATING) {
             const { deleteLocalEntity, entityType, entityData } = this.props;
             deleteLocalEntity(entityType, entityData.id);
-            this.setState({ mode: DELETING, entityData: null });
+            this.setState({ mode: DELETING, entityData: null, invalidFields: {} });
         } else {
             // Clear form data from local state
-            this.setState({ mode: VIEW, entityData: null });
+            this.setState({ mode: VIEW, entityData: null, invalidFields: {} });
         }
     }
 
     save() {
+        // Shouldn't have to check for invalid fields here as long as we disable the save button
         const { userID, createEntity, updateEntity, entityType, entityData } = this.props;
         const newEntityData = this.state.entityData;
         if (this.state.mode === CREATING) {
@@ -84,23 +85,30 @@ export class Entity extends Component {
             }
             // If SAVING and store matches local entity data then save has completed or nothing changed anyway -> enter view state
             if (nextState.mode === SAVING && isEqual(nextProps.entityData, nextState.entityData)) {
-                return { mode: VIEW, entityData: null };
+                return { mode: VIEW, entityData: null, invalidFields: {} };
             }
         }
         return null;
     }
 
-    changeField(event) {
+    changeField(validator, event) {
         const { name, value } = event.target;
+        const { entityData, invalidFields } = this.state;
+        const isValid = validator(value);
+
         const newEntityData = {
-            ...this.state.entityData,
+            ...entityData,
             [name]: value,
         };
-        this.setState({ entityData: newEntityData });
+        const newInvalidFields = isValid ? omit(invalidFields, [name]) : { ...invalidFields, [name]: true };
+        this.setState({
+            entityData: newEntityData,
+            invalidFields: newInvalidFields,
+        });
     }
 
     render() {
-        const { mode, error } = this.state;
+        const { mode, error, invalidFields } = this.state;
         const { entityType } = this.props;
         const { entityData } = mode === VIEW ? this.props : this.state;
 
@@ -146,7 +154,7 @@ export class Entity extends Component {
                         ) : null
                     }</div>
                     <div>
-                        <Button onClick={this.save.bind(this)} className='save'>
+                        <Button onClick={this.save.bind(this)} className='save' disabled={Boolean(Object.keys(invalidFields).length)}>
                             <FontAwesomeIcon icon='check' />
                         </Button>
                         <Button onClick={this.cancel.bind(this)} className='cancel'>
@@ -161,6 +169,7 @@ export class Entity extends Component {
         const form = React.cloneElement(this.props.children, {
             changeField: this.changeField, // It can update entity's state when a field changes
             entityData, // Its fields hold these values
+            invalidFields, // Object containing keys with names of each invalid field
             isLocal: this.props.entityData._local,
             disabled: ![CREATING, EDIT].includes(mode),
         });

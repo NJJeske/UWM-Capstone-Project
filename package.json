@@ -4,10 +4,7 @@
   "scripts": {
     "start": "npm run server",
     "server": "node ./src/server/app.js",
-    "preserver:dev": "npm run build",
-    "server:dev": "nodemon ./src/server/app.js",
-    "client": "webpack-dev-server --hot",
-    "dev": "concurrently --kill-others \"npm run server:dev\" \"npm run client\"",
+    "server:dev": "nodemon --ext js,scss --exec \"npm run build && npm start\"",
     "build": "webpack",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore ."
