@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from './redux/store.js';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store.js';
 import Routes from './routes.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles.scss';
@@ -23,9 +24,11 @@ library.add(faEdit, faCheck, faBan, faTrashAlt, faHome, faUserCog, faFileAlt, fa
 
 export const App = () => (
     <Provider store={store}>
-        <BrowserRouter>
-            <Routes store={store} />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                <Routes store={store} />
+            </BrowserRouter>
+        </PersistGate>
     </Provider>
 );
 
