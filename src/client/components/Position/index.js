@@ -136,14 +136,6 @@ export const PositionForm = props => {
     );
 };
 
-export const PositionView = ({ entityData }) => {
-    return (
-        <div className='positionView'>
-            <p>{JSON.stringify(entityData, null, 2)}</p>
-        </div>
-    );
-};
-
 export default props => (
     <Entity entityType='positions' entityData={props}>
         <PositionForm />

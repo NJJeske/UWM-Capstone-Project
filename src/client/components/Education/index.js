@@ -105,14 +105,6 @@ export const EducationForm = props => {
     );
 };
 
-export const EducationView = ({ entityData }) => {
-    return (
-        <div className='educationView'>
-            <p>{JSON.stringify(entityData, null, 2)}</p>
-        </div>
-    );
-};
-
 export default props => (
     <Entity entityType='education' entityData={props}>
         <EducationForm />

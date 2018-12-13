@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { pick } from 'lodash';
 import { Container } from 'reactstrap';
 import Timeline from 'react-timelines';
-import { Sidebar, Header } from '../../components';
+import { Sidebar, Header, Details } from '../../components';
 import { getNonCollidingSubsets, buildTrack, buildTimebar, getMaximumDate } from './helpers';
 import 'react-timelines/lib/css/style.css';
 import './styles.scss';
@@ -52,13 +52,14 @@ class TimelinePage extends Component {
         const { auth, startYear, endYear } = this.props;
         const { zoom, timebar, tracks, details } = this.state;
 
-        const detailsBody = details ? (
-            <div id='TIMELINE_DETAILS'>
-                {details.entityType}
-                {JSON.stringify(details.entityData, null, 2)}
-            </div>
-        ) : null;
+        // Details
+        let detailsBody = null;
+        if (details) {
+            const { entityType, entityData } = details;
+            detailsBody = <Details entityType={entityType} entityData={entityData}/>
+        }
 
+        // Timeline
         const mainBody = tracks ? (
             <Timeline
                 scale={{

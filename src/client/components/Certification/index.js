@@ -121,14 +121,6 @@ export const CertificationForm = props => {
     );
 };
 
-export const CertificationView = ({ entityData }) => {
-    return (
-        <div className='certificationView'>
-            <p>{JSON.stringify(entityData, null, 2)}</p>
-        </div>
-    );
-};
-
 export default props => (
     <Entity entityType='certifications' entityData={props}>
         <CertificationForm />
