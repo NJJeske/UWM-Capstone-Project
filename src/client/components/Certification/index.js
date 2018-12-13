@@ -122,19 +122,9 @@ export const CertificationForm = props => {
 };
 
 export const CertificationView = ({ entityData }) => {
-    const {
-        name = '',
-        authority = '',
-        licenseNumber = '',
-        website = '',
-        acquireDate = '',
-        expireDate = '',
-    } = entityData;
     return (
         <div className='certificationView'>
-            <h1>Certification{name}</h1>
-            <h2>Authority: </h2>
-            <p></p>
+            <p>{JSON.stringify(entityData, null, 2)}</p>
         </div>
     );
 };

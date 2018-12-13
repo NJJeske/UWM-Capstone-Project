@@ -90,4 +90,12 @@ const Address = props => {
     );
 };
 
+export const AddressView = ({ address }) => {
+    return (
+        <div className='addressView'>
+            <p>{JSON.stringify(address, null, 2)}</p>
+        </div>
+    );
+};
+
 export default Address;

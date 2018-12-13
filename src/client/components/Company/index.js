@@ -63,6 +63,14 @@ export const CompanyForm = props => {
     );
 };
 
+export const CompanyView = ({ entityData }) => {
+    return (
+        <div className='companyView'>
+            <p>{JSON.stringify(entityData, null, 2)}</p>
+        </div>
+    );
+};
+
 export default props => (
     <Entity entityType='companies' entityData={props}>
         <CompanyForm />

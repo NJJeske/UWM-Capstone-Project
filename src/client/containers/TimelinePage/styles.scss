@@ -1,4 +1,14 @@
 #TIMELINE_PAGE {
+  .emptyTimeline {
+    text-align: center;
+    font-size: 32pt;
+    color: #b5d3e0;
+    font-weight: 500;
+    p {
+      font-size: 0.6em;
+      padding-top: 1em;
+    }
+  }
   .rt-controls {
     background-color: transparent;
     padding-left: 40px;

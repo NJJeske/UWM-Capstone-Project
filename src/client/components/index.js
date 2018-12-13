@@ -1,13 +1,13 @@
-export { default as Address } from './Address';
+export { default as Address, AddressView } from './Address';
 export { default as Certification, CertificationView } from './Certification';
-export { default as Company } from './Company';
+export { default as Company, CompanyView } from './Company';
 export { default as Contact } from './Contact';
-export { default as Education } from './Education';
+export { default as Education, EducationView } from './Education';
 export { default as Entity } from './Entity';
 export { default as Header } from './Header';
-export { default as Position } from './Position';
+export { default as Position, PositionView } from './Position';
 export { default as ProfileButton } from './ProfileButton';
-export { default as Project } from './Project';
+export { default as Project, ProjectView } from './Project';
 export { default as ReferenceSelector } from './ReferenceSelector';
 export { default as Sidebar } from './Sidebar';
 export { default as ProfileForm } from './ProfileForm';

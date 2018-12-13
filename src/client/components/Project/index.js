@@ -132,6 +132,14 @@ export const ProjectForm = props => {
     );
 };
 
+export const ProjectView = ({ entityData }) => {
+    return (
+        <div className='projectView'>
+            <p>{JSON.stringify(entityData, null, 2)}</p>
+        </div>
+    );
+};
+
 export default props => (
     <Entity entityType='projects' entityData={props}>
         <ProjectForm />

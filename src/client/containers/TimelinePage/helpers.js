@@ -92,14 +92,14 @@ export const buildTimebar = (startYear, endYear) => {
     ];
 };
 
-export const buildElement = (entityType, startYear, endYear, entity) => {
+export const buildElement = (entityType, startYear, endYear, entityData) => {
     const bgColor = nextColor();
     const color = colourIsLight(...hexToRgb(bgColor)) ? '#000000' : '#ffffff';
     return {
-        id: `${entityType}-track-element-${entity.id}`,
-        title: entity.name || entity.title,
-        start: new Date(entity.startDate || entity.acquireDate || `${startYear}-01-01`),
-        end: new Date(entity.endDate || entity.expireDate || `${endYear}-12-31`),
+        id: `${entityType}-track-element-${entityData.id}`,
+        title: entityData.name || entityData.title || '',
+        start: new Date(entityData.startDate || entityData.acquireDate || `${startYear}-01-01`),
+        end: new Date(entityData.endDate || entityData.expireDate || `${endYear}-12-31`),
         style: {
             backgroundColor: `#${bgColor}`,
             color,
@@ -107,6 +107,8 @@ export const buildElement = (entityType, startYear, endYear, entity) => {
             boxShadow: '1px 1px 0px rgba(0, 0, 0, 0.25)',
             textTransform: 'capitalize',
         },
+        entityType,
+        entityData,
     };
 };
 
