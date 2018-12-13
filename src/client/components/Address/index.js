@@ -4,7 +4,13 @@ import { alwaysTrue } from '../validators';
 
 const Address = props => {
     const { changeField, disabled, address } = props;
-    const { street1, street2, city, state, zip } = address;
+    const {
+        street1 = '',
+        street2 = '',
+        city = '',
+        state = '',
+        zip = ''
+    } = address;
     const disabledClass = disabled ? 'disabled' : '';
 
     return (
@@ -18,7 +24,7 @@ const Address = props => {
                             placeholder='Street 1'
                             disabled={disabled}
                             className={disabledClass}
-                            value={street1 || ''}
+                            value={street1}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -33,7 +39,7 @@ const Address = props => {
                             placeholder='Street 2'
                             disabled={disabled}
                             className={disabledClass}
-                            value={street2 || ''}
+                            value={street2}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -48,7 +54,7 @@ const Address = props => {
                             placeholder='City'
                             disabled={disabled}
                             className={disabledClass}
-                            value={city || ''}
+                            value={city}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -61,7 +67,7 @@ const Address = props => {
                             placeholder='State'
                             disabled={disabled}
                             className={disabledClass}
-                            value={state || ''}
+                            value={state}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -74,7 +80,7 @@ const Address = props => {
                             placeholder='Zip'
                             disabled={disabled}
                             className={disabledClass}
-                            value={zip || ''}
+                            value={zip}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>

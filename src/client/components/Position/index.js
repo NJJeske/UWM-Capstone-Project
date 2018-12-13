@@ -8,12 +8,12 @@ export const PositionForm = props => {
     const disabledClass = disabled ? 'disabled' : '';
     const {
         companyId,
-        title,
-        startPay,
-        endPay,
-        payPeriod,
-        startDate,
-        endDate
+        title = '',
+        startPay = '',
+        endPay = '',
+        payPeriod = '',
+        startDate = '',
+        endDate = ''
     } = entityData;
 
     return (
@@ -42,7 +42,7 @@ export const PositionForm = props => {
                             placeholder='Position'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title || ''}
+                            value={title}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -73,7 +73,7 @@ export const PositionForm = props => {
                             placeholder='Start Pay'
                             disabled={disabled}
                             className={disabledClass}
-                            value={startPay || ''}
+                            value={startPay}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -86,7 +86,7 @@ export const PositionForm = props => {
                             placeholder='End Pay'
                             disabled={disabled}
                             className={disabledClass}
-                            value={endPay || ''}
+                            value={endPay}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -105,7 +105,7 @@ export const PositionForm = props => {
                                     name="startDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={startDate || ''}
+                                    value={startDate}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
@@ -124,7 +124,7 @@ export const PositionForm = props => {
                                     name="endDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={endDate || ''}
+                                    value={endDate}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>

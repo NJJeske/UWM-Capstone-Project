@@ -74,7 +74,7 @@ describe('Existing Entity', () => {
             expect(entity.find('Child').prop('entityData')).toEqual(nextEntityData);
         });
         it('should update state when changeField is invoked', () => {
-            entity.instance().changeField({
+            entity.instance().changeField(x => true, {
                 target: { name: 'rating', value: nextEntityData.rating }
             });
             expect(entity.state('entityData')).toEqual(nextEntityData);

@@ -12,6 +12,7 @@ const props = {
         'email': 'bobsmith@whatever.com',
         'notes': 'this is a personn\nand he does stuff.',
     },
+    invalidFields: {},
     disabled: true,
 };
 
@@ -43,7 +44,7 @@ describe('ContactForm', () => {
             input.simulate('change', event);
             expect(props.changeField).toBeCalled();
             expect(props.changeField.mock.calls).toHaveLength(1);
-            expect(props.changeField).toBeCalledWith(event);
+            expect(props.changeField).toBeCalledWith(expect.anything(), event);
             props.changeField.mockReset();
         });
     });

@@ -8,12 +8,12 @@ export const ProjectForm = props => {
     const { changeField, entityData, invalidFields, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        title,
-        description,
+        title = '',
+        description = '',
         positionId,
         educationId,
-        startDate,
-        endDate,
+        startDate = '',
+        endDate = '',
     } = entityData;
 
     return (
@@ -27,7 +27,7 @@ export const ProjectForm = props => {
                             placeholder='Title'
                             disabled={disabled}
                             className={disabledClass}
-                            value={title || ''}
+                            value={title}
                             valid={!invalidFields.title}
                             invalid={invalidFields.title}
                             onChange={changeField.bind(null, lengthLessThan.bind(null, 20))}
@@ -46,7 +46,7 @@ export const ProjectForm = props => {
                             placeholder='Description'
                             disabled={disabled}
                             className={disabledClass}
-                            value={description || ''}
+                            value={description}
                             valid={!invalidFields.description}
                             invalid={invalidFields.description}
                             onChange={changeField.bind(null, alwaysTrue)}
@@ -97,7 +97,7 @@ export const ProjectForm = props => {
                                     name="startDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={startDate || ''}
+                                    value={startDate}
                                     valid={!invalidFields.startDate}
                                     invalid={invalidFields.startDate}
                                     onChange={changeField.bind(null, alwaysTrue)}
@@ -118,7 +118,7 @@ export const ProjectForm = props => {
                                     name="endDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={endDate || ''}
+                                    value={endDate}
                                     valid={!invalidFields.endDate}
                                     invalid={invalidFields.endDate}
                                     onChange={changeField.bind(null, alwaysTrue)}

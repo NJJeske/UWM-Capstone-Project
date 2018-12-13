@@ -21,6 +21,7 @@ const props = {
         'endDate': '2010-01-12',
         ...address
     },
+    invalidFields: {},
     disabled: true,
 };
 
@@ -64,7 +65,7 @@ describe('EducationForm', () => {
             input.simulate('change', event);
             expect(props.changeField).toBeCalled();
             expect(props.changeField.mock.calls).toHaveLength(1);
-            expect(props.changeField).toBeCalledWith(event);
+            expect(props.changeField).toBeCalledWith(expect.anything(), event);
             props.changeField.mockReset();
         });
     });

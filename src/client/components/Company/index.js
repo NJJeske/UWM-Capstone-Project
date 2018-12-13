@@ -1,21 +1,15 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import { Entity, Address } from '../';
-
-// id: faker.random.uuid(),
-//     name: faker.company.companyName(),
-//     phone: faker.phone.phoneNumber('###-###-####'),
-//     website: rand.maybe(faker.internet.url(), 0.4),
-//     address: addressGenerator(faker, rand)
+import { alwaysTrue } from '../validators';
 
 export const CompanyForm = props => {
-    console.log(props);
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        name,
-        phone,
-        website,
+        name = '',
+        phone = '',
+        website = '',
         ...address
     } = entityData;
 
@@ -30,8 +24,8 @@ export const CompanyForm = props => {
                             placeholder='Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={name || ''}
-                            onChange={changeField}
+                            value={name}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -45,8 +39,8 @@ export const CompanyForm = props => {
                             placeholder='Phone'
                             disabled={disabled}
                             className={disabledClass}
-                            value={phone || ''}
-                            onChange={changeField}
+                            value={phone}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -58,8 +52,8 @@ export const CompanyForm = props => {
                             placeholder='Website'
                             disabled={disabled}
                             className={disabledClass}
-                            value={website || ''}
-                            onChange={changeField}
+                            value={website}
+                            onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
                 </Col>
@@ -69,10 +63,8 @@ export const CompanyForm = props => {
     );
 };
 
-export default props => {
-    console.log(props);
-    return (
+export default props => (
     <Entity entityType='companies' entityData={props}>
         <CompanyForm />
     </Entity>
-)};
+);

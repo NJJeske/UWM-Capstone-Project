@@ -1,7 +1,7 @@
 import React from 'react';
 import { omit } from 'lodash';
 import { shallow } from 'enzyme';
-import { EducationForm } from '.';
+import { CompanyForm } from '.';
 
 const address = {
     'street1': '123 1st ave',
@@ -15,19 +15,18 @@ const props = {
     changeField: jest.fn(),
     entityData: {
         'name': 'uwm',
-        'degree': 'masters',
-        'fieldOfStudy': 'economics',
-        'startDate': '2014-06-04',
-        'endDate': '2010-01-12',
+        'phone': '262-389-0787',
+        'website': 'www.cool.com',
         ...address
     },
+    invalidFields: {},
     disabled: true,
 };
 
-describe('EducationForm', () => {
+describe('CompanyForm', () => {
     let form;
     beforeEach(() => {
-        form = shallow(<EducationForm {...props} />);
+        form = shallow(<CompanyForm {...props} />);
     });
 
     it('should render the component without crashing', () => {
@@ -36,7 +35,7 @@ describe('EducationForm', () => {
     it('should populate its child fields with props.entityData', () => {
         // Ignoring ReferenceSelectors for now since they'd need a mock store
         const inputs = form.find('Input');
-        expect(inputs).toHaveLength(5);
+        expect(inputs).toHaveLength(3);
         Object.entries(omit(props.entityData, Object.keys(address))).forEach(([name, value]) => {
             expect(inputs.findWhere(input => input.prop('name') === name).prop('value')).toEqual(value);
         });
@@ -64,7 +63,7 @@ describe('EducationForm', () => {
             input.simulate('change', event);
             expect(props.changeField).toBeCalled();
             expect(props.changeField.mock.calls).toHaveLength(1);
-            expect(props.changeField).toBeCalledWith(event);
+            expect(props.changeField).toBeCalledWith(expect.anything(), event);
             props.changeField.mockReset();
         });
     });

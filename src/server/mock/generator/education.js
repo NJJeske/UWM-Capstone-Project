@@ -10,6 +10,6 @@ module.exports = (faker, rand) => {
         fieldOfStudy: `${faker.name.jobDescriptor()} ${faker.name.jobArea()}`,
         startDate,
         endDate,
-        address: addressGenerator(faker, rand),
+        ...addressGenerator(faker, rand),
     };
 };

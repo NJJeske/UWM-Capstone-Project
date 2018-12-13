@@ -7,12 +7,12 @@ export const CertificationForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        name,
-        authority,
-        licenseNumber,
-        website,
-        acquireDate,
-        expireDate,
+        name = '',
+        authority = '',
+        licenseNumber = '',
+        website = '',
+        acquireDate = '',
+        expireDate = '',
     } = entityData;
 
     return (
@@ -26,7 +26,7 @@ export const CertificationForm = props => {
                             placeholder='Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={name || ''}
+                            value={name}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -41,7 +41,7 @@ export const CertificationForm = props => {
                             placeholder='Authority'
                             disabled={disabled}
                             className={disabledClass}
-                            value={authority || ''}
+                            value={authority}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -56,7 +56,7 @@ export const CertificationForm = props => {
                             placeholder='License #'
                             disabled={disabled}
                             className={disabledClass}
-                            value={licenseNumber || ''}
+                            value={licenseNumber}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -71,7 +71,7 @@ export const CertificationForm = props => {
                             placeholder='Website'
                             disabled={disabled}
                             className={disabledClass}
-                            value={website || ''}
+                            value={website}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -90,7 +90,7 @@ export const CertificationForm = props => {
                                     name="acquireDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={acquireDate || ''}
+                                    value={acquireDate}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>
@@ -109,7 +109,7 @@ export const CertificationForm = props => {
                                     name="expireDate"
                                     disabled={disabled}
                                     className={disabledClass}
-                                    value={expireDate || ''}
+                                    value={expireDate}
                                     onChange={changeField.bind(null, alwaysTrue)}
                                 />
                             </FormGroup>

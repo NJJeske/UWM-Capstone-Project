@@ -14,13 +14,13 @@ import {
     // Entity action bar
     faEdit, faCheck, faBan, faTrashAlt,
     // Dashboard cluster icons
-    faHome, faFileAlt, faGraduationCap, faBriefcase, faCalendarAlt, faCertificate, faProjectDiagram, faAddressBook,
+    faHome, faFileAlt, faGraduationCap, faBriefcase, faCalendarAlt, faCertificate, faProjectDiagram, faAddressBook, faBuilding,
     // Top-right profile button
     faUserCog,
     // Callback page
     faSpinner, faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
-library.add(faEdit, faCheck, faBan, faTrashAlt, faHome, faUserCog, faFileAlt, faGraduationCap, faBriefcase, faCalendarAlt, faCertificate, faProjectDiagram, faAddressBook, faSpinner, faExclamationCircle);
+library.add(faEdit, faCheck, faBan, faTrashAlt, faHome, faUserCog, faFileAlt, faGraduationCap, faBriefcase, faCalendarAlt, faBuilding, faCertificate, faProjectDiagram, faAddressBook, faSpinner, faExclamationCircle);
 
 export const App = () => (
     <Provider store={store}>

@@ -8,13 +8,13 @@ export const ContactForm = props => {
     const { changeField, entityData, disabled } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
-        firstName,
-        lastName,
+        firstName = '',
+        lastName = '',
         companyId,
-        position,
-        phone,
-        email,
-        notes,
+        position = '',
+        phone = '',
+        email = '',
+        notes = '',
     } = entityData;
 
     return (
@@ -28,7 +28,7 @@ export const ContactForm = props => {
                             placeholder='First Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={firstName || ''}
+                            value={firstName}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -41,7 +41,7 @@ export const ContactForm = props => {
                             placeholder='Last Name'
                             disabled={disabled}
                             className={disabledClass}
-                            value={lastName || ''}
+                            value={lastName}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -71,7 +71,7 @@ export const ContactForm = props => {
                             placeholder='Position'
                             disabled={disabled}
                             className={disabledClass}
-                            value={position || ''}
+                            value={position}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -86,7 +86,7 @@ export const ContactForm = props => {
                             placeholder='Phone'
                             disabled={disabled}
                             className={disabledClass}
-                            value={phone || ''}
+                            value={phone}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -99,7 +99,7 @@ export const ContactForm = props => {
                             placeholder='Email'
                             disabled={disabled}
                             className={disabledClass}
-                            value={email || ''}
+                            value={email}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>
@@ -114,7 +114,7 @@ export const ContactForm = props => {
                             placeholder='Notes'
                             disabled={disabled}
                             className={disabledClass}
-                            value={notes || ''}
+                            value={notes}
                             onChange={changeField.bind(null, alwaysTrue)}
                         />
                     </FormGroup>

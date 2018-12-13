@@ -16,6 +16,7 @@ export class Sidebar extends Component {
                 <Link className="menu-item" to="/experience">Experience</Link>
                 <Link className="menu-item" to="/education">Education</Link>
                 <Link className="menu-item" to="/projects">Projects</Link>
+                <Link className="menu-item" to="/companies">Companies</Link>
                 <Link className="menu-item" to="/certifications">Certifications</Link>
                 <Link className="menu-item" to="/contacts">Contacts</Link>
                 <Link className="menu-item" to="/documents">Documents</Link>
