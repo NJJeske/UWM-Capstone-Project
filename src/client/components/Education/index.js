@@ -1,10 +1,17 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, notEmpty } from '../validators';
+
+const validate = {
+    name: notEmpty.bind(null), // title should not be empty
+    degree: notEmpty.bind(null), // degree should not be empty
+    fieldOfStudy: notEmpty.bind(null)
+};
 
 export const EducationForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         name = '',
@@ -19,6 +26,12 @@ export const EducationForm = props => {
         zip = ''
     } = entityData;
 
+    if (isLocal) {
+        invalidFields.name = !validate.name(name);
+        invalidFields.degree = !validate.degree(degree);
+        invalidFields.fieldOfStudy = !validate.fieldOfStudy(fieldOfStudy);
+    }
+
     return (
         <Form>
             <Row form={true}>
@@ -31,7 +44,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.name}
+                            invalid={invalidFields.name}
+                            onChange={changeField.bind(null, validate.name)}
                         />
                     </FormGroup>
                 </Col>
@@ -46,7 +61,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={degree}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.degree}
+                            invalid={invalidFields.degree}
+                            onChange={changeField.bind(null, validate.degree)}
                         />
                     </FormGroup>
                 </Col>
@@ -59,7 +76,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={fieldOfStudy}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.fieldOfStudy}
+                            invalid={invalidFields.fieldOfStudy}
+                            onChange={changeField.bind(null, validate.fieldOfStudy)}
                         />
                     </FormGroup>
                 </Col>
