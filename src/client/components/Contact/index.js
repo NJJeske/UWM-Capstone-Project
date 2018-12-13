@@ -2,10 +2,16 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, notEmpty } from '../validators';
+
+const validate = {
+    firstName: notEmpty.bind(null), // title can be [1,20] chars, inclusive
+    lastName: notEmpty.bind(null)
+};
 
 export const ContactForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         firstName = '',
@@ -16,6 +22,11 @@ export const ContactForm = props => {
         email = '',
         notes = '',
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.firstName = !validate.firstName(firstName);
+        invalidFields.lastName = !validate.lastName(lastName);
+    }
 
     return (
         <Form>
@@ -29,7 +40,9 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={firstName}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.firstName}
+                            invalid={invalidFields.firstName}
+                            onChange={changeField.bind(null, validate.firstName)}
                         />
                     </FormGroup>
                 </Col>
@@ -42,7 +55,9 @@ export const ContactForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={lastName}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.lastName}
+                            invalid={invalidFields.lastName}
+                            onChange={changeField.bind(null, validate.lastName)}
                         />
                     </FormGroup>
                 </Col>

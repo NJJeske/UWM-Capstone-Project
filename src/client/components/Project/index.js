@@ -33,7 +33,7 @@ export const ProjectForm = props => {
                         <Input
                             type='text'
                             name='title'
-                            placeholder='Title - Required'
+                            placeholder='Title'
                             disabled={disabled}
                             className={disabledClass}
                             value={title}
