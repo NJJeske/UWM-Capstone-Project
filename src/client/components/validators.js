@@ -11,6 +11,8 @@ export const notEmpty = (value) => value && value.length > 0;
 
 export const isNumeric = (value) => value && !isNaN(value);
 
+export const  validMoney = (value) => value && /^[0-9]+(\.[0-9]{1,2})?$/.test(value);
+
 export const validEmail = (value) => {
     value && /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(value);
 };

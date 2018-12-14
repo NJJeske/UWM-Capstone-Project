@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, ReferenceSelector } from '../';
-import { alwaysTrue, notEmpty, isNumeric } from '../validators';
+import { alwaysTrue, notEmpty, validMoney } from '../validators';
 
 const validate = {
     title: notEmpty.bind(null),
-    startPay: isNumeric.bind(null),
-    endPay: isNumeric.bind(null)
+    startPay: validMoney.bind(null),
+    endPay: validMoney.bind(null)
 };
 
 export const PositionForm = props => {
