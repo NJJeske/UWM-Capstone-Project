@@ -37,7 +37,7 @@ describe('EducationForm', () => {
     it('should populate its child fields with props.entityData', () => {
         // Ignoring ReferenceSelectors for now since they'd need a mock store
         const inputs = form.find('Input');
-        expect(inputs).toHaveLength(10);
+        expect(inputs).toHaveLength(5);
         Object.entries(omit(props.entityData, Object.keys(address))).forEach(([name, value]) => {
             expect(inputs.findWhere(input => input.prop('name') === name).prop('value')).toEqual(value);
         });
