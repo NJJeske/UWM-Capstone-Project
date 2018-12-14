@@ -41,7 +41,7 @@ module.exports = {
     serviceRoute: '/project',
     transform,
     mockConfig: {
-        root: 'project',
+        root: 'projects',
         responses: {
             getAll: true,
             create: true,

@@ -1,13 +1,25 @@
 #TIMELINE_PAGE {
+  .emptyTimeline {
+    text-align: center;
+    font-size: 32pt;
+    color: #b5d3e0;
+    font-weight: 500;
+    p {
+      font-size: 0.6em;
+      padding-top: 1em;
+    }
+  }
   .rt-controls {
     background-color: transparent;
-    padding-left: 40px;
+    padding-left: 65px;
     .rt-controls__content {
-       background-color: #0D2846;
       .rt-controls__button--zoom-in {
         background: url('../../images/zoom-in.png');
         background-position: center;
-        background-size: contain;
+        border-radius: 10px;
+        background-size: 30px;
+        background-repeat: no-repeat;
+        margin-right: 15px;
         svg {
           display: none;
         }
@@ -18,7 +30,9 @@
       .rt-controls__button--zoom-out {
         background: url('../../images/zoom-out.png');
         background-position: center;
-        background-size: contain;
+        border-radius: 10px;
+        background-size: 30px;
+        background-repeat: no-repeat;
         svg {
           display: none;
         }
@@ -56,8 +70,14 @@
       .rt-track__element {
         height: 48px;
         top: 5px;
+        .rt-element {
+          color: white;
+        }
       }
     }
+  }
+  .rt-layout {
+    margin-top: -30px;
   }
   .rt-layout__side {
     width: 200px;
@@ -78,7 +98,7 @@
         .rt-track-key__entry {
           text-align: center;
           padding-left: 0;
-          background-color: #3E5A66;
+          background-color: #0D2846;
           color: white;
           height: 50px;
           border-bottom: 1px solid #76919e
