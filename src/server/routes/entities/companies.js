@@ -10,7 +10,12 @@ function mapSpringToClient(springData) {
         userID: springData.userID || springData.USER_ID,
         name: springData.name || springData.NAME,
         phone: springData.phoneNumber || springData.PHONE_NUMBER,
-        website: springData.website || springData.WEBSITE
+        website: springData.website || springData.WEBSITE,
+        street1: springData.street1 || springData.STREET_1,
+        street2: springData.street2 || springData.STREET_2,
+        city: springData.city || springData.CITY,
+        state: springData.state || springData.STATE,
+        zip: springData.zipCode || springData.ZIP_CODE
     };
 }
 
@@ -19,7 +24,12 @@ function mapClientToSpring(clientData) {
         userID: clientData.userID,
         name: clientData.name,
         phoneNumber: clientData.phone,
-        website: clientData.website
+        website: clientData.website,
+        street1: clientData.street1,
+        street2: clientData.street2,
+        city: clientData.city,
+        state: clientData.state,
+        zipCode: clientData.zip
     };
 }
 
