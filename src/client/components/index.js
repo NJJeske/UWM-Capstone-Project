@@ -11,3 +11,4 @@ export { default as Project } from './Project';
 export { default as ReferenceSelector } from './ReferenceSelector';
 export { default as Sidebar } from './Sidebar';
 export { default as ProfileForm } from './ProfileForm';
+export { default as DocumentsForm } from './DocumentsForm';

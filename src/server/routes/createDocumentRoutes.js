@@ -4,7 +4,7 @@ const router = express.Router();
 const config = require('config');
 const serviceUrl = config.get('serviceUrl');
 
-const serviceURI = `${serviceUrl}/documents`;
+const serviceURI = `${serviceUrl}/document`;
 
 // Get all documents for a user
 router.get('/:userID', (req, res, next) => {
@@ -13,6 +13,7 @@ router.get('/:userID', (req, res, next) => {
         Authorization: req.headers.authorization
     } };
     const getUrl = serviceURI + '/retrievemany/' + userID;
+    console.log(getUrl);
     return axios.get(getUrl, config)
         .then(response => res.send(response.data))
         .catch(err => next(err));
