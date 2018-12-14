@@ -5,6 +5,6 @@
     "httpListenerPort": 4000,
     "httpsListenerPort": 8443,
     "allowCORS": true,
-    "useMock": false,
+    "useMock": true,
     "seed": 196036
 }
