@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Row } from 'reactstrap';
 import './styles.scss';
 
-const dateStyle = date => moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY');
+const dateStyle = date => date ? moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY') : 'Unknown';
 
 const views = {
     'certifications': ({
@@ -17,12 +17,13 @@ const views = {
         expireDate = ''
     }) => (
         <React.Fragment>
-            <Row className='detailsHeader'>{name}</Row>
-            <Row>{authority}</Row>
-            <Row>{licenseNumber}</Row>
-            <Row>{website}</Row>
-            <Row>{acquireDate}</Row>
-            <Row>{expireDate}</Row>
+            <Row className='detailsHeader opposite'>
+                <span>{name}</span>
+                <span>{`${dateStyle(acquireDate)} through ${dateStyle(expireDate)}`}</span>
+            </Row>
+            <Row>License #{licenseNumber}</Row>
+            <Row>Authority: {authority}</Row>
+            <Row>Website: <a href={website}>{website}</a></Row>
         </React.Fragment>
     ),
     'education': ({
@@ -31,21 +32,14 @@ const views = {
         fieldOfStudy = '',
         startDate = '',
         endDate = '',
-        street1 = '',
-        street2 = '',
-        city = '',
-        state = '',
-        zip = ''
     }) => (
         <React.Fragment>
-            <Row className='detailsHeader'>{name}</Row>
-            <Row>{degree}</Row>
-            <Row>{fieldOfStudy}</Row>
-            <Row>{startDate}</Row>
-            <Row>{endDate}</Row>
-            <Row>{street1}</Row>
-            <Row>{street2}</Row>
-            <Row>{`${city} ${state} ${zip}`}</Row>
+            <Row className='detailsHeader opposite'>
+                <span>{name}</span>
+                <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
+            </Row>
+            <Row>Degree: {degree}</Row>
+            <Row>Field of Study:{fieldOfStudy}</Row>
         </React.Fragment>
     ),
     'positions': ({
@@ -58,32 +52,37 @@ const views = {
         endDate = ''
     }) => (
         <React.Fragment>
-            <Row className='detailsHeader'>
-                <span>{`${title} at ${companyName}`}</span>
+            <Row className='detailsHeader opposite'>
+                <span>{title}</span>
                 <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
             </Row>
             <Row>
-                <span>{`${startPay}-${endPay} ${payPeriod}`}</span>
+                <span>Company: {companyName}</span>
+            </Row>
+            <Row className='opposite'>
+                <span>{startPay}</span>
+                <span>{payPeriod}</span>
+                <span>{endPay}</span>
             </Row>
         </React.Fragment>
     ),
     'projects': ({
-        title = '',
-        description = '',
+        title,
+        description = 'No Description',
         positionTitle,
-        companyName,
+        companyName = 'Unknown',
         educationName,
-        startDate = '',
-        endDate = '',
+        startDate,
+        endDate,
     }) => (
         <React.Fragment>
-            <Row className='detailsHeader'>{title}</Row>
+            <Row className='detailsHeader opposite'>
+                <span>{title}</span>
+                <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
+            </Row>
             <Row>{description}</Row>
-            <Row>{positionTitle}</Row>
-            <Row>{companyName}</Row>
-            <Row>{educationName}</Row>
-            <Row>{startDate}</Row>
-            <Row>{endDate}</Row>
+            { positionTitle ? <Row>Related to Position: {positionTitle} at {companyName}</Row> : null }
+            { educationName ? <Row>Related to Educfation: {educationName}</Row> : null }
         </React.Fragment>
     ),
 };
@@ -104,17 +103,17 @@ const mapStateToProps = (state, ownProps) => {
             // For positions grab the company name and forward in entityData
             const { companies } = state.data;
             const { companyId } = entityData;
-            const { name: companyName } = companyId ? find(companies.list, { id: parseInt(companyId) }) || {} : {};
+            const { name: companyName } = companyId ? find(companies.list, { id: companyId }) || {} : {};
             return { entityType, entityData: { ...entityData, companyName } };
         }
         case 'projects': {
             // For projects grab the position name, company name, and education name and forward in entityData
             const { positions, companies, education } = state.data;
             const { positionId, educationId } = entityData;
-            const position = positionId ? find(positions.list, { id: parseInt(positionId) }) || {} : {};
+            const position = positionId ? find(positions.list, { id: positionId }) || {} : {};
             const { title: positionTitle, companyId } = position;
-            const { name: companyName } = companyId ? find(companies.list, { id: parseInt(companyId) }) || {} : {};
-            const { name: educationName } = educationId ? find(education.list, { id: parseInt(educationId) }) || {} : {};
+            const { name: companyName } = companyId ? find(companies.list, { id: companyId }) || {} : {};
+            const { name: educationName } = educationId ? find(education.list, { id: educationId }) || {} : {};
             return { entityType, entityData: { ...entityData, positionTitle, companyName, educationName } };
         }
         default: return ownProps;

@@ -56,7 +56,7 @@ class TimelinePage extends Component {
         let detailsBody = null;
         if (details) {
             const { entityType, entityData } = details;
-            detailsBody = <Details entityType={entityType} entityData={entityData}/>
+            detailsBody = <Details entityType={entityType} entityData={entityData} />;
         }
 
         // Timeline
