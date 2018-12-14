@@ -154,7 +154,7 @@ export class Entity extends Component {
                         ) : null
                     }</div>
                     <div>
-                        <Button onClick={this.save.bind(this)} className='save' disabled={Boolean(Object.keys(invalidFields).length)}>
+                        <Button onClick={this.save.bind(this)} className='save' disabled={Object.values(invalidFields).some(x => x)}>
                             <FontAwesomeIcon icon='check' />
                         </Button>
                         <Button onClick={this.cancel.bind(this)} className='cancel'>

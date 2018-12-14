@@ -1,10 +1,17 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity, ReferenceSelector } from '../';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, notEmpty, validMoney } from '../validators';
+
+const validate = {
+    title: notEmpty,
+    startPay: validMoney,
+    endPay: validMoney
+};
 
 export const PositionForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         companyId,
@@ -15,6 +22,10 @@ export const PositionForm = props => {
         startDate = '',
         endDate = ''
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.title = !validate.title(title);
+    }
 
     return (
         <Form>
@@ -43,7 +54,9 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={title}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.title}
+                            invalid={invalidFields.title}
+                            onChange={changeField.bind(null, validate.title)}
                         />
                     </FormGroup>
                 </Col>
@@ -74,7 +87,9 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={startPay}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.startPay}
+                            invalid={invalidFields.startPay}
+                            onChange={changeField.bind(null, validate.startPay)}
                         />
                     </FormGroup>
                 </Col>
@@ -87,7 +102,9 @@ export const PositionForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={endPay}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.endPay}
+                            invalid={invalidFields.endPay}
+                            onChange={changeField.bind(null, validate.endPay)}
                         />
                     </FormGroup>
                 </Col>
