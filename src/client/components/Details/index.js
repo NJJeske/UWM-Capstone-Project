@@ -21,9 +21,9 @@ const views = {
                 <span>{name}</span>
                 <span>{`${dateStyle(acquireDate)} through ${dateStyle(expireDate)}`}</span>
             </Row>
-            <Row>License #{licenseNumber}</Row>
+            <Row>License #: {licenseNumber}</Row>
             <Row>Authority: {authority}</Row>
-            <Row>Website: <a href={website}>{website}</a></Row>
+            <Row>Website: {website}</Row>
         </React.Fragment>
     ),
     'education': ({
@@ -39,7 +39,7 @@ const views = {
                 <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
             </Row>
             <Row>Degree: {degree}</Row>
-            <Row>Field of Study:{fieldOfStudy}</Row>
+            <Row>Field of Study: {fieldOfStudy}</Row>
         </React.Fragment>
     ),
     'positions': ({
@@ -59,10 +59,8 @@ const views = {
             <Row>
                 <span>Company: {companyName}</span>
             </Row>
-            <Row className='opposite'>
-                <span>{startPay}</span>
-                <span>{payPeriod}</span>
-                <span>{endPay}</span>
+            <Row>
+                <span>{payPeriod}, Start {startPay}, End {endPay}</span>
             </Row>
         </React.Fragment>
     ),
@@ -82,7 +80,7 @@ const views = {
             </Row>
             <Row>{description}</Row>
             { positionTitle ? <Row>Related to Position: {positionTitle} at {companyName}</Row> : null }
-            { educationName ? <Row>Related to Educfation: {educationName}</Row> : null }
+            { educationName ? <Row>Related to Education: {educationName}</Row> : null }
         </React.Fragment>
     ),
 };
