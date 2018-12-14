@@ -12,6 +12,7 @@ export class DocumentsForm extends Component {
         this.state = {
             userId: '',
             files: ['Resume.docx', 'CoverLetter.docx', 'Skills.docx'],
+            uploadedFile: null,
             error: '',
             msg: ''
         };
@@ -47,11 +48,18 @@ export class DocumentsForm extends Component {
         axios.delete(deleteUrl, null);
     }
 
+    handleChange(e) {
+        console.log(e);
+        let change = {};
+        change[e.target.name] = e.target.value;
+        this.setState(change);
+    }
+
     render() {
         const FileList = ({ items, onItemClick }) => (
             <ListGroup>
                 {
-                    items.map((item, i) => <ListGroupItem key={i} onClick={onItemClick}>{ item }<Button className='deleteButton' color='danger' onClick={this.handleDelete}>Delete</Button></ListGroupItem>)
+                    items.map((item, i) => <ListGroupItem key={i} onClick={onItemClick}>{ item }<Button className='deleteButton' color='danger' onClick={this.handleDelete()}>Delete</Button></ListGroupItem>)
                 }
             </ListGroup>
         );
@@ -60,7 +68,7 @@ export class DocumentsForm extends Component {
             <Form className='uploadForm'>
                 <FormGroup className='uploadFormGroup'>
                     <Label className='uploadLabel' for='fileUploadButton'>Upload A Document</Label>
-                    <Input className='documentUpload' type='file' name='fileUploadButton' id='exampleFile' />
+                    <Input className='documentUpload' type='file' name='uploadedFile' id='exampleFile' onChange={this.handleChange}/>
                     <Button className='submitDownloadButton' onClick={this.handleUpload}>Submit Upload</Button>
                     <div className='documentList'>
                         <Label className='documentListLabel' for='documentList'>Your Documents</Label>
