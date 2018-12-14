@@ -1,6 +1,11 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, validState, validZip } from '../validators';
+
+const validate = {
+    zip: validZip,
+    state: validState
+};
 
 const Address = props => {
     const { changeField, disabled, address } = props;
@@ -68,7 +73,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={state}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            onChange={changeField.bind(null, validate.state)}
                         />
                     </FormGroup>
                 </Col>
@@ -81,7 +86,7 @@ const Address = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={zip}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            onChange={changeField.bind(null, validate.zip)}
                         />
                     </FormGroup>
                 </Col>
