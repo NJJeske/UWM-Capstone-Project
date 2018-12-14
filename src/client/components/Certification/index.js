@@ -29,7 +29,7 @@ export const CertificationForm = props => {
     return (
         <Form>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
@@ -46,7 +46,7 @@ export const CertificationForm = props => {
                 </Col>
             </Row>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
@@ -63,7 +63,7 @@ export const CertificationForm = props => {
                 </Col>
             </Row>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
@@ -80,7 +80,7 @@ export const CertificationForm = props => {
                 </Col>
             </Row>
             <Row form={true}>
-                <Col xs='12' lg='9'>
+                <Col xs='12'>
                     <FormGroup >
                         <Input
                             type='text'
