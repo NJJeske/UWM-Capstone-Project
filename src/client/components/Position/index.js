@@ -4,9 +4,9 @@ import { Entity, ReferenceSelector } from '../';
 import { alwaysTrue, notEmpty, validMoney } from '../validators';
 
 const validate = {
-    title: notEmpty.bind(null),
-    startPay: validMoney.bind(null),
-    endPay: validMoney.bind(null)
+    title: notEmpty,
+    startPay: validMoney,
+    endPay: validMoney
 };
 
 export const PositionForm = props => {

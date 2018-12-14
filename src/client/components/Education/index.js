@@ -4,11 +4,11 @@ import { Entity } from '../';
 import { alwaysTrue, notEmpty, validState, validZip } from '../validators';
 
 const validate = {
-    name: notEmpty.bind(null), // title should not be empty
-    degree: notEmpty.bind(null), // degree should not be empty
-    fieldOfStudy: notEmpty.bind(null),
-    zip: validZip.bind(null),
-    state: validState.bind(null)
+    name: notEmpty, // title should not be empty
+    degree: notEmpty, // degree should not be empty
+    fieldOfStudy: notEmpty,
+    zip: validZip,
+    state: validState
 };
 
 export const EducationForm = props => {

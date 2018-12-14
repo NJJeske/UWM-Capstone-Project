@@ -4,9 +4,9 @@ import { Entity } from '../';
 import { alwaysTrue, notEmpty, validState, validZip } from '../validators';
 
 const validate = {
-    name: notEmpty.bind(null),
-    zip: validZip.bind(null),
-    state: validState.bind(null)
+    name: notEmpty,
+    zip: validZip,
+    state: validState
 };
 
 export const CompanyForm = props => {

@@ -6,7 +6,7 @@ import { alwaysTrue, lengthBetween, notEmpty } from '../validators';
 
 const validate = {
     title: lengthBetween.bind(null, 1, 20),
-    description: notEmpty.bind(null)
+    description: notEmpty
 };
 
 export const ProjectForm = props => {

@@ -4,8 +4,8 @@ import { Entity } from '../';
 import { alwaysTrue, notEmpty } from '../validators';
 
 const validate = {
-    name: notEmpty.bind(null),
-    authority: notEmpty.bind(null)
+    name: notEmpty,
+    authority: notEmpty
 };
 
 export const CertificationForm = props => {

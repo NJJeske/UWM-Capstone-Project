@@ -5,8 +5,8 @@ import { Entity, ReferenceSelector } from '../';
 import { alwaysTrue, notEmpty } from '../validators';
 
 const validate = {
-    firstName: notEmpty.bind(null), // title can be [1,20] chars, inclusive
-    lastName: notEmpty.bind(null),
+    firstName: notEmpty, // title can be [1,20] chars, inclusive
+    lastName: notEmpty,
 };
 
 export const ContactForm = props => {
