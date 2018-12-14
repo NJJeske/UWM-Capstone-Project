@@ -1,10 +1,19 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Entity, Address } from '../';
-import { alwaysTrue } from '../validators';
+import { Entity } from '../';
+import { alwaysTrue, notEmpty, validState, validZip } from '../validators';
+
+const validate = {
+    name: notEmpty, // title should not be empty
+    degree: notEmpty, // degree should not be empty
+    fieldOfStudy: notEmpty,
+    zip: validZip,
+    state: validState
+};
 
 export const EducationForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         name = '',
@@ -12,8 +21,18 @@ export const EducationForm = props => {
         fieldOfStudy = '',
         startDate = '',
         endDate = '',
-        ...address
+        street1 = '',
+        street2 = '',
+        city = '',
+        state = '',
+        zip = ''
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.name = !validate.name(name);
+        invalidFields.degree = !validate.degree(degree);
+        invalidFields.fieldOfStudy = !validate.fieldOfStudy(fieldOfStudy);
+    }
 
     return (
         <Form>
@@ -27,7 +46,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.name}
+                            invalid={invalidFields.name}
+                            onChange={changeField.bind(null, validate.name)}
                         />
                     </FormGroup>
                 </Col>
@@ -42,7 +63,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={degree}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.degree}
+                            invalid={invalidFields.degree}
+                            onChange={changeField.bind(null, validate.degree)}
                         />
                     </FormGroup>
                 </Col>
@@ -55,12 +78,13 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={fieldOfStudy}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.fieldOfStudy}
+                            invalid={invalidFields.fieldOfStudy}
+                            onChange={changeField.bind(null, validate.fieldOfStudy)}
                         />
                     </FormGroup>
                 </Col>
             </Row>
-            <Address disabled={disabled} address={address} changeField={changeField} />
             <Row form={true}>
                 <Col lg='6'>
                     <Row form={true}>
@@ -99,6 +123,81 @@ export const EducationForm = props => {
                             </FormGroup>
                         </Col>
                     </Row>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='12'>
+                    <FormGroup >
+                        <Input
+                            type='text'
+                            name='street1'
+                            placeholder='Street 1'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={street1}
+                            onChange={changeField.bind(null, alwaysTrue)}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col xs='12'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='street2'
+                            placeholder='Street 2'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={street2}
+                            onChange={changeField.bind(null, alwaysTrue)}
+                        />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form={true}>
+                <Col sm='6'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='city'
+                            placeholder='City'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={city}
+                            onChange={changeField.bind(null, alwaysTrue)}
+                        />
+                    </FormGroup>
+                </Col>
+                <Col xs='3' sm='2'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='state'
+                            placeholder='State'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={state}
+                            valid={!invalidFields.state}
+                            invalid={invalidFields.state}
+                            onChange={changeField.bind(null, validate.state)}
+                        />
+                    </FormGroup>
+                </Col>
+                <Col xs='9' sm='4'>
+                    <FormGroup disabled={disabled} >
+                        <Input
+                            type='text'
+                            name='zip'
+                            placeholder='Zip'
+                            disabled={disabled}
+                            className={disabledClass}
+                            value={zip}
+                            valid={!invalidFields.zip}
+                            invalid={invalidFields.zip}
+                            onChange={changeField.bind(null, validate.zip)}
+                        />
+                    </FormGroup>
                 </Col>
             </Row>
         </Form>
