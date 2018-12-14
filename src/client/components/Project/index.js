@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
-import {alwaysTrue, lengthBetween, notEmpty} from '../validators';
+import { alwaysTrue, lengthBetween, notEmpty } from '../validators';
 
 const validate = {
     title: lengthBetween.bind(null, 1, 20),
