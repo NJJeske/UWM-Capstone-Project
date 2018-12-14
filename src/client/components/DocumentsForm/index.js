@@ -64,7 +64,7 @@ export class DocumentsForm extends Component {
         const FileList = ({ items, onClickAction }) => (
             <ListGroup>
                 {
-                    items.map((item, i) => <ListGroupItem key={i} action><Row><Col className='itemCol'>{ item }</Col><Col><Button size='lg' className='deleteButton' color='danger' onClick={this.handleDelete()}>Delete</Button></Col></Row></ListGroupItem>)
+                    items.map((item, i) => <ListGroupItem key={i} onClick={onClickAction} action><Row><Col className='itemCol'>{ item }</Col><Col><Button size='lg' className='deleteButton' color='danger' onClick={this.handleDelete()}>Delete</Button></Col></Row></ListGroupItem>)
                 }
             </ListGroup>
         );
