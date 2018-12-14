@@ -4,7 +4,7 @@ const router = express.Router();
 const config = require('config');
 const serviceUrl = config.get('serviceUrl');
 
-const serviceURI = `${serviceUrl}/documents`;
+const serviceURI = `${serviceUrl}/document`;
 
 // Get all documents for a user
 router.get('/:userID', (req, res, next) => {
@@ -20,7 +20,7 @@ router.get('/:userID', (req, res, next) => {
 
 // Create a new document
 router.post('/', (req, res, next) => {
-    const { documentData } = req.body;
+    const documentData = req.body;
     const headers = { headers: { Authorization: req.headers.authorization } };
     return axios.post(serviceURI, documentData, headers)
         .then(response => res.send(response.data))
