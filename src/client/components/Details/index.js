@@ -79,8 +79,8 @@ const views = {
                 <span>{`${dateStyle(startDate)} through ${dateStyle(endDate)}`}</span>
             </Row>
             <Row>{description}</Row>
-            { positionTitle ? <Row>Related to Position: {positionTitle} at {companyName}</Row> : null }
-            { educationName ? <Row>Related to Education: {educationName}</Row> : null }
+            { positionTitle ? <Row className='detailsFooter'>Related to Position: {positionTitle} at {companyName}</Row> : null }
+            { educationName ? <Row className='detailsFooter'>Related to Education: {educationName}</Row> : null }
         </React.Fragment>
     ),
 };

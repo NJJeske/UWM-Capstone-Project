@@ -7,20 +7,23 @@
     border: 5px solid #0D2846;
     background-color: #e2e2e2;
     color: #0D2846;
-    padding-bottom: 3px;
     margin-left: 150px;
     margin-right: 150px;
     .row {
         margin: 0;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 3px;
+        padding: 10px 15px 9px 15px;
     }
     .detailsHeader {
         background-color: #0D2846;
         color: white;
-        padding-top: 0px;
-        padding-bottom: 3px;
+        padding-top: 2px;
+        padding-bottom: 7px;
+    }
+    .detailsFooter {
+        background-color: #0D2846;
+        color: white;
+        padding-top: 4px;
+        padding-bottom: 1px;
     }
     .opposite {
         justify-content: space-between;
