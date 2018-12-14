@@ -60,7 +60,7 @@ const views = {
                 <span>Company: {companyName}</span>
             </Row>
             <Row>
-                <span>{payPeriod}, Start {startPay}, End {endPay}</span>
+                <span>{payPeriod ? `${payPeriod}, ` : null}Start {`$${startPay}`}, End {`$${endPay}`}</span>
             </Row>
         </React.Fragment>
     ),

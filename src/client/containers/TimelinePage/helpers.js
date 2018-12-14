@@ -7,8 +7,8 @@ export const getNonCollidingSubsets = entities => {
     return chunk(entities);
 };
 
-const startDate = entity => entity.startDate || entity.acquireDate || entity.endDate || entity.expireDate;
-const endDate = entity => entity.endDate || entity.expireDate || entity.startDate || entity.acquireDate;
+const startDate = (entity = {}) => entity.startDate || entity.acquireDate || entity.endDate || entity.expireDate;
+const endDate = (entity = {}) => entity.endDate || entity.expireDate || entity.startDate || entity.acquireDate;
 
 export const getMaximumDate = (entities, findEarliest = true) => {
     const lists = Object.values(entities).map(entityType => entityType.list);
