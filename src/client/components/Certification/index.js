@@ -4,7 +4,8 @@ import { Entity } from '../';
 import { alwaysTrue, notEmpty } from '../validators';
 
 const validate = {
-    name: notEmpty.bind(null) // title can be [1,20] chars, inclusive
+    name: notEmpty.bind(null),
+    authority: notEmpty.bind(null)
 };
 
 export const CertificationForm = props => {
@@ -22,6 +23,7 @@ export const CertificationForm = props => {
 
     if (isLocal) {
         invalidFields.name = !validate.name(name);
+        invalidFields.authority = !validate.authority(authority);
     }
 
     return (
@@ -55,7 +57,7 @@ export const CertificationForm = props => {
                             value={authority}
                             valid={!invalidFields.authority}
                             invalid={invalidFields.authority}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            onChange={changeField.bind(null, validate.authority)}
                         />
                     </FormGroup>
                 </Col>

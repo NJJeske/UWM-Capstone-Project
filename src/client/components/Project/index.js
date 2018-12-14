@@ -2,10 +2,11 @@ import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import TextArea from 'react-textarea-autosize';
 import { Entity, ReferenceSelector } from '../';
-import { alwaysTrue, lengthBetween } from '../validators';
+import {alwaysTrue, lengthBetween, notEmpty} from '../validators';
 
 const validate = {
-    title: lengthBetween.bind(null, 1, 20), // title can be [1,20] chars, inclusive
+    title: lengthBetween.bind(null, 1, 20),
+    description: notEmpty.bind(null)
 };
 
 export const ProjectForm = props => {
@@ -23,6 +24,7 @@ export const ProjectForm = props => {
 
     if (isLocal) {
         invalidFields.title = !validate.title(title);
+        invalidFields.description = !validate.description(description);
     }
 
     return (
@@ -56,7 +58,7 @@ export const ProjectForm = props => {
                             value={description}
                             valid={!invalidFields.description}
                             invalid={invalidFields.description}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            onChange={changeField.bind(null, validate.description)}
                         />
                     </FormGroup>
                 </Col>

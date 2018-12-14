@@ -6,7 +6,7 @@ import { alwaysTrue, notEmpty } from '../validators';
 
 const validate = {
     firstName: notEmpty.bind(null), // title can be [1,20] chars, inclusive
-    lastName: notEmpty.bind(null)
+    lastName: notEmpty.bind(null),
 };
 
 export const ContactForm = props => {

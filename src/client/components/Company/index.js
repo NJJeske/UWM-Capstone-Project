@@ -1,10 +1,17 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import { Entity } from '../';
-import { alwaysTrue } from '../validators';
+import { alwaysTrue, notEmpty, validState, validZip } from '../validators';
+
+const validate = {
+    name: notEmpty.bind(null),
+    zip: validZip.bind(null),
+    state: validState.bind(null)
+};
 
 export const CompanyForm = props => {
-    const { changeField, entityData, disabled } = props;
+    const { changeField, entityData, disabled, isLocal } = props;
+    let { invalidFields } = props;
     const disabledClass = disabled ? 'disabled' : '';
     const {
         name = '',
@@ -16,6 +23,10 @@ export const CompanyForm = props => {
         state = '',
         zip = ''
     } = entityData;
+
+    if (isLocal) {
+        invalidFields.name = !validate.name(name);
+    }
 
     return (
         <Form>
@@ -29,7 +40,9 @@ export const CompanyForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={name}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.name}
+                            invalid={invalidFields.name}
+                            onChange={changeField.bind(null, validate.name)}
                         />
                     </FormGroup>
                 </Col>
@@ -115,7 +128,9 @@ export const CompanyForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={state}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.state}
+                            invalid={invalidFields.state}
+                            onChange={changeField.bind(null, validate.state)}
                         />
                     </FormGroup>
                 </Col>
@@ -128,7 +143,9 @@ export const CompanyForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={zip}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.zip}
+                            invalid={invalidFields.zip}
+                            onChange={changeField.bind(null, validate.zip)}
                         />
                     </FormGroup>
                 </Col>

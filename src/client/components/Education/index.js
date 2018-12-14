@@ -1,12 +1,14 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Entity } from '../';
-import { alwaysTrue, notEmpty } from '../validators';
+import { alwaysTrue, notEmpty, validState, validZip } from '../validators';
 
 const validate = {
     name: notEmpty.bind(null), // title should not be empty
     degree: notEmpty.bind(null), // degree should not be empty
-    fieldOfStudy: notEmpty.bind(null)
+    fieldOfStudy: notEmpty.bind(null),
+    zip: validZip.bind(null),
+    state: validState.bind(null)
 };
 
 export const EducationForm = props => {
@@ -176,7 +178,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={state}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.state}
+                            invalid={invalidFields.state}
+                            onChange={changeField.bind(null, validate.state)}
                         />
                     </FormGroup>
                 </Col>
@@ -189,7 +193,9 @@ export const EducationForm = props => {
                             disabled={disabled}
                             className={disabledClass}
                             value={zip}
-                            onChange={changeField.bind(null, alwaysTrue)}
+                            valid={!invalidFields.zip}
+                            invalid={invalidFields.zip}
+                            onChange={changeField.bind(null, validate.zip)}
                         />
                     </FormGroup>
                 </Col>
