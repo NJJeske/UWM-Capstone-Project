@@ -37,21 +37,10 @@ describe('EducationForm', () => {
     it('should populate its child fields with props.entityData', () => {
         // Ignoring ReferenceSelectors for now since they'd need a mock store
         const inputs = form.find('Input');
-        expect(inputs).toHaveLength(5);
+        expect(inputs).toHaveLength(10);
         Object.entries(omit(props.entityData, Object.keys(address))).forEach(([name, value]) => {
             expect(inputs.findWhere(input => input.prop('name') === name).prop('value')).toEqual(value);
         });
-    });
-    it('should pass changeField, disabled, and address data to address component', () => {
-        // Ignoring ReferenceSelectors for now since they'd need a mock store
-        const address = form.find('Address');
-        expect(address.prop('address').street1).toEqual(props.entityData.street1);
-        expect(address.prop('address').street2).toEqual(props.entityData.street2);
-        expect(address.prop('address').city).toEqual(props.entityData.city);
-        expect(address.prop('address').state).toEqual(props.entityData.state);
-        expect(address.prop('address').zip).toEqual(props.entityData.zip);
-        expect(address.prop('disabled')).toEqual(props.disabled);
-        expect(address.prop('changeField')).toEqual(props.changeField);
     });
     it('should disable all its fields if props.disabled is true', () => {
         form.find('Input').forEach(input => {
