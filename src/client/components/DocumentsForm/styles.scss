@@ -5,8 +5,14 @@
   .uploadFormGroup {
     align-content: center;
     align-items: center;
+    .list-group-item {
+      background-color: #66808c;
+      border: 5px solid #0D2846;
+      border-radius: 10px;
+    }
     .itemCol {
       min-width: 80%;
+      background-color: #66808c;
     }
     .documentUpload {
       padding-bottom: 2.5%;
@@ -15,12 +21,12 @@
     }
     .documentListLabel {
       font-size: 24pt;
-      font-weight: 600;
+      font-weight: bold;
       color: white;
     }
     .uploadLabel {
       font-size: 24pt;
-      font-weight: 600;
+      font-weight: bold;
       color: white;
     }
     .documentList {

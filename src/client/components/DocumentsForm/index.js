@@ -12,6 +12,7 @@ export class DocumentsForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleDownload = this.handleDownload.bind(this);
         this.state = {
             userId: '',
             files: ['Resume.docx', 'CoverLetter.docx', 'Skills.docx'],
@@ -45,8 +46,11 @@ export class DocumentsForm extends Component {
         */
     }
 
+    handleDownload(e) {
+        // TODO
+    }
+
     handleDelete(e) {
-        // const config = { headers: { Authorization: headers().headers.Authorization } };
         // TODO
     }
 
@@ -57,10 +61,10 @@ export class DocumentsForm extends Component {
     }
 
     render() {
-        const FileList = ({ items }) => (
+        const FileList = ({ items, onClickAction }) => (
             <ListGroup>
                 {
-                    items.map((item, i) => <ListGroupItem key={i}><Row><Col className='itemCol'>{ item }</Col><Col><Button size='lg' className='deleteButton' color='danger' onClick={this.handleDelete()}>Delete</Button></Col></Row></ListGroupItem>)
+                    items.map((item, i) => <ListGroupItem key={i} action><Row><Col className='itemCol'>{ item }</Col><Col><Button size='lg' className='deleteButton' color='danger' onClick={this.handleDelete()}>Delete</Button></Col></Row></ListGroupItem>)
                 }
             </ListGroup>
         );
@@ -70,10 +74,10 @@ export class DocumentsForm extends Component {
                 <FormGroup className='uploadFormGroup'>
                     <Label className='uploadLabel'>Upload A Document</Label>
                     <Input className='documentUpload' type='file' name='uploadedFile' id='uploadedFile' onChange={this.handleChange}/>
-                    <Button className='submitDownloadButton' onClick={this.handleUpload}>Submit Upload</Button>
+                    <Button className='submitDownloadButton' onClick={this.handleUpload()}>Submit Upload</Button>
                     <div className='documentList'>
                         <Label className='documentListLabel' for='documentList'>Your Documents</Label>
-                        <FileList items={this.state.files}/>
+                        <FileList items={this.state.files} onClickAction={this.handleDownload()}/>
                     </div>
                 </FormGroup>
             </Form>
