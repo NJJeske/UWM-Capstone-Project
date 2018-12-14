@@ -13,7 +13,6 @@ router.get('/:userID', (req, res, next) => {
         Authorization: req.headers.authorization
     } };
     const getUrl = serviceURI + '/retrievemany/' + userID;
-    console.log(getUrl);
     return axios.get(getUrl, config)
         .then(response => res.send(response.data))
         .catch(err => next(err));
@@ -23,9 +22,6 @@ router.get('/:userID', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const documentData = req.body;
     const headers = { headers: { Authorization: req.headers.authorization } };
-    console.log(documentData);
-    console.log(serviceURI);
-    console.log(headers);
     return axios.post(serviceURI, documentData, headers)
         .then(response => res.send(response.data))
         .catch(err => next(err));
